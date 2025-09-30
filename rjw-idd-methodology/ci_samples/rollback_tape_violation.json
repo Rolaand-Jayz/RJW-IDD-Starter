@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "profile": "generic"
+  },
+  "frames": [
+    {
+      "tick": 0,
+      "predicted": {
+        "state_hash": "aaa"
+      },
+      "authoritative": {
+        "state_hash": "aab"
+      },
+      "rollback_depth": 1
+    }
+  ]
+}
