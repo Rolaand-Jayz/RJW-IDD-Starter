@@ -262,4 +262,4 @@ For documenting operational choices:
 ---
 
 **For detailed procedures:** Consult the full spec/runbook documents.  
-**For questions:** Reference `docs/GAP-CLOSURE-SUMMARY.md` for context on what was added and why.
+**For questions:** Reference the change log in `rjw-idd-starter-kit/docs/change-log.md` for context on what was added and why.

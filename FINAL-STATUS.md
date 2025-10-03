@@ -80,12 +80,7 @@ tests/guards/test_red_green_guard.py ................ [100%]
 - `logs/rdd-harvest/LOG-TEMPLATE.md` - Evidence harvest
 - `logs/security/LOG-TEMPLATE.md` - Security audits
 
-### Analysis (3)
-- `GAP-ANALYSIS-FINDINGS.md` - Detailed gap analysis
-- `GAP-REMEDIATION-SUMMARY.md` - Remediation details
-- `GAPS-ADDRESSED.md` - Summary document
-
-**Total:** 20 new files + 3 modified files
+**Total:** 17 new files + 3 modified files
 
 ---
 
@@ -169,11 +164,10 @@ Added to `rjw-idd-starter-kit/docs/change-log.md`:
 
 ## 📖 Documentation References
 
-- **Gap Analysis:** [GAP-ANALYSIS-FINDINGS.md](GAP-ANALYSIS-FINDINGS.md)
-- **Remediation Details:** [GAP-REMEDIATION-SUMMARY.md](GAP-REMEDIATION-SUMMARY.md)
 - **Contribution Guide:** [CONTRIBUTING.md](CONTRIBUTING.md)
 - **Project README:** [README.md](README.md)
 - **Starter Kit Manual:** [rjw-idd-starter-kit/docs/manual/starter-kit-manual.md](rjw-idd-starter-kit/docs/manual/starter-kit-manual.md)
+- **Change Log:** [rjw-idd-starter-kit/docs/change-log.md](rjw-idd-starter-kit/docs/change-log.md)
 
 ---
 

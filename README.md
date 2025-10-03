@@ -15,7 +15,7 @@ RJW-IDD now includes **complete operational guidance** from development through 
 - **METHOD-0005:** Operations & Production Support phase (maturity gates, SRE practices)
 
 **Quick Start:** See `docs/OPERATIONAL-QUICK-REFERENCE.md` for navigation guide.  
-**Full Context:** Read `docs/GAP-CLOSURE-SUMMARY.md` for complete gap analysis and remediation.
+**Full Context:** Review `rjw-idd-starter-kit/docs/change-log.md` for complete project history and improvements.
 
 ## Quickstart
 1. **Clone/Copy:** Place the contents of this kit in an empty repository and run `git init` if starting fresh.
