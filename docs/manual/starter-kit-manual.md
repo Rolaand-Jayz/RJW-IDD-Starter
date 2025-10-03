@@ -98,6 +98,65 @@ If the repository is not yet tracked by git, the script skips the gate and print
    - Customize `research/evidence_tasks.json`.
    - Run `tools/rjw_idd_evidence_harvester.py` and then `scripts/validate_evidence.py`.
 2. **SDD**
+   - Draft specs under `specs/` following templates. Populate ledgers with IDs and cross-references.
+   - Open living-doc gaps for any known shortfalls; resolve them before implementation.
+3. **TDD/LDDD/IDD**
+   - Write failing tests (`TEST-####`), implement fixes, verify guards pass.
+   - Update specs/docs, add change-log entry, and record governance decisions.
+
+## 9. Add-on Management
+
+RJW-IDD supports optional add-ons that extend the methodology for specific domains:
+
+### Available Add-ons
+
+**3d-game-core** - Augments RJW-IDD for 3D game development:
+- Determinism and rollback harnesses
+- Tolerant replay systems
+- Asset and performance gates
+- Game design document templates
+- Profiles: `generic`, `first_person`, `third_person`, `isometric`, `platformer`, `driving`, `action_rpg`, `networked`
+
+**video-ai-enhancer** - Augments RJW-IDD for real-time video enhancement:
+- Quality, latency, and storage governance
+- Pipeline architecture templates
+- Live streaming optimization
+- Profiles: `baseline`, `live_stream`, `broadcast_mastering`, `mobile_edge`, `remote_collab`
+
+### Enabling Add-ons
+
+During bootstrap (`scripts/bootstrap/install.sh`), you'll be prompted to select an add-on. You can also enable manually:
+
+```bash
+# Enable 3D game core
+python scripts/addons/enable_3d_game_core.py
+python scripts/addons/set_3d_profile.py --profile third_person
+
+# Enable video AI enhancer
+python scripts/addons/enable_video_ai_enhancer.py
+python scripts/addons/set_video_ai_profile.py --profile live_stream
+```
+
+### Disabling Add-ons
+
+```bash
+python scripts/addons/disable_3d_game_core.py
+# or
+python scripts/addons/disable_video_ai_enhancer.py
+```
+
+### Governance Requirements
+
+When enabling, disabling, or changing add-on configuration:
+1. Add an entry to `docs/change-log.md`
+2. Document the decision in `docs/decisions/`
+3. Update `logs/LOG-0001-stage-audits.md`
+
+Add-on state is tracked in `method/config/features.yml`.
+
+## 10. Troubleshooting & FAQ
+
+**Q: Guards fail locally but the kit just shipped?**
    - Clone the SPEC template, cross-link REQ/SPEC/TEST IDs, and update ledgers.
 3. **Implementation & Living Docs**
    - Add tests, run `pytest` locally, capture verification evidence in change log.

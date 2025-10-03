@@ -4,13 +4,20 @@ This starter kit packages the assets you need to run RJW-IDD in any codebase. It
 
 ## Quickstart
 1. **Clone/Copy:** Place the contents of this kit in an empty repository and run `git init` if you are starting fresh.
-2. **Bootstrap Tooling:** Execute `scripts/setup/bootstrap_project.sh` (optionally set `PYTHON_BIN=python3.11`). The script creates `.venv`, installs dependencies from `requirements-dev.txt`, runs `pytest`, and executes the governance gate.
+2. **Bootstrap Tooling:** Execute `scripts/bootstrap/install.sh` for full setup with add-on selection, or `scripts/setup/bootstrap_project.sh` directly (optionally set `PYTHON_BIN=python3.11`). The script creates `.venv`, installs dependencies from `requirements-dev.txt`, runs `pytest`, and executes the governance gate.
 3. **Review Manual:** Read `docs/manual/starter-kit-manual.md` for role definitions, cadence guidance, and guard explanations.
 4. **Enlist the Prompts:** Choose the right helper from `docs/prompts/` (start with `PROMPT-0001-starter-briefing.md`) so the AI agent can coach you through the workflow even without development experience.
 5. **Commit Baseline:** Capture the imported kit as your first change (`docs/change-log.md`) and push to your remote so the GitHub Actions workflow can run.
 6. **Customize:** Duplicate the SPEC templates you need, seed the ledgers with your first REQ-#### and TEST-#### entries, and update `research/evidence_tasks.json`.
 
 > Need the bigger picture? The manual provides a full bring-up checklist and FAQ, while the sections below outline every asset shipped in the kit.
+
+## Add-on Support
+RJW-IDD supports optional add-ons that extend the methodology for specific domains:
+- **3d-game-core** - 3D game development with determinism, replay, asset/perf gates
+- **video-ai-enhancer** - Real-time video enhancement with quality, latency, storage gates
+
+The bootstrap installer (`scripts/bootstrap/install.sh`) prompts for add-on selection. See `scripts/addons/README.md` and `docs/manual/starter-kit-manual.md` §9 for details.
 
 ## Prompt Workflow (No-Code Friendly)
 - `PROMPT-0001-starter-briefing.md` — collect the goal, surface relevant specs, highlight open questions.
