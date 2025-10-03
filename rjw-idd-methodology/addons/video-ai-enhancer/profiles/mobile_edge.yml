@@ -23,5 +23,4 @@ overrides:
     default_model: rjw-video-edge
     runtime: onnx
     acceleration: cpu
-  telemetry:
-    snapshot_interval_s: 45
+  # telemetry removed

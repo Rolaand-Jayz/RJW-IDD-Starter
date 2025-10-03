@@ -19,8 +19,7 @@ overrides:
   storage_pipeline:
     capture_window_minutes: 45
     retention_hours: 48
-  telemetry:
-    snapshot_interval_s: 20
+  # telemetry removed
   models:
     default_model: rjw-video-collab
     acceleration: auto

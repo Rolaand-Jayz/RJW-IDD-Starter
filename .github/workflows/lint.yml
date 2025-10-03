@@ -1,0 +1,73 @@
+name: Code Quality & Lint
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
+
+jobs:
+  lint-python:
+    name: Python Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          cd rjw-idd-starter-kit
+          python -m pip install --upgrade pip
+          pip install black ruff mypy
+
+      - name: Run Black
+        run: |
+          cd rjw-idd-starter-kit
+          black --check --diff .
+
+      - name: Run Ruff
+        run: |
+          cd rjw-idd-starter-kit
+          ruff check .
+
+      - name: Run MyPy
+        run: |
+          cd rjw-idd-starter-kit
+          mypy tools/ scripts/ --ignore-missing-imports
+        continue-on-error: true  # Type hints still being added
+
+  lint-shell:
+    name: Shell Script Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: './rjw-idd-starter-kit/scripts'
+          severity: warning
+
+  lint-markdown:
+    name: Markdown Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run markdownlint
+        uses: nosborn/github-action-markdown-cli@v3.3.0
+        with:
+          files: .
+          config_file: .markdownlint.json
+          ignore_files: |
+            node_modules/
+            .git/
+            artifacts/

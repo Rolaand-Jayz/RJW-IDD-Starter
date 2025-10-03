@@ -2,6 +2,21 @@
 
 This starter kit packages the assets you need to run RJW-IDD in any codebase. It ships a reusable directory layout, method documents, scripts, and templates so new projects can copy the process without inheriting project-specific history.
 
+## 🎉 New: Operational Maturity Framework (2025-10-03)
+
+RJW-IDD now includes **complete operational guidance** from development through production:
+
+- **SPEC-0701:** Deployment operations (blue-green, canary, rollback procedures)
+- **SPEC-0801:** SLO/SLI framework (availability, latency, error budgets, alerting)
+- **SPEC-0901:** User experience & feedback loops (usability, accessibility, satisfaction)
+- **SPEC-1001:** Data governance (retention, backup/restore, migration, compliance)
+- **DOC-0018:** General incident response runbook (SEV classification, postmortems)
+- **DOC-0020:** Deployment runbook (step-by-step procedures)
+- **METHOD-0005:** Operations & Production Support phase (maturity gates, SRE practices)
+
+**Quick Start:** See `docs/OPERATIONAL-QUICK-REFERENCE.md` for navigation guide.  
+**Full Context:** Read `docs/GAP-CLOSURE-SUMMARY.md` for complete gap analysis and remediation.
+
 ## Quickstart
 1. **Clone/Copy:** Place the contents of this kit in an empty repository and run `git init` if starting fresh.
 2. **Bootstrap Tooling:** Execute `scripts/setup/bootstrap_project.sh` (set `PYTHON_BIN` if you need a specific interpreter). The script builds `.venv`, installs `requirements-dev.txt`, runs `pytest`, and executes the governance test gate.
@@ -11,19 +26,19 @@ This starter kit packages the assets you need to run RJW-IDD in any codebase. It
 
 > The manual covers the full bring-up checklist and FAQ. The sections below outline every asset shipped in the kit.
 
-## What’s Included
-- **Method Pack (`../rjw-idd-methodology/`):** Core principles, role handbook, stage checklists, and decision template.
-- **Docs & Standards (`docs/`):** Change log template, decision templates, living-doc reconciliation log, runbooks, governance standards, and a detailed starter-kit manual (`docs/manual/starter-kit-manual.md`).
-- **Specs (`specs/`):** Template specifications for functional backbone, quality gates, evidence harvest, observability, security, integration, and cost governance.
+## What's Included
+- **Method Pack (`../rjw-idd-methodology/`):** Core principles, role handbook, stage checklists, decision template, **and new operations phase (METHOD-0005)**.
+- **Docs & Standards (`docs/`):** Change log template, decision templates, living-doc reconciliation log, runbooks, governance standards, **operational quick reference**, and a detailed starter-kit manual (`docs/manual/starter-kit-manual.md`).
+- **Specs (`specs/`):** Template specifications for functional backbone, quality gates, evidence harvest, observability, security, integration, cost governance, **deployment operations (SPEC-0701), SLO framework (SPEC-0801), user feedback (SPEC-0901), and data governance (SPEC-1001)**.
 - **Artifacts (`artifacts/`):** Blank ledgers, integration transcript scaffold, and supporting templates.
 - **Research (`research/`):** Starter evidence task configuration, empty indices, and allowlist instructions ready for harvesting.
 - **Scripts & Tools (`scripts/`, `tools/`):** Evidence harvester, ID validators, cost dashboard helper, sandbox utilities, setup bootstrapper, and test-guard helpers.
-- **Logs (`logs/`):** Placeholder directories with README files describing required artefacts for audits.
+- **Logs (`logs/`):** Placeholder directories with README files describing required artefacts for audits **including deployment logs, SLO reports, operational metrics, satisfaction tracking, and DR drill results**.
 
 Use this starter kit as the reusable part of the methodology; layer your product-specific specs, evidence, and code on top.
 
 ## Lifecycle Overview
-RJW-IDD runs through three repeatable phases with continuous governance around them:
+RJW-IDD runs through **four** repeatable phases with continuous governance around them:
 
 1. **Research-Driven Development (RDD)**
    - Configure evidence tasks (`research/evidence_tasks.json`).
@@ -39,6 +54,13 @@ RJW-IDD runs through three repeatable phases with continuous governance around t
    - Enforce test-first rules via `scripts/ci/test_gate.sh` and `tools/testing/red_green_guard.py`.
    - Capture integration transcripts in `artifacts/integration/transcript-archive/`.
    - Update living documentation using the standards in `docs/standards/` and record verification artefacts in the Change Log.
+
+4. **Operations & Production Support (NEW)** 🎉
+   - Deploy with blue-green/canary strategies and automated rollback (`SPEC-0701`, `DOC-0020`).
+   - Monitor SLOs, manage error budgets, respond to incidents (`SPEC-0801`, `DOC-0018`).
+   - Collect user feedback, conduct usability testing, ensure accessibility (`SPEC-0901`).
+   - Manage data lifecycle, backups, migrations, and compliance (`SPEC-1001`).
+   - Pass operational maturity gates: Production Readiness → Post-Launch Stabilization → Operational Excellence (`METHOD-0005`).
 
 Cross-cutting governance (audits, cost reviews, security drills) runs continuously using the runbooks and scripts provided.
 

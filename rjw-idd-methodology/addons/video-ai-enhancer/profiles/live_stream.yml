@@ -20,8 +20,7 @@ overrides:
   storage_pipeline:
     max_bitrate_mbps: 60
     capture_window_minutes: 15
-  telemetry:
-    snapshot_interval_s: 15
+  # telemetry removed
   models:
     default_model: rjw-video-live
     acceleration: tensor_rt

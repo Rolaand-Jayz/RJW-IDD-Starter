@@ -37,13 +37,6 @@ storage_pipeline:
   segment_max_seconds: 300
   max_parallel_writers: 4
 
-telemetry:
-  snapshot_interval_s: 30
-  metrics_export: otlp
-  observability_tags:
-    - video-ai
-    - realtime
-
 models:
   default_model: rjw-video-hires
   runtime: onnx

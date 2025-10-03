@@ -23,5 +23,4 @@ overrides:
     default_model: rjw-video-mastering
     runtime: tensor_rt
     acceleration: tensor_rt
-  telemetry:
-    snapshot_interval_s: 60
+  # telemetry removed
