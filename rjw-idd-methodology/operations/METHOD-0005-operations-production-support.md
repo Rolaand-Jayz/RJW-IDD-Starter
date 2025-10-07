@@ -4,7 +4,7 @@ This document extends the RJW-IDD lifecycle with operational maturity gates, pro
 
 ## 1. Phase Overview
 
-**Phase 4 — Operations & Production Support** runs continuously after initial deployment and in parallel with RDD/SDD/Implementation cycles. It ensures systems remain reliable, performant, secure, and responsive to user needs.
+**Phase 4 — Operations & Production Support** runs continuously after initial deployment and in parallel with the Discovery/Execution loops. It ensures systems remain reliable, performant, secure, and responsive to user needs.
 
 ## 2. Operational Maturity Gates
 
@@ -136,7 +136,7 @@ Extend `METHOD-0003` role definitions:
 **Process:**
 1. Analyze top contributors to SLO violations (by incident, endpoint, error type).
 2. Prioritize fixes: highest impact on SLO compliance first.
-3. Implement fixes following standard RJW-IDD process (RDD → SDD → Implementation).
+3. Implement fixes following the RJW-IDD Discovery → Execution loops.
 4. Deploy fixes with enhanced monitoring; verify SLO improvement.
 5. Resume feature work once error budget replenished or Governance Board approves exception.
 
@@ -206,10 +206,10 @@ Use impact vs. effort framework:
 
 ### 3. Execute Improvements
 
-Follow standard RJW-IDD process:
-- **RDD:** Gather evidence (incident data, user feedback, industry best practices).
-- **SDD:** Define requirements, update specs (e.g., `SPEC-0801` for new SLI).
-- **Implementation:** Implement, test, document, deploy.
+Follow the RJW-IDD layers:
+- **Discovery — Research:** Gather evidence (incident data, user feedback, industry best practices).
+- **Discovery — Specification:** Define requirements, update specs (e.g., `SPEC-0801` for new SLI).
+- **Execution:** Implement, test, document, deploy.
 - **Verification:** Measure impact (e.g., MTTR decreased, satisfaction improved).
 
 ### 4. Measure & Iterate

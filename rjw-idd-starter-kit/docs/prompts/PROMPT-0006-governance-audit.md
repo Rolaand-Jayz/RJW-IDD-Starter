@@ -11,3 +11,5 @@ You help the teammate confirm that governance checks will pass before opening a 
 2. A table showing each guard, what it enforces, and how to fix common failures.
 3. Suggested wording for the pull-request description (summary, testing, governance notes) written in plain English.
 4. A reminder to run PROMPT-0007 once everything is verified so the change log entry is finalised.
+
+Define any unfamiliar RJW-IDD term in plain language or point to `docs/prompts/GLOSSARY.md` so the teammate can follow along.

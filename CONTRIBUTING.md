@@ -251,22 +251,76 @@ cd Rolaand-Jayz-Wayz-IDD
 
 ### 2. Bootstrap Environment
 
+The starter-kit includes a convenience bootstrap script that performs the common setup steps:
+
 ```bash
 cd rjw-idd-starter-kit
 bash scripts/setup/bootstrap_project.sh
 ```
 
-This script will:
-- Create a Python virtual environment (`.venv`)
-- Install development dependencies
-- Run tests to verify setup
-- Execute governance guards
+What the script does:
+- Create a local Python virtual environment (`.venv`) if one does not exist
+- Install development dependencies from `requirements-dev.txt`
+- Run the test suite (`pytest`) to verify the setup
+- Execute the governance test gate (CI-style guards) when a Git repository is present
+
+Controlling the base/head refs used by the governance gate
+- The test gate uses `origin/main` by default as the base ref. If your repo uses a different mainline branch or you want to test against a specific commit/branch, set the environment variables the bootstrap/CI scripts honor:
+  - `RJW_BASE_REF` — base ref used for the diff (default: `origin/main`)
+  - `RJW_HEAD_REF` — head ref used for the diff (default: `HEAD`)
+- Examples:
+  - Use a different base branch:
+    ```bash
+    export RJW_BASE_REF=origin/develop
+    bash scripts/setup/bootstrap_project.sh
+    ```
+  - Use a specific commit as the base:
+    ```bash
+    export RJW_BASE_REF="$(git rev-list --max-parents=0 HEAD)"  # first commit as base
+    bash scripts/setup/bootstrap_project.sh
+    ```
+  - Override head ref:
+    ```bash
+    export RJW_HEAD_REF=my-feature-branch
+    bash scripts/setup/bootstrap_project.sh
+    ```
+
+Skipping the governance test gate for local iteration
+- The bootstrap script will run the governance gate only when it detects a `.git` directory. To iterate quickly on your local machine without invoking the gate, prefer one of these safe options:
+
+  1) Run the individual setup steps manually (recommended for local development):
+    ```bash
+    # from repo/rjw-idd-starter-kit
+    python3 -m venv ./.venv
+    source .venv/bin/activate
+    python -m pip install --upgrade pip
+    pip install -r requirements-dev.txt
+    # optional: install editable package for local imports
+    pip install -e .
+    # run tests locally
+    pytest
+    ```
+    These commands perform the same setup as the bootstrap script up to (but not including) the governance gate.
+
+  2) If you still want to use the bootstrap script but avoid the gate for a one-off local run, run the manual steps above instead of the script. (Do not rename or delete `.git` to bypass the gate — that is destructive and not recommended.)
+
+Why you might skip the gate locally
+- The governance gate enforces change-log, ledger, spec, and test alignment. It is intentionally strict to mirror CI. Skipping it is acceptable for quick local iterations but remember to run the full bootstrap (or let CI run the gate) before opening PRs so the repo-level checks pass.
+
+Developer note on CI / reproducibility
+- CI systems should not skip the gate. Use the environment variables `RJW_BASE_REF` and `RJW_HEAD_REF` in your CI configuration if your mainline branch is not `origin/main`.
+- If your initial repository clone lacks `origin/main`, the bootstrap script falls back to the repository’s first commit for diffing. You can replicate that behavior manually with:
+  ```bash
+  export RJW_BASE_REF="$(git rev-list --max-parents=0 HEAD)"
+  bash scripts/setup/bootstrap_project.sh
+  ```
 
 ### 3. Activate Environment
 
 ```bash
 source rjw-idd-starter-kit/.venv/bin/activate
 ```
+
 
 ### 4. Install Pre-commit Hooks
 

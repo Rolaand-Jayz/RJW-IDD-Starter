@@ -8,7 +8,9 @@ Use these checklists to force the same lifecycle run that originally created RJW
 - [ ] Roles confirmed (Evidence Lead, Spec Architect, Security Liaison, Implementation Wrangler).
 - [ ] Stage audit log initialised (`logs/LOG-0001-stage-audits.md`) with audit tag `⟦audit-id:1⟧` reserved.
 
-## Phase 1 — Research-Driven Development (RDD)
+## Layer 1 — Discovery (Research + Specification)
+
+### Research Loop
 1. **Plan**
    - [ ] Draft `DEC-####` describing the harvest goal, sources, and date range.
    - [ ] Update `research/evidence_tasks.json` with focus areas.
@@ -19,29 +21,26 @@ Use these checklists to force the same lifecycle run that originally created RJW
    - [ ] Execute validators (`scripts/validate_evidence.py`, `scripts/validate_ids.py --paths research/evidence_index.json`).
    - [ ] Append Change Log row in `docs/change-log.md` detailing harvest, validator status, and outstanding gaps.
    - [ ] Complete `⟦audit-id:n⟧ <reflect/>` entry in stage audit log summarising coverage and open items.
-4. **Exit Gate (must be true)**
-   - [ ] Curated evidence meets recency requirement.
-   - [ ] Gaps documented with a follow-up plan in the relevant `docs/decisions/DEC-####.md` file or the Change Log.
-   - [ ] Next-phase checklist signed by Evidence Lead and Spec Architect.
 
-## Phase 2 — Spec-Driven Development (SDD)
+### Specification Loop
 1. **Prep**
    - [ ] Draft or update `DEC-####` capturing spec scope and trade-offs (e.g., provisional observability guidance).
    - [ ] Ensure requirement ledger template is ready.
 2. **Author & Align**
    - [ ] Create/update specs across functional, quality, observability, security, integration, cost bands.
-   - [ ] Refresh requirement ledger linking each `REQ-####` to evidence, specs, and planned tests.
+   - [ ] Refresh the requirement ledger linking each work item ID to evidence, specs, and planned tests.
    - [ ] Update living documentation reconciliation log with any outstanding doc gaps.
 3. **Validate & Log**
    - [ ] Run ID validator on updated specs/ledger.
    - [ ] Record change in `docs/change-log.md` with linked `DEC-####` and validation results.
    - [ ] Capture `⟦audit-id:n⟧ <reflect/>` stage summary noting remaining assumptions and scheduled micro-harvests.
-4. **Exit Gate (must be true)**
-   - [ ] No unresolved ledger rows without a dated mitigation plan.
-   - [ ] Provisional assumptions have associated follow-up decisions or scheduled RDD tasks.
-   - [ ] Stage audit signed by Spec Architect and Security Liaison.
 
-## Phase 3 — Implementation Engines
+### Discovery Exit Gate (must be true)
+- [ ] Curated evidence meets recency requirement; gaps tracked to owners and due dates.
+- [ ] Requirement ledger, specs, and reconciliation log are aligned and reference the supporting evidence IDs.
+- [ ] Scope freeze captured in latest `DEC-####`; Discovery exit signed by Evidence Lead and Spec Architect.
+
+## Layer 2 — Execution
 1. **Readiness**
    - [ ] Implementation decision (`DEC-####`) crafted describing scope of the sprint/run.
    - [ ] Tooling (test guard, consent manager, metric emitter) configured locally or ported to the new environment.
@@ -64,4 +63,4 @@ Use these checklists to force the same lifecycle run that originally created RJW
 - [ ] Stage audits kept current; every follow-up noted in `logs/LOG-0001-stage-audits.md` is tracked to closure.
 - [ ] Change Log verification column always references tangible artefacts (validator outputs, logs, receipts).
 
-Use this checklist pack as a gatekeeper. If any box stays unchecked, loop back, capture a new decision, or schedule additional RDD work before progressing.
+Use this checklist pack as a gatekeeper. If any box stays unchecked, loop back, capture a new decision, or schedule additional Discovery work before progressing.

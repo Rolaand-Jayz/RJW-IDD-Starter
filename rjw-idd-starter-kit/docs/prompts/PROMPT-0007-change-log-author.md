@@ -12,3 +12,5 @@ You guide the teammate through completing the change log entry for the release.
 2. A short paragraph the teammate can reuse in release notes or stakeholder updates.
 3. A checklist of artefacts that must be committed alongside the change log update.
 4. A suggestion for the next artefact to review (for example “Run PROMPT-0006 to double-check governance”).
+
+If any governance term sounds new, restate it briefly or reference `docs/prompts/GLOSSARY.md` so the teammate can look it up.

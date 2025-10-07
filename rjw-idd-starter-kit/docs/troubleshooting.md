@@ -4,11 +4,20 @@ This guide helps diagnose and resolve common issues when working with RJW-IDD pr
 
 ## Quick Diagnosis
 
-Run this command to check your environment:
+Copy this prompt into your helper:
 
-```bash
-python tools/health_check.py
 ```
+Please run `python tools/health_check.py` and explain the results in simple words.
+```
+
+The helper should run the command, share the output, and translate anything confusing.
+
+## Level-Zero Fix Flow
+
+1. Share the guardrails (`docs/prompts/AGENT-GUARDRAILS.md`) so the helper confirms each action and offers to run commands for you.
+2. Pick the issue below that matches what you see and copy the “Ask the helper” prompt.
+3. Let the helper run the suggested commands, then follow the next steps it gives you.
+4. When you discover a new reusable prompt, add it to `project-prompts.md`.
 
 ## Common Issues and Solutions
 
@@ -21,19 +30,7 @@ python tools/health_check.py
 - `ModuleNotFoundError` for installed packages
 - Python interpreter shows system path instead of `.venv`
 
-**Solutions:**
-
-
-```bash
-# Activate virtual environment
-source .venv/bin/activate  # Linux/Mac
-# or
-.venv\Scripts\activate     # Windows
-
-# Verify activation
-which python  # Should show .venv/bin/python
-python -c "import sys; print(sys.executable)"
-```
+**Ask the helper:** “Help me activate the virtual environment and confirm Python is using `.venv`.” The helper will run `source .venv/bin/activate` (or `.venv\Scripts\activate` on Windows), followed by `which python` and `python -c "import sys; print(sys.executable)"`, then explain the output.
 
 #### Dependencies Not Installed
 
@@ -42,20 +39,7 @@ python -c "import sys; print(sys.executable)"
 - Import errors for `pytest`, `ruff`, `black`, etc.
 - Tools not found in PATH
 
-**Solutions:**
-
-
-```bash
-# Install dependencies
-pip install -r requirements-dev.txt
-
-# Or reinstall everything
-rm -rf .venv
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements-dev.txt
-pip install -e .
-```
+**Ask the helper:** “Please reinstall the project dependencies inside `.venv` and let me know when it is done.” The helper will run the install commands (including rebuilding the virtual environment if needed) and report success or errors.
 
 ### 2. Testing Issues
 
@@ -66,19 +50,7 @@ pip install -e .
 - `pytest` command not found
 - No tests discovered
 
-**Solutions:**
-
-
-```bash
-# Check pytest installation
-python -m pytest --version
-
-# Run tests explicitly
-python -m pytest tests/ -v
-
-# Check test discovery
-python -m pytest --collect-only tests/
-```
+**Ask the helper:** “Pytest is not finding tests. Run the detection commands and tell me what they mean.” The helper will execute `python -m pytest --version`, `python -m pytest tests/ -v`, and `python -m pytest --collect-only tests/`, explaining any failures.
 
 #### Test Failures
 
@@ -87,19 +59,7 @@ python -m pytest --collect-only tests/
 - Tests failing unexpectedly
 - Import errors in test files
 
-**Solutions:**
-
-
-```bash
-# Run specific test
-python -m pytest tests/guards/test_red_green_guard.py::TestContainsTestPath::test_detects_test_directory -v
-
-# Debug imports
-python -c "import tools.testing.red_green_guard; print('Import successful')"
-
-# Check Python path
-python -c "import sys; print('\n'.join(sys.path))"
-```
+**Ask the helper:** “A test failed. Rerun the failing test only, restate the error in plain words, and coach me on the smallest fix.” The helper can also check imports and the Python path if modules are missing, then guide you back to the Create stage.
 
 ### 3. Linting and Formatting Issues
 
@@ -110,24 +70,7 @@ python -c "import sys; print('\n'.join(sys.path))"
 - Linting fails with import errors
 - Type checking reports missing modules
 
-**Solutions:**
-
-
-```bash
-# Check tool versions
-ruff --version
-mypy --version
-black --version
-
-# Run individual tools
-ruff check tools/
-mypy tools/
-black --check tools/
-
-# Fix formatting
-black tools/
-ruff check --fix tools/
-```
+**Ask the helper:** “Linting failed. Run the lint commands, fix what you can automatically, and summarise what is left.” The helper will run the Ruff, MyPy, and Black commands and translate any remaining errors, then point you to the next prompt.
 
 #### Pre-commit Hook Failures
 
@@ -136,19 +79,7 @@ ruff check --fix tools/
 - Git commits blocked by pre-commit hooks
 - Hook runs fail with errors
 
-**Solutions:**
-
-
-```bash
-# Run hooks manually
-pre-commit run --all-files
-
-# Update hooks
-pre-commit autoupdate
-
-# Skip hooks temporarily (not recommended)
-git commit --no-verify
-```
+**Ask the helper:** “Pre-commit blocked my commit. Run the hooks, explain any errors, and guide me through the fix.” The helper can update hooks, rerun them, and only skip as a last resort while warning you about the risks.
 
 ### 4. Git and Version Control Issues
 
@@ -159,21 +90,7 @@ git commit --no-verify
 - Guards fail with "no git history"
 - Branch comparison errors
 
-**Solutions:**
-
-
-```bash
-# Check git status
-git status
-git log --oneline -10
-
-# Set comparison branch
-export RJW_BASE_REF=origin/main
-export RJW_HEAD_REF=HEAD
-
-# Run guard manually
-python -m tools.testing.red_green_guard --files $(git diff --name-only HEAD~1)
-```
+**Ask the helper:** “The guards say git history is missing. Check git status, set the comparison branches if needed, and rerun the guard so I know what changed.” The helper will run the git commands and report what to do next.
 
 #### Change Log Validation Errors
 
@@ -182,17 +99,7 @@ python -m tools.testing.red_green_guard --files $(git diff --name-only HEAD~1)
 - Commits rejected for missing change log entries
 - Invalid change log format
 
-**Solutions:**
-
-
-```bash
-# Check change log format
-head -20 docs/change-log.md
-
-# Add missing entry
-# Format: change-YYYYMMDD-## - Description
-echo "change-$(date +%Y%m%d)-01 - Fixed issue description" >> docs/change-log.md
-```
+**Ask the helper:** “The guard says the change log is missing. Show me the first few lines, draft the row I need, and wait for me to confirm it’s added.” The helper will display the log, craft the entry, and remind you to run the Record stage prompts.
 
 ### 5. Docker and Container Issues
 
@@ -203,19 +110,7 @@ echo "change-$(date +%Y%m%d)-01 - Fixed issue description" >> docs/change-log.md
 - Docker build fails
 - Missing dependencies in container
 
-**Solutions:**
-
-
-```bash
-# Build with no cache
-docker build --no-cache -t rjw-idd .
-
-# Check build logs
-docker build -t rjw-idd . 2>&1 | tee build.log
-
-# Run container
-docker run -it --rm rjw-idd bash
-```
+**Ask the helper:** “Docker build failed. Re-run the build (with `--no-cache` if needed), capture the logs, and tell me the first error in plain words.” The helper can also start the container for inspection if the build succeeds.
 
 #### Volume Mount Issues
 
@@ -224,16 +119,7 @@ docker run -it --rm rjw-idd bash
 - File changes not reflected in container
 - Permission errors
 
-**Solutions:**
-
-
-```bash
-# Check volume mounts
-docker run -v $(pwd):/app -it rjw-idd bash
-
-# Fix permissions
-sudo chown -R $USER:$USER .
-```
+**Ask the helper:** “The container is not seeing my files. Check the volume mount and fix any permission issues, then tell me what changed.” The helper can run the docker commands and report the results.
 
 ### 6. Performance Issues
 
@@ -244,19 +130,7 @@ sudo chown -R $USER:$USER .
 - Tests take too long to execute
 - CI/CD pipelines timeout
 
-**Solutions:**
-
-
-```bash
-# Run tests in parallel
-python -m pytest tests/ -n auto
-
-# Profile tests
-python -m pytest tests/ --durations=10
-
-# Run specific slow tests
-python -m pytest tests/ -k "slow" --tb=short
-```
+**Ask the helper:** “Tests are slow. Try the speed-up commands for me, explain what they do, and suggest next steps based on the output.” The helper will run the parallel and profiling options, then translate the findings.
 
 #### Memory Issues
 
@@ -265,19 +139,7 @@ python -m pytest tests/ -k "slow" --tb=short
 - Out of memory errors
 - Tests fail with memory exhaustion
 
-**Solutions:**
-
-
-```bash
-# Check memory usage
-python -c "import psutil; print(f'Memory: {psutil.virtual_memory()}')"
-
-# Run with less parallelism
-python -m pytest tests/ -n 2
-
-# Profile memory usage
-python -m memory_profiler tools/rjw_idd_evidence_harvester.py
-```
+**Ask the helper:** “We are running out of memory. Check how much RAM is free, try running fewer parallel tests, and show me where the memory goes.” The helper can execute the monitoring and profiling commands, then describe the findings in everyday language.
 
 ### 7. Network and API Issues
 

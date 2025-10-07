@@ -1,34 +1,35 @@
 # Rolaand Jayz Wayz – Coding with Natural Language: Intelligence Driven Development (RJW-IDD) Starter Kit
 
-This starter kit packages the assets you need to run RJW-IDD in any codebase. It ships a reusable directory layout, method documents, scripts, and templates so new projects can copy the process without inheriting project-specific history.
+> Built so a person with **zero coding background** can partner with an AI helper, stay on the RJW-IDD rails, and ship real work.
 
-## 🎉 New: Operational Maturity Framework (2025-10-03)
+This starter kit gives you the directory layout, scripts, documents, and—most importantly—the copy-paste prompts that make RJW-IDD approachable for everyone. Bring it into any codebase to get a consistent, traceable workflow.
 
-RJW-IDD now includes **complete operational guidance** from development through production:
+## Who This Kit Supports
+- **Level zero developers** who need plain-language guidance, one prompt at a time.
+- **Teams** who want a shared prompt library and predictable governance steps.
+- **AI helpers** that must confirm plans, follow RJW-IDD, and leave a clear paper trail.
 
-- **SPEC-0701:** Deployment operations (blue-green, canary, rollback procedures)
-- **SPEC-0801:** SLO/SLI framework (availability, latency, error budgets, alerting)
-- **SPEC-0901:** User experience & feedback loops (usability, accessibility, satisfaction)
-- **SPEC-1001:** Data governance (retention, backup/restore, migration, compliance)
-- **DOC-0018:** General incident response runbook (SEV classification, postmortems)
-- **DOC-0020:** Deployment runbook (step-by-step procedures)
-- **METHOD-0005:** Operations & Production Support phase (maturity gates, SRE practices)
+## Quickstart (Human Friendly)
+1. **Open the Novice Guide:** `rjw-idd-starter-kit/docs/manual/novice-quickstart.md` walks you through the seven RJW-IDD stages.
+2. **Load the Core Prompts:** Keep `rjw-idd-starter-kit/docs/prompts/PROMPT-CORE-novice-flow.md` open and copy the prompts in order. Use `project-prompts.md` to store any new prompts the helper gives you.
+3. **Share the Guardrails:** Send anything from `rjw-idd-starter-kit/docs/prompts/AGENT-GUARDRAILS.md` to remind your helper to stay in plain language and confirm each step. Point them to the glossary (`docs/prompts/GLOSSARY.md`) if a new term appears.
+4. **Use the Example Conversations:** `rjw-idd-starter-kit/docs/prompts/EXAMPLE-CONVERSATIONS.md` shows how to ask the helper to run commands like the bootstrap script, review diffs, or write the change log.
+5. **Let the Helper Run Setup:** Paste a prompt such as “Please run the bootstrap script for me. Explain what you are doing and share the results.” The helper will execute `scripts/setup/bootstrap_project.sh`, confirm success, and translate the output.
+6. **Log the Baseline:** Add a row to `docs/change-log.md` (for example `change-YYYYMMDD-01`) so the history starts clean, then push so the GitHub Actions workflow runs on pull requests.
 
-**Quick Start:** See `docs/OPERATIONAL-QUICK-REFERENCE.md` for navigation guide.  
-**Full Context:** Review `rjw-idd-starter-kit/docs/change-log.md` for complete project history and improvements.
+Need deeper context or role guidance? Read `docs/manual/starter-kit-manual.md` after the novice flow feels comfortable.
 
-## Quickstart
-1. **Clone/Copy:** Place the contents of this kit in an empty repository and run `git init` if starting fresh.
-2. **Bootstrap Tooling:** Execute `scripts/setup/bootstrap_project.sh` (set `PYTHON_BIN` if you need a specific interpreter). The script builds `.venv`, installs `requirements-dev.txt`, runs `pytest`, and executes the governance test gate.
-3. **Review Manual:** Read `docs/manual/starter-kit-manual.md` for role definitions, cadence guidance, and troubleshooting.
-4. **Commit Baseline:** Record the imported kit in `docs/change-log.md` (`change-YYYYMMDD-01`) and push so the GitHub Actions workflow runs on pull requests.
-5. **Customize:** Duplicate SPEC templates, seed the ledgers with initial REQ-####/TEST-#### entries, and update `research/evidence_tasks.json`.
-
-> The manual covers the full bring-up checklist and FAQ. The sections below outline every asset shipped in the kit.
+## Quickstart (For the Helper)
+- Start with the **Agent Pledge** from `PROMPT-CORE-novice-flow.md`.
+- Name the current RJW-IDD stage at the top of every reply.
+- Offer the next prompt to paste when you finish a stage.
+- Offer to run safe commands (tests, setup, formatting), describe what they do, ask for a yes/no, then summarise the results.
+- Before editing files, list the plan and wait for human approval.
 
 ## What's Included
 - **Method Pack (`../rjw-idd-methodology/`):** Core principles, role handbook, stage checklists, decision template, **and new operations phase (METHOD-0005)**.
 - **Docs & Standards (`docs/`):** Change log template, decision templates, living-doc reconciliation log, runbooks, governance standards, **operational quick reference**, and a detailed starter-kit manual (`docs/manual/starter-kit-manual.md`).
+- **Docs/Prompts (`docs/prompts/`):** Plain-language prompt index (`README.md`), copy-ready novice flow, agent guardrails, glossary, example conversations, and deeper prompts for specs, testing, docs, and audits.
 - **Specs (`specs/`):** Template specifications for functional backbone, quality gates, evidence harvest, observability, security, integration, cost governance, **deployment operations (SPEC-0701), SLO framework (SPEC-0801), user feedback (SPEC-0901), and data governance (SPEC-1001)**.
 - **Artifacts (`artifacts/`):** Blank ledgers, integration transcript scaffold, and supporting templates.
 - **Research (`research/`):** Starter evidence task configuration, empty indices, and allowlist instructions ready for harvesting.
