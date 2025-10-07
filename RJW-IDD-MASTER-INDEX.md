@@ -341,6 +341,7 @@ python scripts/addons/disable_video_ai_enhancer.py  # to disable
 | **DOC-0011** | `docs/standards/DOC-0011-intelligence-driven-methodology.md` | RJW-IDD overview | Roles, lifecycle, tooling |
 | **DOC-0012** | `docs/standards/DOC-0012-cost-governance-standard.md` | Cost governance standard | Budgets, tracking, alerts |
 | **DOC-0013** | `docs/standards/DOC-0013-naming-conventions.md` | Naming conventions | Files, IDs, artifacts |
+| **DOC-0021** | `docs/standards/DOC-0021-git-setup-configuration.md` | Git configuration and workflows | Version control, commits |
 
 ### Runbooks
 | DOC ID | Location | Purpose | Used By |
@@ -351,6 +352,7 @@ python scripts/addons/disable_video_ai_enhancer.py  # to disable
 | **DOC-0017** | `docs/runbooks/DOC-0017-test-first-runbook.md` | Test-first enforcement | Execution Wrangler |
 | **DOC-0018** | `docs/runbooks/DOC-0018-general-incident-runbook.md` | General incident response | On-call, SRE |
 | **DOC-0020** | `docs/runbooks/DOC-0020-deployment-runbook.md` | Deployment procedures | SRE, DevOps Lead |
+| **DOC-0022** | `docs/runbooks/DOC-0022-git-workflow-runbook.md` | Step-by-step git procedures | All developers |
 
 ### Document Classes (from DOC-0006)
 | Class | Location | Purpose | Required Metadata |
@@ -500,6 +502,7 @@ python scripts/addons/disable_video_ai_enhancer.py  # to disable
 | **backup_manager.py** | `tools/backup_manager.py` | Backup management |
 | **health_check.py** | `tools/health_check.py` | System health checks |
 | **performance_benchmark.py** | `tools/performance_benchmark.py` | Performance benchmarking |
+| **commit_msg_helper.py** | `tools/git/commit_msg_helper.py` | Commit message validation and builder |
 
 ---
 
@@ -1101,6 +1104,13 @@ cat method/config/features.yml
 - **i18n Guide:** `docs/i18n-guide.md`
 - **API Standards:** `docs/api-standards.md`
 - **Troubleshooting:** `docs/troubleshooting.md`
+
+### Git Configuration Files
+- **Git Setup Standard:** `docs/standards/DOC-0021-git-setup-configuration.md` ⭐ **NEW**
+- **Git Workflow Runbook:** `docs/runbooks/DOC-0022-git-workflow-runbook.md` ⭐ **NEW**
+- **Sample .gitconfig:** `.github/gitconfig-sample` ⭐ **NEW**
+- **Pull Request Template:** `.github/PULL_REQUEST_TEMPLATE.md` ⭐ **NEW**
+- **Commit Message Helper:** `tools/git/commit_msg_helper.py` ⭐ **NEW**
 
 ### Review Documents
 - `docs/reviews/CODEBASE-REVIEW-SUMMARY.md`

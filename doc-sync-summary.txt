@@ -1,0 +1,7 @@
+Found 2 doc-sync issue(s):
+
+DRIFT: 2 issue(s)
+  /home/rolaand-jayz/Desktop/method/rjw-idd-starter-kit/scripts/doc_sync.py:27
+    Tag @doc-sync:\s*(\S+)' not referenced in docs
+  /home/rolaand-jayz/Desktop/method/rjw-idd-starter-kit/scripts/doc_sync.py:130
+    Tag @doc-sync:{orphan} not referenced in docs

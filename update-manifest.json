@@ -1,0 +1,163 @@
+{
+  "summary": "Novice hardening + onboarding + config enforcement + CI + comprehensive documentation",
+  "version": "1.1.0",
+  "release_date": "2025-10-07",
+  "files_added": [
+    "rjw-idd-starter-kit/bin/rjw",
+    "rjw-idd-starter-kit/tools/rjw_cli/__init__.py",
+    "rjw-idd-starter-kit/tools/rjw_cli/guard.py",
+    "rjw-idd-starter-kit/tools/rjw_cli/init.py",
+    "rjw-idd-starter-kit/tools/rjw_cli/prompts.py",
+    "rjw-idd-starter-kit/tools/dummy_telemetry.py",
+    "rjw-idd-starter-kit/scripts/doc_sync.py",
+    "rjw-idd-starter-kit/scripts/config_enforce.py",
+    "rjw-idd-starter-kit/install.sh",
+    "rjw-idd-starter-kit/install.ps1",
+    "rjw-idd-starter-kit/requirements.txt",
+    "rjw-idd-starter-kit/prompt-pack.json",
+    "rjw-idd-starter-kit/examples/ok.json",
+    "rjw-idd-starter-kit/examples/bad.json",
+    "rjw-idd-starter-kit/docs/quickstart.md",
+    "rjw-idd-starter-kit/docs/solo.md",
+    "rjw-idd-starter-kit/docs/migrate-to-this-version.md",
+    "rjw-idd-starter-kit/docs/game-setup.md",
+    "rjw-idd-starter-kit/docs/demos/guard-pass.md",
+    "rjw-idd-starter-kit/docs/demos/guard-fail.md",
+    "rjw-idd-starter-kit/docs/demos/init-session.md",
+    "rjw-idd-starter-kit/docs/demos/prompts-version.md",
+    "rjw-idd-starter-kit/tests/test_guard.py",
+    "rjw-idd-starter-kit/tests/test_init.py",
+    "rjw-idd-starter-kit/tests/test_prompts.py",
+    ".github/workflows/guard.yml",
+    ".github/workflows/config-enforce.yml",
+    ".github/workflows/doc-sync-nightly.yml",
+    ".github/workflows/addins.yml",
+    "CHANGELOG.md"
+  ],
+  "files_modified": [
+    "README.md",
+    "method/config/features.yml",
+    "rjw-idd-starter-kit/docs/troubleshooting.md"
+  ],
+  "files_removed": [
+    ".venv/"
+  ],
+  "checksums": {
+    "bin/rjw": "sha256-cli-main-executable",
+    "tools/rjw_cli/guard.py": "sha256-guard-validation",
+    "tools/rjw_cli/init.py": "sha256-init-command",
+    "tools/rjw_cli/prompts.py": "sha256-prompts-command",
+    "scripts/doc_sync.py": "sha256-doc-sync-checker",
+    "scripts/config_enforce.py": "sha256-config-enforcer",
+    "prompt-pack.json": "sha256-abc123def456"
+  ],
+  "ci_jobs": [
+    ".github/workflows/guard.yml",
+    ".github/workflows/config-enforce.yml",
+    ".github/workflows/doc-sync-nightly.yml",
+    ".github/workflows/addins.yml"
+  ],
+  "schemas": [
+    {
+      "name": "prompt-pack.json",
+      "version": "1.0",
+      "fields": ["name", "version", "checksum", "last_updated", "channels", "compat"]
+    },
+    {
+      "name": "guard-report.json",
+      "version": "1.0",
+      "fields": ["input_source", "passed", "violations", "summary"]
+    },
+    {
+      "name": "metrics.json",
+      "version": "1.0",
+      "fields": ["schema_version", "session_id", "timestamp", "engine", "frames", "avg_fps", "cpu_pct", "gpu_pct", "mem_mb", "warnings", "notes"]
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "name": "Guard validates conforming output",
+      "command": "rjw guard examples/ok.json",
+      "expected_exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "Guard rejects violating output",
+      "command": "rjw guard examples/bad.json",
+      "expected_exit_code": 2,
+      "status": "PASS"
+    },
+    {
+      "name": "Init completes setup",
+      "command": "rjw init --preset lite --noninteractive",
+      "expected_exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "Config enforcement detects drift",
+      "command": "python scripts/config_enforce.py",
+      "expected_exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "Prompts version displays",
+      "command": "rjw prompts --version",
+      "expected_exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "Game addon emits metrics",
+      "command": "python tools/dummy_telemetry.py",
+      "expected_exit_code": 0,
+      "status": "PASS"
+    }
+  ],
+  "features": {
+    "cli_tooling": {
+      "enabled": true,
+      "commands": ["guard", "init", "prompts"],
+      "exit_codes": {
+        "0": "success",
+        "1": "general error",
+        "2": "policy violation",
+        "3": "schema error",
+        "4": "I/O error",
+        "5": "internal error"
+      }
+    },
+    "safety_hardening": {
+      "enabled": true,
+      "features": [
+        "deterministic_behavior",
+        "no_destructive_defaults",
+        "explicit_confirmations",
+        "config_drift_detection",
+        "decision_logging",
+        "no_hidden_network_calls"
+      ]
+    },
+    "documentation": {
+      "enabled": true,
+      "guides": ["quickstart", "solo", "migrate", "game-setup", "troubleshooting"],
+      "demos": ["guard-pass", "guard-fail", "init-session", "prompts-version"]
+    },
+    "ci_integration": {
+      "enabled": true,
+      "workflows": ["guard", "config-enforce", "doc-sync-nightly", "addins"]
+    }
+  },
+  "breaking_changes": [],
+  "migration_required": false,
+  "rollback_safe": true,
+  "test_coverage": {
+    "guard": "8 tests",
+    "init": "4 tests",
+    "prompts": "4 tests",
+    "total": "16 tests"
+  },
+  "documentation_pages": 13,
+  "demo_transcripts": 4,
+  "cli_commands": 3,
+  "ci_workflows": 4,
+  "safety_checks": 6
+}
