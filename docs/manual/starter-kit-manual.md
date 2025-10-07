@@ -2,6 +2,8 @@
 
 This manual is the field guide for deploying the RJW-IDD starter kit. Pair it with the top-level README: the README gives the elevator pitch and quickstart checklist, while this manual dives into responsibilities, cadence, and troubleshooting.
 
+> Brand-new developers should start with `docs/manual/novice-quickstart.md` plus the prompts in `docs/prompts/`. Come back here once the core flow feels comfortable.
+
 ## 1. Orientation
 
 - **Target audience:** Engineering leads, governance sentinels, doc stewards, product tech leads.

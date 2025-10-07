@@ -4,6 +4,11 @@
 # - Installs development dependencies from requirements-dev.txt.
 # - Runs pytest to confirm guard coverage is green.
 # - Executes the governance test gate with a safe fallback base ref when origin/main is unavailable.
+# - To aid local development, you may skip the governance test gate by setting
+#   SKIP_RJW_TEST_GATE=1 (or 'true'/'yes') in your environment. This is intended
+#   for local iteration only; CI should leave the gate enabled.
+# - Use RJW_BASE_REF and RJW_HEAD_REF to override the base/head refs used for the
+#   git diff when the default (origin/main) does not apply.
 
 set -euo pipefail
 
@@ -38,15 +43,21 @@ echo "bootstrap: running pytest"
 pytest
 
 if [[ -d "${ROOT_DIR}/.git" ]]; then
-  DEFAULT_BASE="origin/main"
-  if ! git -C "${ROOT_DIR}" rev-parse --verify "${DEFAULT_BASE}" >/dev/null 2>&1; then
-    DEFAULT_BASE="$(git -C "${ROOT_DIR}" rev-list --max-parents=0 HEAD 2>/dev/null || true)"
+  # Allow local developers to opt out of running the heavy governance gate.
+  # Accepts: 1, true, yes (case-sensitive on common shells; set exact string)
+  if [[ "${SKIP_RJW_TEST_GATE:-}" =~ ^(1|true|yes)$ ]]; then
+    echo "bootstrap: SKIP_RJW_TEST_GATE set; skipping scripts/ci/test_gate.sh (local dev)" >&2
+  else
+    DEFAULT_BASE="origin/main"
+    if ! git -C "${ROOT_DIR}" rev-parse --verify "${DEFAULT_BASE}" >/dev/null 2>&1; then
+      DEFAULT_BASE="$(git -C "${ROOT_DIR}" rev-list --max-parents=0 HEAD 2>/dev/null || true)"
+    fi
+    if [[ -n "${DEFAULT_BASE}" ]]; then
+      export RJW_BASE_REF="${RJW_BASE_REF:-${DEFAULT_BASE}}"
+    fi
+    echo "bootstrap: executing scripts/ci/test_gate.sh (RJW_BASE_REF=${RJW_BASE_REF:-unset})"
+    bash "${ROOT_DIR}/scripts/ci/test_gate.sh"
   fi
-  if [[ -n "${DEFAULT_BASE}" ]]; then
-    export RJW_BASE_REF="${RJW_BASE_REF:-${DEFAULT_BASE}}"
-  fi
-  echo "bootstrap: executing scripts/ci/test_gate.sh (RJW_BASE_REF=${RJW_BASE_REF:-unset})"
-  bash "${ROOT_DIR}/scripts/ci/test_gate.sh"
 else
   echo "bootstrap: no git repository detected; skipping scripts/ci/test_gate.sh (requires git diff)" >&2
 fi

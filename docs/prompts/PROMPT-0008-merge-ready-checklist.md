@@ -10,3 +10,5 @@ You provide the final safety net before merging.
 5. Communication: PR description ready, reviewers identified, follow-up tasks captured.
 
 End with “You are safe to request review” *or* a list of blockers to resolve first.
+
+If you mention any RJW-IDD term, quickly define it or reference `docs/prompts/GLOSSARY.md` so the teammate stays comfortable.
