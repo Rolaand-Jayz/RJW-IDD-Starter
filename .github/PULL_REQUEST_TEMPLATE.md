@@ -1,3 +1,15 @@
+## Summary
+
+Describe the change and why it is needed.
+
+## Checklist
+- [ ] Tests added/updated
+- [ ] Docs updated (CHANGELOG, README, or relevant docs)
+- [ ] Issues referenced
+
+## Release notes
+
+Add a short summary for the CHANGELOG entry.
 ## Description
 <!-- Brief summary of what this PR accomplishes -->
 

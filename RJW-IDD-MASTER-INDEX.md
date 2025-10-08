@@ -1,9 +1,40 @@
+
 # RJW-IDD Master Index & Quick Reference
 **Version:** 1.0.0  
 **Last Updated:** 2025-10-05  
 **Purpose:** Comprehensive index for fast lookup and retrieval of all RJW-IDD methodology components
 
 ---
+
+## 🆕 Zero-Knowledge Quickstart (for absolute beginners)
+If you're new to this repository or the RJW-IDD methodology and want a fast, non-technical path to get useful results, follow these small steps. No prior knowledge required.
+
+1. Read this file end-to-end once to get the big picture (5–10 minutes).
+2. Open `rjw-idd-starter-kit/README.md` next — it contains runnable examples and a minimal setup.
+3. Create a working Python virtual environment and install the project's dependencies:
+
+```bash
+# from the repository root
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r rjw-idd-starter-kit/requirements.txt || pip install -r rjw-idd-starter-kit/requirements-dev.txt
+```
+
+4. Run the project's basic health check and tests (fast smoke):
+
+```bash
+cd rjw-idd-starter-kit
+pytest -q  # runs the test suite; expect a small set of quick checks
+```
+
+5. Try an example prompt flow (no deep knowledge needed): open `rjw-idd-starter-kit/docs/prompts/` and start with `PROMPT-0001-starter-briefing.md` — it walks you through creating a short plan and next steps.
+
+6. When you want help, use `project-prompts.md` or open `PROMPT-LIBRARY-QUICK-ACCESS.md` — both are curated for newcomers.
+
+Notes for complete beginners:
+- You don't need to understand all files to start. Focus on `rjw-idd-starter-kit/docs/`, `docs/runbooks/`, and `docs/prompts/` first.
+- If anything fails during setup, copy the terminal output and open `docs/troubleshooting.md`.
+
 
 ## 📋 TABLE OF CONTENTS
 
@@ -24,6 +55,134 @@
 15. [Quick Lookup Tables](#quick-lookup-tables)
 
 ---
+
+## 🧭 Simplified Navigation (start here)
+If you're just exploring, these are the smallest set of places to click/read to start getting value quickly.
+
+- Starter & runnable examples: `rjw-idd-starter-kit/README.md` — quick setup and example runs.
+- Beginner prompts: `rjw-idd-starter-kit/docs/prompts/PROMPT-0001-starter-briefing.md` — guided plan creation.
+- Quick prompts library: `PROMPT-LIBRARY-QUICK-ACCESS.md` — one-page access to common prompts.
+- Runbooks (how-to): `docs/runbooks/` — step-by-step operational procedures.
+- Core doctrine overview: `rjw-idd-methodology/README.md` — high-level explanations of concepts.
+- Troubleshooting: `rjw-idd-starter-kit/docs/troubleshooting.md` and `docs/troubleshooting.md` — common fixes.
+- Tests & health checks: `rjw-idd-starter-kit` then run `pytest` to validate your environment.
+
+Tip: copy-paste the path into your editor/file-open dialog to jump straight to a file.
+
+## 📘 Beginner Glossary (plain language)
+A short list of terms you'll see frequently, explained simply.
+
+- Method / RJW-IDD: The documented process and conventions in this repo — how we plan, specify, build, and operate software.
+- Discovery: The research and evidence-gathering phase where you collect facts and user needs.
+- Specification (Spec): A formal, traceable description of what the system should do.
+- Execution: The building, testing, and delivery phase (where code and tests are written).
+- TDD (Test-Driven Development): Write failing tests first, then code to make them pass.
+- LDDD (Living Documentation Driven Development): Keep docs and code changes together so docs never go stale.
+- Guard: Automated checks (scripts/tests) that block unsafe or incomplete changes before merge/deploy.
+- Add-on: Optional feature packs (for example, 3D Game Core) you can enable or disable.
+- Runbook: A step-by-step playbook for operational tasks (deploys, incident handling).
+- Change Log / DEC-####: Records of decisions and changes; DEC-#### are decision documents you can read for rationale.
+- Evidence: Harvested practitioner knowledge or signals used to inform specs and decisions.
+
+If you want more glossary entries, I can expand this into a full `docs/glossary.md` and link it from here.
+
+## 🛠️ Starter Tutorial Projects (pick one to scaffold)
+Below are five complete, fun tutorial project options designed for a solo, no-experience developer. Each one is explicitly crafted to exercise the full RJW‑IDD workflow (Discovery → Specification → Execution → Operations) and includes variability axes so every user's result will be different.
+
+1. MoodMix — mood-driven playlist & visualizer
+  - Pitch: Type a mood or paste a short journal line; the app returns a playlist, a dynamic visualizer, and a shareable mood card (PNG).
+  - Why it teaches the method: evidence-led UX choices, spec for media imports, tests for mapping and rendering, runbook for deployment and file handling.
+  - Variability: visual styles, mood→genre mapping, music sources, share templates.
+  - Est. effort: 3–5 days
+  - Scaffold path: `tutorials/moodmix/`
+
+2. Recipe Remix — creative recipe generator and printable cards
+  - Pitch: Give ingredients and constraints; get a novel recipe, shopping list, and printable recipe card (PDF).
+  - Why it teaches the method: discovery of edge cases, spec for ingredient formats, TDD for normalization and PDF generation, runbook for persistence & privacy.
+  - Variability: cuisine, dietary rules, difficulty, template styles.
+  - Est. effort: 3–6 days
+  - Scaffold path: `tutorials/recipe-remix/`
+
+3. PixelPet Studio — create and care for a tiny pixel pet
+  - Pitch: Feed, play, and customize a pixel pet that evolves; includes deterministic 48-hour replay of player actions.
+  - Why it teaches the method: state-machine specs, deterministic replay tests, integration transcripts, runbook for migration/backups.
+  - Variability: art packs, growth rules, mini-games, social sharing options.
+  - Est. effort: 4–7 days
+  - Scaffold path: `tutorials/pixelpet-studio/`
+
+4. Arcade Map Maker — collaborative map editor with versioned snapshots
+  - Pitch: Tile-based editor with layers, exportable JSON maps, PNG snapshots, and branching/rollback of map versions.
+  - Why it teaches the method: schema specs, snapshot/versioning tests, UI integration tests, runbook for data export/import.
+  - Variability: palettes, map size, tile behaviors, collaboration model (fork vs lock).
+  - Est. effort: 4–8 days
+  - Scaffold path: `tutorials/arcade-map-maker/`
+
+5. StoryForge — collaborative short-story remixing and zine export
+  - Pitch: Authors submit fragments; the app suggests merges, checks continuity, and generates a printable zine with author credits.
+  - Why it teaches the method: evidence-driven merge rules, spec for attribution, integration tests for merges→export, runbook for zine generation.
+  - Variability: genres, merge aggressiveness, layout templates, contributor roles.
+  - Est. effort: 4–7 days
+  - Scaffold path: `tutorials/storyforge/`
+
+How to proceed
+
+- The tutorial roots have been created as empty starting points (no files were added inside them):
+  - `tutorials/moodmix/`
+  - `tutorials/recipe-remix/`
+  - `tutorials/pixelpet-studio/`
+  - `tutorials/arcade-map-maker/`
+  - `tutorials/storyforge/`
+
+Scaffold-by-methodology (what will happen next)
+
+All tutorial artifacts (DEC, evidence, specs, scaffolding, tests, runbooks, and ops docs) will be produced by following the RJW‑IDD methodology end-to-end. No pre-built venvs or pre-created source files are included — environment setup is an explicit methodological step to teach developers how to manage their tooling.
+
+Step-by-step flow (interactive, chat-driven in the IDE)
+
+1) Discovery — user in the chat
+  - The agent asks a short set of discovery questions and requests 5 example inputs the user wants the tutorial to handle.
+  - The user replies in the IDE chat. The agent creates `tutorials/<slug>/DEC-0001.md` capturing scope, success criteria, and constraints and shows a file preview in chat.
+  - The agent (optionally) synthesizes or gathers small sample evidence files and places them under `tutorials/<slug>/evidence/` so the spec loop can proceed.
+
+2) Specification — iterative in chat
+  - The agent drafts `tutorials/<slug>/specs/SPEC-<slug>-functional.md` from the DEC and evidence and posts it in chat for user review.
+  - The user edits or accepts the spec in chat; the agent commits the approved spec and links it from the DEC.
+
+3) Environment (explicit teaching step)
+  - The agent teaches venv creation in the chat and explains the reasons and alternatives (poetry, pipx, system interpreter). The learner runs the commands locally.
+  - Example commands are provided in chat and saved to `tutorials/<slug>/setup/ENVIRONMENT.md` by the agent (this file documents the expected outcomes and quick troubleshooting tips):
+
+```bash
+# from the tutorial root
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+```
+
+4) Implementation scaffolding (after spec approval)
+  - The agent creates minimal, commented starter files under `tutorials/<slug>/src/`, `tutorials/<slug>/tests/`, and `tutorials/<slug>/docs/` guided by the spec.
+  - For each file creation the agent provides an educational note in chat explaining what the file does, why it's needed, and what to expect when running it.
+
+5) Tests & guards (TDD workflow)
+  - The agent generates unit tests and a small integration test that encode the spec's acceptance criteria and guides the user through running them.
+  - The agent interprets test failures in chat and suggests targeted edits until tests pass.
+
+6) Living docs, runbooks & artifacts
+  - The agent ensures docs are updated alongside code (`tutorials/<slug>/docs/README.md`, `tutorials/<slug>/docs/runbook.md`).
+  - Integration transcripts and example outputs are stored under `tutorials/<slug>/artifacts/integration/` for replay and audit.
+
+7) Operations & SLOs
+  - The agent drafts `tutorials/<slug>/docs/ops.md` with simple SLOs, backup policies, and monitoring checklist items.
+
+Chat-driven confirmations
+
+- Every step is confirmed in the IDE chat. The agent always includes:
+  - A short educational blurb (what, why, how).
+  - Exact copyable commands for the user to run locally.
+  - A preview of the files to be created (or the diff) before applying changes.
+
+If you'd like, I can start the Discovery step for a chosen tutorial now. Which tutorial should I begin with?
+
 
 ## 🎯 CORE METHODOLOGY DOCUMENTS
 

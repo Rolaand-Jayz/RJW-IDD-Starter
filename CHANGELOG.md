@@ -1,5 +1,11 @@
 # Changelog
 
+All notable changes to this project will be documented in this file.
+
+## [Unreleased]
+- Governance & CI remediation: add governance docs, CI gates, pre-commit, and release workflow (DEC-GOV-0001 tie-in).
+# Changelog
+
 All notable changes to the RJW-IDD Starter Kit will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),

@@ -1,3 +1,22 @@
+# Contributing (Novice-first)
+
+This project welcomes contributions. The process is intentionally simple so a new developer can follow it.
+
+Branch protections (assumed and recommended)
+- Protect `main` with: required status checks (lint, tests, security), at least 1 review, and linear history.
+- We recommend creating topic branches named `feature/<short-desc>` or `fix/<short-desc>`.
+
+How to contribute
+1. Fork the repo, create a branch.
+2. Run local checks (see `scripts/checks/run_checks.sh`) and fix issues.
+3. Open a PR with description and link to tests run.
+4. At least one maintainer review is required; fix requested changes and re-run checks.
+
+Coding standards
+- Use `black`/`ruff`/`mypy` in CI — the project enforces style and type checks.
+
+Security
+- For security issues, follow `SECURITY.md`.
 # RDD Evidence Harvest Log Template
 
 This directory stores logs from evidence harvesting runs per SPEC-0003.

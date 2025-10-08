@@ -4,6 +4,31 @@ on:
   push:
     tags:
       - 'v*.*.*'
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare zip
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}
+          ZIPNAME=starter-kit-${TAG}.zip
+          git archive --format zip -o ${ZIPNAME} HEAD
+          sha256sum ${ZIPNAME} > ${ZIPNAME}.sha256
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ github.ref_name }}
+          files: |
+            starter-kit-${{ github.ref_name }}.zip
+            starter-kit-${{ github.ref_name }}.zip.sha256
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
   workflow_dispatch:
     inputs:
       tag_name:

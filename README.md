@@ -119,3 +119,19 @@ By keeping this starter kit clean and evidence-neutral, you can import it into a
 
 - [3D Game Core](addons/3d-game-core/README.md) — opt-in 3D harnesses, specs, and gates.
 - [Video AI Enhancer](addons/video-ai-enhancer/README.md) — opt-in real-time video enhancement, latency, and storage governance.
+
+## Capability Matrix
+
+This matrix lists core features and whether they are available (✅), partially available (🟨), or not available (❌).
+
+| Feature | Status | Link |
+|---|---:|---|
+| Starter kit scripts (bootstrap) | ✅ | `rjw-idd-starter-kit/scripts/setup/bootstrap_project.sh` |
+| Governance checks (local) | ✅ | `scripts/checks/run_checks.sh` |
+| CI gating workflows | ✅ | `.github/workflows/gating-ci.yml` |
+| Release ZIP artifact | ✅ | `.github/workflows/release.yml` |
+| 3D add-on harness | 🟨 | `addons/3d-game-core/` (opt-in scaffolding) |
+| Video AI add-on | 🟨 | `addons/video-ai-enhancer/` (opt-in scaffolding) |
+| Pre-commit hooks | ✅ | `.pre-commit-config.yaml` |
+| Doc-sync checker | ✅ | `scripts/tools/doc_sync_check.py` |
+
