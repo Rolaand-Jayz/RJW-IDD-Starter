@@ -29,6 +29,11 @@ How learners use it (chat-driven)
 - The agent will present the DEC and proposed spec in the IDE chat. Once accepted, the agent will create the workflow and the local check scripts.
 - The user will run `scripts/checks/run_checks.sh` locally (after creating a venv as part of the tutorial flow). The agent will interpret failures and propose fixes in chat.
 
+Codacy MCP & local MCP discovery
+--------------------------------
+- If you (or an automated agent) rely on the Codacy MCP checks, install the Codacy CLI locally so the agent can run the same analysis the MCP server would. Visit https://docs.codacy.com/ and follow the install steps for your OS. After installing, run `codacy_cli_analyze --help` to confirm it is available.
+- This repository includes a conservative helper `scripts/tools/mcp_detector.py` and a wrapper command `./bin/rjw mcp-scan` which checks your PATH for known MCP/agent CLIs and attempts a harmless `--version` to test operability. The agent may ask you to run this scan; if operable MCP CLIs are detected, the agent will intelligently consider using them to improve research/code generation where appropriate.
+
 Quick local commands (example)
 ```bash
 # from repository root

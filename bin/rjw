@@ -35,12 +35,21 @@ def cmd_check_ledgers(args):
     else:
         print('No ledger validator present; please use scripts/validate_ids.py or add validate_ledgers.py')
 
+def cmd_mcp_scan(args):
+    """Scan the local system for installed MCP/agent CLI executables and report operability."""
+    detector = ROOT / 'scripts' / 'tools' / 'mcp_detector.py'
+    if detector.exists():
+        run(f'python "{detector}"')
+    else:
+        print('No MCP detector present (scripts/tools/mcp_detector.py).')
+
 def main():
     p = argparse.ArgumentParser(prog='rjw')
     sub = p.add_subparsers(dest='cmd')
     sub.add_parser('init')
     sub.add_parser('guard')
     sub.add_parser('check-ledgers')
+    sub.add_parser('mcp-scan')
     args = p.parse_args()
     if args.cmd == 'init':
         cmd_init(args)
@@ -48,6 +57,8 @@ def main():
         cmd_guard(args)
     elif args.cmd == 'check-ledgers':
         cmd_check_ledgers(args)
+    elif args.cmd == 'mcp-scan':
+        cmd_mcp_scan(args)
     else:
         p.print_help()
 

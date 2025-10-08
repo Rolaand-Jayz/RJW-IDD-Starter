@@ -12,6 +12,14 @@ How to contribute
 3. Open a PR with description and link to tests run.
 4. At least one maintainer review is required; fix requested changes and re-run checks.
 
+Codacy MCP CLI (optional but recommended for automated analysis):
+
+- If you use the Codacy MCP workflows or the repository guidance, install the Codacy CLI to enable local analyses and to satisfy automated agent prompts. Install via your package manager or follow instructions at https://docs.codacy.com/.
+- After installing, you can run `codacy_cli_analyze --help` to confirm installation. The agent may prompt to run `codacy_cli_analyze` when performing automated fixes.
+
+Local MCP discovery
+- The repository includes `scripts/tools/mcp_detector.py` and an `rjw mcp-scan` helper to discover operable MCP/agent CLIs on your system. Run `./bin/rjw mcp-scan` to check available CLIs and version output.
+
 Coding standards
 - Use `black`/`ruff`/`mypy` in CI — the project enforces style and type checks.
 
