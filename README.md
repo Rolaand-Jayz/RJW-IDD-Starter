@@ -4,11 +4,15 @@ This starter kit packages the assets you need to run RJW-IDD in any codebase. It
 
 ## Quickstart
 1. **Clone/Copy:** Place the contents of this kit in an empty repository and run `git init` if you are starting fresh.
-2. **Bootstrap Tooling:** Execute `scripts/bootstrap/install.sh` for full setup with add-on selection, or `scripts/setup/bootstrap_project.sh` directly (optionally set `PYTHON_BIN=python3.11`). The script creates `.venv`, installs dependencies from `requirements-dev.txt`, runs `pytest`, and executes the governance gate.
-3. **Review Manual:** Read `docs/manual/starter-kit-manual.md` for role definitions, cadence guidance, and guard explanations.
-4. **Enlist the Prompts:** Choose the right helper from `docs/prompts/` (start with `PROMPT-0001-starter-briefing.md`) so the AI agent can coach you through the workflow even without development experience.
-5. **Commit Baseline:** Capture the imported kit as your first change (`docs/change-log.md`) and push to your remote so the GitHub Actions workflow can run.
-6. **Customize:** Duplicate the SPEC templates you need, seed the ledgers with your first REQ-#### and TEST-#### entries, and update `research/evidence_tasks.json`.
+2. **Set Up Project Environment:** 
+   - Copy `templates/setup_project_env.sh` to your project root
+   - Copy and customize dependency templates from `templates/` (see `templates/README.md`)
+   - Run `./setup_project_env.sh` to create your project-specific environment
+3. **Alternative Bootstrap:** Execute `scripts/setup/bootstrap_project.sh` for a basic setup (creates `.venv`, installs any existing dependencies, runs tests)
+4. **Review Manual:** Read `docs/manual/starter-kit-manual.md` for role definitions, cadence guidance, and guard explanations.
+5. **Enlist the Prompts:** Choose the right helper from `docs/prompts/` (start with `PROMPT-0001-starter-briefing.md`) so the AI agent can coach you through the workflow even without development experience.
+6. **Commit Baseline:** Capture the imported kit as your first change (`docs/change-log.md`) and push to your remote so the GitHub Actions workflow can run.
+7. **Customize:** Duplicate the SPEC templates you need, seed the ledgers with your first REQ-#### and TEST-#### entries, and update `research/evidence_tasks.json`.
 
 > Need the bigger picture? The manual provides a full bring-up checklist and FAQ, while the sections below outline every asset shipped in the kit.
 
@@ -18,6 +22,22 @@ RJW-IDD supports optional add-ons that extend the methodology for specific domai
 - **video-ai-enhancer** - Real-time video enhancement with quality, latency, storage gates
 
 The bootstrap installer (`scripts/bootstrap/install.sh`) prompts for add-on selection. See `scripts/addons/README.md` and `docs/manual/starter-kit-manual.md` §9 for details.
+
+## Environment Philosophy
+**The starter kit is a TEMPLATE, not a runnable project with fixed dependencies.**
+
+Each project created from this kit should:
+- Define its own dependencies based on what it actually does
+- Create its own `.venv` with project-specific packages
+- Use the templates in `templates/` as starting points
+
+The starter kit provides:
+- Template dependency files for different project types
+- Setup scripts that adapt to your project's needs
+- Add-on specific dependency suggestions
+- Best practices for Python environment management
+
+See `templates/README.md` for detailed guidance on setting up project environments.
 
 ## Prompt Workflow (No-Code Friendly)
 - `PROMPT-0001-starter-briefing.md` — collect the goal, surface relevant specs, highlight open questions.
