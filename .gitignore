@@ -35,3 +35,8 @@ Thumbs.db
 
 #Ignore vscode AI rules
 
+
+# Virtual environments (project-specific)
+.venv/
+*.venv/
+rjw-idd-starter-kit/.venv/

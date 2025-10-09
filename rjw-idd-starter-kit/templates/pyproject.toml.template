@@ -1,0 +1,71 @@
+# Template pyproject.toml for RJW-IDD Projects
+# Copy and customize this file for your specific project
+
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "your-project-name"  # CHANGE THIS
+version = "0.1.0"
+description = "Your project description"  # CHANGE THIS
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}  # Or your preferred license
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}  # CHANGE THIS
+]
+keywords = ["your", "project", "keywords"]  # CHANGE THIS
+
+# Customize dependencies based on your project needs
+dependencies = [
+    # Add your runtime dependencies here
+    # "requests>=2.31.0",
+    # "fastapi>=0.100.0",
+    # "pandas>=2.0.0",
+]
+
+# Optional dependencies for different use cases
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=22.0.0", 
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+    "pre-commit>=3.0.0",
+]
+
+# Uncomment and customize if using 3d-game-core addon
+# gamedev = [
+#     "pygame>=2.5.0",
+#     "panda3d>=1.10.0",
+# ]
+
+# Uncomment and customize if using video-ai-enhancer addon  
+# video = [
+#     "opencv-python>=4.8.0",
+#     "pillow>=10.0.0",
+# ]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/your-project-name"  # CHANGE THIS
+Issues = "https://github.com/yourusername/your-project-name/issues"  # CHANGE THIS
+
+# Tool configurations
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "--cov=src --cov-report=html --cov-report=term-missing"
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+
+[tool.ruff]
+target-version = "py39"
+line-length = 88
+
+[tool.mypy]
+python_version = "3.9"
+strict = true
