@@ -1,0 +1,2 @@
+req_id,description,status,evidence_refs,spec_refs,tests_refs,next_review
+REQ-DEMO-0001,"Add a 'Clear' (C) button to the calculator UI",defined,"DEC-DEMO-0001","SPEC-DEMO-0001","TEST-DEMO-0001;TEST-DEMO-0002",2026-01-01

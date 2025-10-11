@@ -1,3 +1,7 @@
+features:
+  guard: true
+  init: true
+  prompts_version: true
 addons:
   3d_game_core:
     enabled: true

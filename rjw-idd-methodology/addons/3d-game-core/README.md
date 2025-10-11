@@ -1,19 +1,63 @@
-# RJW-IDD Add-in: 3d-game-core
+# 3D Game Core Add-on
 
-`METHOD-ADDIN-3D-CORE` — Opt-in augmentation of RJW-IDD for teams shipping 3D games across first/third person, isometric/2.5D, platformer, driving, action-RPG, and networked sub-genres. The base methodology remains unchanged; activation flows through the central feature registry and toggle scripts under `scripts/addons/`.
+**Status:** Included (opt-in)  
+**Registry Toggle:** `addons.3d_game_core.enabled` in `method/config/features.yml`
 
-## Capabilities
-- Profile-aware default budgets, tolerances, and artefact templates for common 3D sub-genres.
-- End-to-end prompts to drive research, design, testing, pact negotiation, and knowledge reconciliation.
-- Determinism, tolerant replay, and rollback harnesses with integration stubs for any engine.
-- Asset and performance gates wired for CI snippets, plus metrics schema and adapters for Unity, Unreal, Godot, or custom engines.
-- Migration & quickstart guides, pact exemplars, and acceptance criteria for enabling/disabling the add-in cleanly.
+The 3D Game Core add-on extends RJW-IDD with determinism harnesses, tolerant replay tooling, performance/asset gates, and documentation tailored to 3D projects.
 
-## Activation Model
-1. Keep `method/config/features.yml` as the single source of truth. `3d_game_core.enabled` defaults to `false`.
-2. Run `python scripts/addons/enable_3d_game_core.py` to opt in. The script injects CI hooks, updates documentation links, and confirms idempotency.
-3. Switch sub-genre defaults via `python scripts/addons/set_3d_profile.py --profile <profile>`.
-4. Disable using `python scripts/addons/disable_3d_game_core.py` to reverse CI/documentation wiring without touching other artefacts.
-5. Log the add-in decision in `docs/decisions/`, capture the feature change in `docs/change-log.md`, and note the audit tag in `logs/LOG-0001-stage-audits.md`.
+---
 
-All deliverables honour the RJW-IDD identifier scheme with traceability stubs (`REQ-####`, `SPEC-####`, `TEST-####`, `DEC-####`, `INTEG-####`) so downstream projects can extend with project-specific evidence.
+## Enabling / Disabling
+### Using helper scripts (recommended)
+```bash
+# Enable and accept the default profile
+python rjw-idd-starter-kit/scripts/addons/enable_3d_game_core.py
+
+# Switch profiles (examples: generic, third_person, driving, networked)
+python rjw-idd-starter-kit/scripts/addons/set_3d_profile.py --profile third_person
+
+# Disable when not needed
+python rjw-idd-starter-kit/scripts/addons/disable_3d_game_core.py
+```
+
+### Manual toggle
+Edit `method/config/features.yml`:
+```yaml
+addons:
+  3d_game_core:
+    enabled: true
+    profile: generic
+```
+Then run `python rjw-idd-starter-kit/scripts/config_enforce.py` to ensure the declared state matches the repository artefacts.
+
+### Governance reminders
+- Log the change in `docs/change-log.md`
+- Capture the rationale in `docs/decisions/DEC-####.md`
+- Update `logs/LOG-0001-stage-audits.md`
+
+---
+
+## What You Get
+| Area | Location | Highlights |
+| --- | --- | --- |
+| Specs & Config | `config/`, `specs/`, `docs/` | Determinism, rollback, perf and asset governance templates |
+| Tooling | `tools/` | Determinism harness, tolerant replay runner, asset linter, perf budget gate |
+| Tests | `tests/` | Pytest suites covering the tooling for quick regression checks |
+| Prompts | `prompts/` | Research packs, GDD helpers, pact generators, test navigator flows for 3D |
+| Scripts | `../../scripts/addons/` | Enable/disable/profile helpers wired into the feature registry |
+
+See the directory READMEs and acceptance docs (`ACCEPTANCE.md`, `docs/`) for deeper walkthroughs.
+
+---
+
+## Profiles
+The add-on ships multiple profiles (`generic`, `third_person`, `driving`, `platformer`, etc.) that tailor budgets and tolerances in `config/3d-game-core.yml`. Use `set_3d_profile.py` to switch profiles and rerun the config guard afterwards.
+
+---
+
+## Validation
+After any change to the add-on state:
+1. Run `python rjw-idd-starter-kit/scripts/config_enforce.py`
+2. Execute the guard suite (`pytest && bash scripts/ci/test_gate.sh`) before merging
+
+Keeping the registry, docs, and tooling aligned ensures the RJW-IDD gate remains authoritative.

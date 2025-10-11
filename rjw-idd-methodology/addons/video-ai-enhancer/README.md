@@ -1,19 +1,62 @@
-# RJW-IDD Add-in: video-ai-enhancer
+# Video AI Enhancer Add-on
 
-`METHOD-ADDIN-VIDEO-AI` — Opt-in augmentation of RJW-IDD for teams delivering real-time video enhancement and upscaling pipelines that must stream, collaborate, and capture output with deterministic quality. The base methodology remains unchanged; activation flows through the feature registry and toggle scripts under `scripts/addons/`.
+**Status:** Included (opt-in)  
+**Registry Toggle:** `addons.video_ai_enhancer.enabled` in `method/config/features.yml`
 
-## Capabilities
-- Latency-aware budgets, model selection templates, and storage governance profiles for live streaming, broadcast mastering, mobile edge, and remote collaboration.
-- Prompt suites covering signal research, pipeline architecture, model QA, operations, and knowledge reconciliation tuned for video enhancement.
-- Quality, latency, and storage guards with sample payloads for CI integration plus ID validators for add-in artefacts.
-- Quickstart, migration, and metrics schema docs to on-board teams and wire telemetry/export with OTLP or custom sinks.
-- Clean enable/disable scripts that register CI snippets, documentation links, and feature flags in an idempotent fashion.
+The Video AI Enhancer add-on equips RJW-IDD with latency/quality/storage governance, specs, and tooling for real-time video enhancement and upscaling pipelines.
 
-## Activation Model
-1. Keep `method/config/features.yml` as the source of truth. `video_ai_enhancer.enabled` defaults to `false`.
-2. Run `python scripts/addons/enable_video_ai_enhancer.py` to opt in. The script registers CI snippets, documentation links, and ensures idempotency.
-3. Switch latency/quality defaults via `python scripts/addons/set_video_ai_profile.py --profile <profile>`.
-4. Disable using `python scripts/addons/disable_video_ai_enhancer.py` to remove CI/documentation wiring without touching other artefacts.
-5. Record the enable/disable decision in `docs/decisions/`, update `docs/change-log.md`, and tag the action in `logs/LOG-0001-stage-audits.md`.
+---
 
-All deliverables honour the RJW-IDD identifier scheme with traceability tokens (`SPEC-VIDEO-*`, `REQ-VIDEO-*`, `TEST-VIDEO-*`, etc.) so downstream projects can surface evidence and audit readiness.
+## Enabling / Disabling
+### Using helper scripts (recommended)
+```bash
+# Enable with the default baseline profile
+python rjw-idd-starter-kit/scripts/addons/enable_video_ai_enhancer.py
+
+# Switch profiles (baseline, live_stream, broadcast_mastering, mobile_edge, remote_collab)
+python rjw-idd-starter-kit/scripts/addons/set_video_ai_profile.py --profile live_stream
+
+# Disable when you no longer need the add-on
+python rjw-idd-starter-kit/scripts/addons/disable_video_ai_enhancer.py
+```
+
+### Manual toggle
+```yaml
+addons:
+  video_ai_enhancer:
+    enabled: true
+    profile: baseline
+```
+Edit the block in `method/config/features.yml`, then run `python rjw-idd-starter-kit/scripts/config_enforce.py` to confirm the registry and filesystem are aligned.
+
+### Governance reminders
+- Record a change entry in `docs/change-log.md`
+- Capture the decision in `docs/decisions/`
+- Update the audit log (`logs/LOG-0001-stage-audits.md`)
+
+---
+
+## What You Get
+| Area | Location | Highlights |
+| --- | --- | --- |
+| Specs & Runbooks | `specs/`, `docs/` | Quality, latency, storage controls; operational guidance |
+| Tooling | `tools/` | Latency guard, storage validator, quality gate, ID validators |
+| Tests | `tests/` | Coverage for each guard and validator |
+| Prompts | `prompts/` | Research packs, change navigator, reconciliation helpers |
+| Scripts | `../../scripts/addons/` | Enable/disable/profile scripts integrated with the feature registry |
+
+Consult `docs/` for acceptance criteria and implementation notes.
+
+---
+
+## Profiles
+Profiles tailor budgets and guard thresholds for different delivery scenarios (`baseline`, `live_stream`, `broadcast_mastering`, `mobile_edge`, `remote_collab`). Adjust them with `set_video_ai_profile.py` and re-run the configuration guard afterwards.
+
+---
+
+## Validation
+After toggling or reconfiguring the add-on:
+1. Run `python rjw-idd-starter-kit/scripts/config_enforce.py`
+2. Execute `pytest && bash scripts/ci/test_gate.sh` before committing the change
+
+Keeping the feature registry, docs, and tooling in sync preserves the integrity of the RJW-IDD gate.

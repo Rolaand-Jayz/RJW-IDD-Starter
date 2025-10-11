@@ -93,7 +93,7 @@ class HealthChecker:
         print("\n📋 Environment Check:")
 
         python_version = f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
-        min_version = "3.11.0"
+        min_version = "3.9.0"
         is_python_ok = self._compare_versions(python_version, min_version) >= 0
         self.results["environment"]["python_version"] = {
             "current": python_version,

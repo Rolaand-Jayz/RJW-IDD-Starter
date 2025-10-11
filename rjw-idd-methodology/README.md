@@ -17,4 +17,7 @@ This pack houses the source-of-truth guidance for Rolaand Jayz Wayz – Coding w
 RJW-IDD deliberately keeps method guidance separate from project execution assets. The pack here describes *how* to operate; the starter kit provides reusable scaffolding that each project instantiates with its own IDs and evidence.
 
 ## Add-ins
-- [Video AI Enhancer](addons/video-ai-enhancer/README.md) — opt-in real-time video enhancement, latency, and storage governance.
+- [3D Game Core](addons/3d-game-core/README.md) — governance, tooling, and prompts for deterministic 3D projects (enabled by default; toggle via `method/config/features.yml`).
+- [Video AI Enhancer](addons/video-ai-enhancer/README.md) — real-time video enhancement governance (disabled by default; enable via the feature registry).
+
+Edit `method/config/features.yml` (or run the helper scripts under `rjw-idd-starter-kit/scripts/addons/`) to adjust add-in state and then run `python rjw-idd-starter-kit/scripts/config_enforce.py` to confirm the declaration matches the on-disk assets.

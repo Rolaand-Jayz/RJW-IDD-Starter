@@ -20,6 +20,16 @@ source .venv/bin/activate
 pip install -r rjw-idd-starter-kit/requirements.txt || pip install -r rjw-idd-starter-kit/requirements-dev.txt
 ```
 
+| Toggle | Notes |
+| --- | --- |
+| `features.guard` | Controls the CLI guard/validator entry points (`rjw guard …`). |
+| `features.init` | Enables the interactive `rjw init` workflow. |
+| `features.prompts_version` | Publishes `prompt-pack.json` metadata for prompt libraries. |
+| `addons.*.enabled` | Declares add-on artefacts active; keep in sync with the addon directories and helper scripts. |
+
+Run `rjw-idd-starter-kit/scripts/config_enforce.py` (with Python) after editing the registry to confirm the declaration matches the filesystem (prompt pack, add-in directories, etc.).
+
+### 3D Game Core Add-on
 4. Run the project's basic health check and tests (fast smoke):
 
 ```bash
@@ -336,9 +346,13 @@ If you'd like, I can start the Discovery step for a chosen tutorial now. Which t
 
 ### Feature Registry
 **Location:** `method/config/features.yml`  
-**Controls:** Central source of truth for add-on state
+**Controls:** Core CLI capabilities and add-on state
 
 ```yaml
+features:
+  guard: true
+  init: true
+  prompts_version: true
 addons:
   3d_game_core:
     enabled: true
@@ -350,103 +364,37 @@ addons:
     profile: baseline
 ```
 
+| Toggle | Purpose |
+| --- | --- |
+| `features.guard` | Enables CLI guard/validator entry points. |
+| `features.init` | Enables the interactive `rjw init` bootstrap flow. |
+| `features.prompts_version` | Publishes `prompt-pack.json` metadata for prompt packs. |
+| `addons.*.enabled` | Declares add-on artefacts active and should match the directories present. |
+
+After editing the registry (or running an add-on helper script) execute `rjw-idd-starter-kit/scripts/config_enforce.py` (with Python) to ensure declarations and filesystem agree, and capture the change in the change log, decision log, and audit log.
+
 ### 3D Game Core Add-on
 **ID:** `METHOD-ADDIN-3D-CORE`  
-**Location:** `rjw-idd-methodology/addons/3d-game-core/`
+**Location:** `rjw-idd-methodology/addons/3d-game-core/`  
+**Status:** Included — enabled by default (`profile: generic`)
 
-**Capabilities:**
-- Profile-aware budgets and tolerances
-- Determinism, tolerant replay, rollback harnesses
-- Asset and performance gates
-- Engine adapters (Unity, Unreal, Godot, custom)
-
-**Profiles:**
-- `generic` - Default balanced settings
-- `first_person` - FPS-specific optimizations
-- `third_person` - TPS camera and controls
-- `isometric` - 2.5D projection handling
-- `platformer` - Physics and collision focus
-- `driving` - Vehicle simulation emphasis
-- `action_rpg` - RPG systems and inventory
-- `networked` - Multiplayer synchronization
-
-**Key Files:**
-- `README.md` - Overview and activation model
-- `ACCEPTANCE.md` - Acceptance criteria
-- `docs/quickstart.md` - Setup guide
-- `docs/migration_enable_disable.md` - Enable/disable procedures
-- `docs/pacts_examples.md` - IDD pact examples
-- `docs/metrics_schema.md` - Metrics structure
-
-**Specs:**
-- `SPEC-GDD_3d.md` - Game design document template
-- `SPEC-ENGINE_3d.md` - Engine-specific requirements
-- `SPEC-NET_3d.md` - Networking specifications
-- `SPEC-PERF_3d.md` - Performance targets
-- `SPEC-AI_3d.md` - AI/NPC behaviors
-- `SPEC-OBS_3d.md` - Observability for games
-- `SPEC-BUILD_3d.md` - Build pipeline specs
-
-**Prompts:**
-- `01_research_pack_3d.md` - Research signal gathering
-- `02_gdd_from_evidence_3d.md` - GDD generation from evidence
-- `03_test_navigator_3d.md` - Test planning for 3D games
-- `04_idd_pacts_generator_3d.md` - Pact contract generation
-- `05_doc_reconciler_3d.md` - Documentation alignment
-
-**Tools:**
-- Engine adapters: `unity_cli_stub.md`, `unreal_cli_stub.md`, `godot_cli_stub.md`, `custom_engine_metrics_stub.md`
-
-**Activation:**
 ```bash
-python scripts/addons/enable_3d_game_core.py
-python scripts/addons/set_3d_profile.py --profile third_person
-python scripts/addons/disable_3d_game_core.py  # to disable
+# Enable / disable / change profile
+python rjw-idd-starter-kit/scripts/addons/enable_3d_game_core.py
+python rjw-idd-starter-kit/scripts/addons/set_3d_profile.py --profile third_person
+python rjw-idd-starter-kit/scripts/addons/disable_3d_game_core.py
 ```
 
 ### Video AI Enhancer Add-on
 **ID:** `METHOD-ADDIN-VIDEO-AI`  
-**Location:** `rjw-idd-methodology/addons/video-ai-enhancer/`
+**Location:** `rjw-idd-methodology/addons/video-ai-enhancer/`  
+**Status:** Included — disabled by default (`profile: baseline`)
 
-**Capabilities:**
-- Latency-aware budgets
-- Model selection templates
-- Storage governance profiles
-- Quality gates for streaming
-
-**Profiles:**
-- `baseline` - Default settings
-- `live_stream` - Real-time streaming optimization
-- `broadcast_mastering` - High-quality broadcast
-- `mobile_edge` - Edge device constraints
-- `remote_collab` - Remote collaboration focus
-
-**Key Files:**
-- `README.md` - Overview and activation model
-- `ACCEPTANCE.md` - Acceptance criteria
-- `docs/quickstart.md` - Setup guide
-- `docs/migration_enable_disable.md` - Enable/disable procedures
-- `docs/pipeline_guides.md` - Pipeline architecture
-- `docs/metrics_schema.md` - Metrics structure
-
-**Specs:**
-- `SPEC-QUALITY_video.md` - Quality requirements
-- `SPEC-LATENCY_video.md` - Latency budgets
-- `SPEC-STORAGE_video.md` - Storage governance
-- `SPEC-PIPELINE_video.md` - Pipeline architecture
-
-**Prompts:**
-- `01_research_signal_video.md` - Signal research
-- `02_pipeline_design_video.md` - Pipeline design
-- `03_quality_playbook_video.md` - Quality assurance
-- `04_operational_response_video.md` - Operations support
-- `05_doc_reconciler_video.md` - Documentation sync
-
-**Activation:**
 ```bash
-python scripts/addons/enable_video_ai_enhancer.py
-python scripts/addons/set_video_ai_profile.py --profile live_stream
-python scripts/addons/disable_video_ai_enhancer.py  # to disable
+# Enable / disable / change profile
+python rjw-idd-starter-kit/scripts/addons/enable_video_ai_enhancer.py
+python rjw-idd-starter-kit/scripts/addons/set_video_ai_profile.py --profile live_stream
+python rjw-idd-starter-kit/scripts/addons/disable_video_ai_enhancer.py
 ```
 
 ### Add-on Governance
@@ -1044,6 +992,8 @@ python scripts/validate_evidence.py --input research/evidence_index.json --cutof
 | **3D addon** | `rjw-idd-methodology/addons/3d-game-core/` |
 | **Video addon** | `rjw-idd-methodology/addons/video-ai-enhancer/` |
 | **Feature config** | `method/config/features.yml` |
+| **Demo Project** | `examples/demo_project/` |
+| **Workspace** | `workspace/` |
 
 ### Operational Metrics Quick Reference
 
@@ -1282,9 +1232,7 @@ cat method/config/features.yml
 - `COMMIT-READY.md`
 - `FINAL-STATUS.md`
 
-### Project Workspace
-- `workspace/README.md` - Scratch workspace for experimentation
-- `workspace/decisions/` - Workspace decision log
+
 
 ---
 
@@ -1315,3 +1263,4 @@ For technical issues:
 **End of RJW-IDD Master Index**
 
 *This index is a living document. Update it when adding new methodology components, specs, or tools. Reference this document in the Change Log when updated.*
+new methodology components, specs, or tools. Reference this document in the Change Log when updated.*

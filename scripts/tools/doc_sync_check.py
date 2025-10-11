@@ -10,7 +10,10 @@ import sys
 ROOT = Path(__file__).resolve().parents[2]
 readme = ROOT / "README.md"
 text = readme.read_text(encoding="utf-8")
-paths = re.findall(r"`([^`]+)`", text)
+
+# Only capture inline code tokens (single-line backticks). Multiline snippets tend
+# to be prose and trigger bogus filesystem lookups like the bootstrap doc note.
+paths = re.findall(r"`([^`\n]+)`", text)
 missing = []
 for p in set(paths):
     if p.startswith("http"):
