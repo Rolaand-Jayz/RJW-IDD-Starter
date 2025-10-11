@@ -23,6 +23,19 @@ RJW-IDD supports optional add-ons that extend the methodology for specific domai
 
 The bootstrap installer (`scripts/bootstrap/install.sh`) prompts for add-on selection. See `scripts/addons/README.md` and `docs/manual/starter-kit-manual.md` §9 for details.
 
+## Feature Registry
+Feature toggles live in `method/config/features.yml` (shared across the starter kit and the methodology pack).
+
+| Toggle | Default | Purpose |
+| --- | --- | --- |
+| features.guard | true | Enables the rjw guard CLI entry point. |
+| features.init | true | Enables the rjw init bootstrap workflow. |
+| features.prompts_version | true | Publishes `rjw-idd-starter-kit/prompt-pack.json` metadata. |
+| addons.3d_game_core.enabled | true | Declares the 3D game add-in active. |
+| addons.video_ai_enhancer.enabled | false | Declares the video AI add-in active. |
+
+Edit the YAML directly or use the helper scripts under `scripts/addons/`. After any change run the script `rjw-idd-starter-kit/scripts/config_enforce.py` (with Python) to confirm the declaration matches the filesystem (prompt pack, add-in directories, etc.), and capture the governance trail (change log, decision log, audits).
+
 ## Environment Philosophy
 **The starter kit is a TEMPLATE, not a runnable project with fixed dependencies.**
 

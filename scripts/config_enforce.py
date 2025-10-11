@@ -14,7 +14,7 @@ Exit codes:
 import sys
 import yaml
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple
 
 
 def load_features_yml(project_root: Path) -> Dict:
@@ -34,32 +34,34 @@ def load_features_yml(project_root: Path) -> Dict:
 
 def discover_enabled_features(project_root: Path) -> Dict[str, bool]:
     """Discover which features are actually enabled"""
-    features = {}
-    
-    # Check for CLI tool
-    cli_path = project_root / 'rjw-idd-starter-kit' / 'bin' / 'rjw'
-    features['guard'] = cli_path.exists()
-    features['init'] = cli_path.exists()
-    
-    # Check for prompt-pack.json
-    prompt_pack = project_root / 'prompt-pack.json'
-    features['prompts_version'] = prompt_pack.exists()
-    
-    # Check for game addon
-    game_addon = project_root / 'rjw-idd-methodology' / 'addons' / '3d-game-core'
-    features['game_addin'] = game_addon.exists()
-    
-    # Check addon config
     try:
         config = load_features_yml(project_root)
-        if 'addons' in config:
-            if '3d_game_core' in config['addons']:
-                features['game_addin'] = config['addons']['3d_game_core'].get('enabled', False)
-            if 'video_ai_enhancer' in config['addons']:
-                features['video_ai_enhancer'] = config['addons']['video_ai_enhancer'].get('enabled', False)
-    except:
-        pass
-    
+    except Exception:
+        config = {}
+
+    declared = _extract_declared_features(config)
+    features: Dict[str, bool] = dict(declared)
+
+    cli_path = project_root / 'rjw-idd-starter-kit' / 'bin' / 'rjw'
+    prompt_pack_locations = [
+        project_root / 'prompt-pack.json',
+        project_root / 'rjw-idd-starter-kit' / 'prompt-pack.json',
+    ]
+    game_addon_path = project_root / 'rjw-idd-methodology' / 'addons' / '3d-game-core'
+    video_addon_path = project_root / 'rjw-idd-methodology' / 'addons' / 'video-ai-enhancer'
+
+    if features.get('guard', False) and not cli_path.exists():
+        features['guard'] = False
+    if features.get('init', False) and not cli_path.exists():
+        features['init'] = False
+    if features.get('prompts_version', False):
+        if not any(path.exists() for path in prompt_pack_locations):
+            features['prompts_version'] = False
+    if features.get('game_addin', False) and not game_addon_path.exists():
+        features['game_addin'] = False
+    if features.get('video_ai_enhancer', False) and not video_addon_path.exists():
+        features['video_ai_enhancer'] = False
+
     return features
 
 
@@ -67,14 +69,13 @@ def check_config_drift(declared: Dict, actual: Dict) -> List[Dict]:
     """Check for drift between declared and actual features"""
     issues = []
     
-    if 'features' not in declared:
+    declared_features = _extract_declared_features(declared)
+    if not declared_features:
         issues.append({
             'type': 'config_error',
-            'message': 'No features section in features.yml'
+            'message': 'No declared features or add-ons found in features.yml'
         })
         return issues
-    
-    declared_features = declared['features']
     
     # Check each feature
     for feature_name, is_enabled in declared_features.items():
@@ -98,6 +99,35 @@ def check_config_drift(declared: Dict, actual: Dict) -> List[Dict]:
             })
     
     return issues
+
+
+def _extract_declared_features(declared: Dict) -> Dict[str, bool]:
+    """Normalise declared features across legacy and add-on schemas."""
+    features: Dict[str, bool] = {}
+
+    raw_features = declared.get("features")
+    if isinstance(raw_features, dict):
+        for name, value in raw_features.items():
+            features[str(name)] = bool(value)
+
+    addons = declared.get("addons")
+    if isinstance(addons, dict):
+        for addon_name, addon_config in addons.items():
+            if not isinstance(addon_config, dict):
+                continue
+            normalised = _normalise_addon_name(addon_name)
+            if normalised:
+                features[normalised] = bool(addon_config.get("enabled", False))
+
+    return features
+
+
+def _normalise_addon_name(name: str) -> Optional[str]:
+    mapping = {
+        "3d_game_core": "game_addin",
+        "video_ai_enhancer": "video_ai_enhancer",
+    }
+    return mapping.get(name, name.replace("-", "_"))
 
 
 def generate_report(issues: List[Dict], declared: Dict, actual: Dict) -> str:
