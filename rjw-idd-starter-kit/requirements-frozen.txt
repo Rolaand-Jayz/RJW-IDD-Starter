@@ -60,7 +60,7 @@ matplotlib==3.10.6
 meson==1.9.1
 moddb==0.14.0
 more-itertools==10.8.0
-msgpack==1.0.5
+msgpack==1.1.2
 nftables==0.1
 numpy==2.3.3
 orjson==3.11.3
