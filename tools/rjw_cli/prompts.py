@@ -2,13 +2,13 @@
 RJW Prompts - Manage prompt pack versions and updates
 """
 
-import sys
 import json
+import sys
 from pathlib import Path
-from typing import Dict, Any
+from typing import Any
 
 
-def load_prompt_pack(project_dir: Path) -> Dict[str, Any]:
+def load_prompt_pack(project_dir: Path) -> dict[str, Any]:
     """Load prompt-pack.json"""
     pack_path = project_dir / 'prompt-pack.json'
 
@@ -23,7 +23,7 @@ def load_prompt_pack(project_dir: Path) -> Dict[str, Any]:
         }
 
     try:
-        with open(pack_path, 'r') as f:
+        with open(pack_path) as f:
             return json.load(f)
     except Exception as e:
         print(f"WARNING: Could not load prompt-pack.json: {e}", file=sys.stderr)
@@ -37,7 +37,7 @@ def load_prompt_pack(project_dir: Path) -> Dict[str, Any]:
         }
 
 
-def check_for_updates(online: bool) -> Dict[str, Any]:
+def check_for_updates(online: bool) -> dict[str, Any]:
     """Check for available updates"""
     if not online:
         return {

@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import argparse
 import sys
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable, List
 
 TARGET_FILE = Path("docs/living-docs-reconciliation.md")
 PLACEHOLDER_TOKEN = "YYYY-MM-DD"
@@ -37,8 +37,8 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def normalise(paths: Iterable[str]) -> List[str]:
-    normalised: List[str] = []
+def normalise(paths: Iterable[str]) -> list[str]:
+    normalised: list[str] = []
     for raw in paths:
         if raw is None:
             continue

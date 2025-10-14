@@ -6,8 +6,8 @@ import argparse
 import csv
 import re
 import sys
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Dict, Iterable, List, Set
 
 IGNORED_PREFIXES = ("workspace/", "sandbox/", "tmp/")
 SPEC_PREFIX = "specs/"
@@ -38,8 +38,8 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def normalise(paths: Iterable[str]) -> List[str]:
-    normalised: List[str] = []
+def normalise(paths: Iterable[str]) -> list[str]:
+    normalised: list[str] = []
     for raw in paths:
         if raw is None:
             continue
@@ -50,8 +50,8 @@ def normalise(paths: Iterable[str]) -> List[str]:
     return normalised
 
 
-def filter_relevant(paths: Iterable[str]) -> List[str]:
-    relevant: List[str] = []
+def filter_relevant(paths: Iterable[str]) -> list[str]:
+    relevant: list[str] = []
     for path in paths:
         if any(path.startswith(prefix) for prefix in IGNORED_PREFIXES):
             continue
@@ -59,8 +59,8 @@ def filter_relevant(paths: Iterable[str]) -> List[str]:
     return relevant
 
 
-def touched_spec_ids(paths: Iterable[str]) -> Dict[str, List[str]]:
-    mapping: Dict[str, List[str]] = {}
+def touched_spec_ids(paths: Iterable[str]) -> dict[str, list[str]]:
+    mapping: dict[str, list[str]] = {}
     for path in paths:
         if not path.startswith(SPEC_PREFIX):
             continue
@@ -73,9 +73,9 @@ def touched_spec_ids(paths: Iterable[str]) -> Dict[str, List[str]]:
     return mapping
 
 
-def extract_ledger_spec_ids(path: Path) -> tuple[Set[str], List[str]]:
-    spec_ids: Set[str] = set()
-    placeholders: List[str] = []
+def extract_ledger_spec_ids(path: Path) -> tuple[set[str], list[str]]:
+    spec_ids: set[str] = set()
+    placeholders: list[str] = []
     if not path.exists():
         return spec_ids, placeholders
 
@@ -92,8 +92,8 @@ def extract_ledger_spec_ids(path: Path) -> tuple[Set[str], List[str]]:
     return spec_ids, placeholders
 
 
-def touched_decision_ids(paths: Iterable[str]) -> Dict[str, str]:
-    mapping: Dict[str, str] = {}
+def touched_decision_ids(paths: Iterable[str]) -> dict[str, str]:
+    mapping: dict[str, str] = {}
     for path in paths:
         if not path.startswith(str(DECISIONS_DIR)):
             continue
@@ -105,7 +105,7 @@ def touched_decision_ids(paths: Iterable[str]) -> Dict[str, str]:
     return mapping
 
 
-def extract_decision_tokens(path: Path) -> tuple[Set[str], bool]:
+def extract_decision_tokens(path: Path) -> tuple[set[str], bool]:
     text = path.read_text(encoding="utf-8")
     tokens = {token.upper() for token in DEC_ID_RE.findall(text)}
     has_placeholder = DEC_PLACEHOLDER in text.upper()
@@ -123,7 +123,7 @@ def main() -> int:
     decision_changed = any(path.startswith(DECISION_PREFIX) for path in changed)
     evidence_changed = any(path.startswith(EVIDENCE_PREFIX) for path in changed)
 
-    errors: List[str] = []
+    errors: list[str] = []
 
     if spec_changed and not ledger_changed:
         errors.append(

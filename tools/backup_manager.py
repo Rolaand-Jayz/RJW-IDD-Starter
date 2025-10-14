@@ -6,13 +6,12 @@ from __future__ import annotations
 import argparse
 import json
 import shutil
-import subprocess
 import sys
 import time
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from tools.logging_config import get_logger, setup_logging
 
@@ -23,12 +22,12 @@ logger = get_logger(__name__)
 class BackupConfig:
     """Configuration for backup operations."""
 
-    source_paths: List[Path]
+    source_paths: list[Path]
     backup_root: Path
     retention_days: int = 30
     compression: bool = True
-    encryption_key: Optional[str] = None
-    exclude_patterns: List[str] = field(default_factory=list)
+    encryption_key: str | None = None
+    exclude_patterns: list[str] = field(default_factory=list)
 
     def __post_init__(self) -> None:
         self.backup_root.mkdir(parents=True, exist_ok=True)
@@ -39,10 +38,10 @@ class BackupResult:
     """Result of a backup operation."""
 
     success: bool
-    backup_path: Optional[Path]
+    backup_path: Path | None
     size_bytes: int
     duration_seconds: float
-    error_message: Optional[str] = None
+    error_message: str | None = None
     timestamp: datetime = field(default_factory=datetime.now)
 
 
@@ -53,7 +52,7 @@ class BackupManager:
         self.config = config
         self.logger = get_logger(f"{__name__}.backup")
 
-    def create_backup(self, name: Optional[str] = None) -> BackupResult:
+    def create_backup(self, name: str | None = None) -> BackupResult:
         """Create a backup of configured paths."""
         start_time = time.time()
         timestamp = datetime.now()
@@ -197,7 +196,7 @@ class BackupManager:
 
         return removed_count
 
-    def list_backups(self) -> List[Dict[str, Any]]:
+    def list_backups(self) -> list[dict[str, Any]]:
         """List all available backups."""
         backups = []
 

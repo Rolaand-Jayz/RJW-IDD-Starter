@@ -11,14 +11,14 @@ import datetime as dt
 import html
 import json
 import os
-import sys
-import textwrap
 import re
+import sys
 import time
 import urllib.parse
 import urllib.request
-from dataclasses import dataclass, asdict
-from typing import Any, Dict, Iterable, List, Optional
+from collections.abc import Iterable
+from dataclasses import asdict, dataclass
+from typing import Any
 
 USER_AGENT = "RJW-IDD-EvidenceHarvester/1.0 (+https://example.invalid/rjw-idd)"
 DEFAULT_RECENCY_DAYS = 28
@@ -27,7 +27,7 @@ PLATFORM_CHOICES = {"hn", "reddit", "github", "so"}
 STANCE_CHOICES = {"pain", "fix", "aha", "win", "risk", "contra"}
 
 
-def http_get(url: str, headers: Optional[Dict[str, str]] = None, retries: int = 2, backoff: float = 1.5) -> Any:
+def http_get(url: str, headers: dict[str, str] | None = None, retries: int = 2, backoff: float = 1.5) -> Any:
     request = urllib.request.Request(url, headers=headers or {"User-Agent": USER_AGENT})
     attempt = 0
     while True:
@@ -41,7 +41,7 @@ def http_get(url: str, headers: Optional[Dict[str, str]] = None, retries: int = 
         except Exception as exc:  # pragma: no cover - network layer
             attempt += 1
             if attempt > retries:
-                raise RuntimeError(f"HTTP GET failed for {url}: {exc}")
+                raise RuntimeError(f"HTTP GET failed for {url}: {exc}") from exc
             time.sleep(backoff ** attempt)
 
 
@@ -77,19 +77,19 @@ def parse_date(value: str) -> dt.datetime:
 class EvidenceTask:
     source: str
     query: str
-    tags: List[str]
+    tags: list[str]
     stance: str
     relevance_note: str
     limit: int = 5
-    subreddit: Optional[str] = None
+    subreddit: str | None = None
     reddit_time_filter: str = "month"
-    github_repo: Optional[str] = None
+    github_repo: str | None = None
     github_type: str = "issues"
-    so_tagged: Optional[str] = None
+    so_tagged: str | None = None
     hn_tags: str = "comment"
 
     @staticmethod
-    def from_dict(data: Dict[str, Any]) -> "EvidenceTask":
+    def from_dict(data: dict[str, Any]) -> EvidenceTask:
         missing = {k for k in ("source", "query", "tags", "stance", "relevance_note") if k not in data}
         if missing:
             raise ValueError(f"Task missing keys: {missing}")
@@ -123,12 +123,12 @@ class EvidenceRecord:
     platform: str
     date: str
     minimal_quote: str
-    tags: List[str]
+    tags: list[str]
     stance: str
     relevance_note: str
-    quality_flags: List[str]
+    quality_flags: list[str]
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return asdict(self)
 
 
@@ -292,8 +292,8 @@ FETCHERS = {
 }
 
 
-def load_tasks(path: str) -> List[EvidenceTask]:
-    with open(path, "r", encoding="utf-8") as fh:
+def load_tasks(path: str) -> list[EvidenceTask]:
+    with open(path, encoding="utf-8") as fh:
         data = json.load(fh)
     tasks = [EvidenceTask.from_dict(item) for item in data.get("tasks", [])]
     invalid_sources = {t.source for t in tasks if t.source not in PLATFORM_CHOICES}
@@ -302,7 +302,7 @@ def load_tasks(path: str) -> List[EvidenceTask]:
     return tasks
 
 
-def main(argv: Optional[List[str]] = None) -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Harvest recency-bound evidence for RJW-IDD.")
     parser.add_argument("--config", required=True, help="Path to evidence task configuration JSON.")
     parser.add_argument("--output", required=True, help="Where to write the JSON evidence index.")
@@ -315,7 +315,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     now_utc = dt.datetime.now(dt.timezone.utc)
     cutoff = (now_utc - dt.timedelta(days=args.recency_days)).replace(tzinfo=None)
 
-    records: List[EvidenceRecord] = []
+    records: list[EvidenceRecord] = []
     counter = args.start_id
 
     for task in tasks:
@@ -332,7 +332,7 @@ def main(argv: Optional[List[str]] = None) -> int:
             break
 
     # Deduplicate by URI to avoid repeats across overlapping tasks.
-    deduped: Dict[str, EvidenceRecord] = {}
+    deduped: dict[str, EvidenceRecord] = {}
     for record in records:
         deduped[record.uri] = record
 

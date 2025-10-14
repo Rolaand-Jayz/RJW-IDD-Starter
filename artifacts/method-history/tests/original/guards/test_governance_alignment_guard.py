@@ -5,7 +5,6 @@ import pytest
 
 from tools.testing import governance_alignment_guard
 
-
 LEDGER_HEADER = "req_id,status,title,evidence_refs,spec_refs,tests_refs,owner,next_review,notes"
 
 

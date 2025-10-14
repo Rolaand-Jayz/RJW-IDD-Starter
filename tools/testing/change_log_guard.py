@@ -5,8 +5,8 @@ from __future__ import annotations
 import argparse
 import re
 import sys
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable, List, Tuple
 
 IGNORED_PREFIXES = (
     "workspace/",
@@ -50,8 +50,8 @@ def should_ignore(path: str) -> bool:
     return any(path.startswith(prefix) for prefix in IGNORED_PREFIXES)
 
 
-def extract_change_rows(text: List[str]) -> List[Tuple[int, List[str]]]:
-    rows: List[Tuple[int, List[str]]] = []
+def extract_change_rows(text: list[str]) -> list[tuple[int, list[str]]]:
+    rows: list[tuple[int, list[str]]] = []
     for index, line in enumerate(text, start=1):
         if not line.startswith("| change-"):
             continue
@@ -60,14 +60,14 @@ def extract_change_rows(text: List[str]) -> List[Tuple[int, List[str]]]:
     return rows
 
 
-def validate_latest_row(rows: List[Tuple[int, List[str]]]) -> List[str]:
+def validate_latest_row(rows: list[tuple[int, list[str]]]) -> list[str]:
     if not rows:
         return [
             "change-log guard: no rows starting with '| change-' found; add a change entry before merging."
         ]
 
     line_no, cells = rows[-1]
-    errors: List[str] = []
+    errors: list[str] = []
 
     if len(cells) < 5:
         errors.append(

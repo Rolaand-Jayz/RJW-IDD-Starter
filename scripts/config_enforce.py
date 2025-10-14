@@ -13,7 +13,7 @@ Exit codes:
 
 import sys
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Optional
 
 import yaml  # type: ignore[import]
 
@@ -26,7 +26,7 @@ def resolve_starter_kit_root(project_root: Path) -> Path:
     return project_root
 
 
-def load_features_yml(project_root: Path) -> Dict:
+def load_features_yml(project_root: Path) -> dict:
     """Load features.yml configuration"""
     features_file = project_root / 'method' / 'config' / 'features.yml'
 
@@ -36,13 +36,13 @@ def load_features_yml(project_root: Path) -> Dict:
         features_file = kit_root / 'method' / 'config' / 'features.yml'
 
     if not features_file.exists():
-        raise FileNotFoundError(f"features.yml not found")
+        raise FileNotFoundError("features.yml not found")
 
-    with open(features_file, 'r') as f:
+    with open(features_file) as f:
         return yaml.safe_load(f)
 
 
-def discover_enabled_features(project_root: Path) -> Dict[str, bool]:
+def discover_enabled_features(project_root: Path) -> dict[str, bool]:
     """Discover which features are actually enabled"""
     try:
         config = load_features_yml(project_root)
@@ -50,7 +50,7 @@ def discover_enabled_features(project_root: Path) -> Dict[str, bool]:
         config = {}
 
     declared = _extract_declared_features(config)
-    features: Dict[str, bool] = dict(declared)
+    features: dict[str, bool] = dict(declared)
 
     kit_root = resolve_starter_kit_root(project_root)
 
@@ -67,6 +67,26 @@ def discover_enabled_features(project_root: Path) -> Dict[str, bool]:
         project_root / 'rjw-idd-methodology' / 'addons' / 'video-ai-enhancer',
         kit_root / 'add-ons' / 'video-ai-enhancer',
     ]
+    yolo_prompt_candidates = [
+        [
+            kit_root / 'docs' / 'prompts' / 'user' / 'core-yolo-flow.md',
+            project_root / 'docs' / 'prompts' / 'user' / 'core-yolo-flow.md',
+        ],
+        [
+            kit_root / 'docs' / 'prompts' / 'agent' / 'PROMPT-AGENT-yolo-mode.md',
+            project_root / 'docs' / 'prompts' / 'agent' / 'PROMPT-AGENT-yolo-mode.md',
+        ],
+    ]
+    turbo_prompt_candidates = [
+        [
+            kit_root / 'docs' / 'prompts' / 'user' / 'core-turbo-flow.md',
+            project_root / 'docs' / 'prompts' / 'user' / 'core-turbo-flow.md',
+        ],
+        [
+            kit_root / 'docs' / 'prompts' / 'agent' / 'PROMPT-AGENT-turbo-mode.md',
+            project_root / 'docs' / 'prompts' / 'agent' / 'PROMPT-AGENT-turbo-mode.md',
+        ],
+    ]
 
     if features.get('guard', False) and not cli_path.exists():
         features['guard'] = False
@@ -79,11 +99,17 @@ def discover_enabled_features(project_root: Path) -> Dict[str, bool]:
         features['game_addin'] = False
     if features.get('video_ai_enhancer', False) and not any(path.exists() for path in video_addon_candidates):
         features['video_ai_enhancer'] = False
+    if features.get('yolo_mode', False):
+        if not all(any(path.exists() for path in group) for group in yolo_prompt_candidates):
+            features['yolo_mode'] = False
+    if features.get('turbo_mode', False):
+        if not all(any(path.exists() for path in group) for group in turbo_prompt_candidates):
+            features['turbo_mode'] = False
 
     return features
 
 
-def check_config_drift(declared: Dict, actual: Dict) -> List[Dict]:
+def check_config_drift(declared: dict, actual: dict) -> list[dict]:
     """Check for drift between declared and actual features"""
     issues = []
 
@@ -119,9 +145,9 @@ def check_config_drift(declared: Dict, actual: Dict) -> List[Dict]:
     return issues
 
 
-def _extract_declared_features(declared: Dict) -> Dict[str, bool]:
+def _extract_declared_features(declared: dict) -> dict[str, bool]:
     """Normalise declared features across legacy and add-on schemas."""
-    features: Dict[str, bool] = {}
+    features: dict[str, bool] = {}
 
     raw_features = declared.get("features")
     if isinstance(raw_features, dict):
@@ -148,7 +174,7 @@ def _normalise_addon_name(name: str) -> Optional[str]:
     return mapping.get(name, name.replace("-", "_"))
 
 
-def generate_report(issues: List[Dict], declared: Dict, actual: Dict) -> str:
+def generate_report(issues: list[dict], declared: dict, actual: dict) -> str:
     """Generate human-readable report"""
     lines = []
 

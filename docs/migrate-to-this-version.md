@@ -4,9 +4,9 @@ This guide helps you migrate existing RJW-IDD projects to the latest version wit
 
 ## Version Information
 
-**Current Version**: 1.2.0
-**Previous Version**: 1.1.0
-**Release Date**: 2025-10-12
+**Current Version**: 1.4.0
+**Previous Version**: 1.3.0
+**Release Date**: 2026-02-10
 
 ## Breaking Changes
 
@@ -36,6 +36,11 @@ This is a feature-additive release with no breaking changes to existing workflow
    - `prompt-pack.json` for versioning
    - Enhanced `features.yml` with profiles
    - CI config enforcement
+
+5. **Accelerated Modes**
+   - YOLO auto-approval prompts with explicit guard logging
+   - Turbo prompts for reduced gate thresholds (`features.turbo_mode`)
+   - Guard auto-ruleset selection via `rjw guard --ruleset auto`
 
 ## Migration Steps
 
@@ -95,10 +100,10 @@ Create `prompt-pack.json` in project root:
 cat > prompt-pack.json << 'EOF'
 {
   "name": "rjw-prompt-pack",
-  "version": "1.0.0",
-  "checksum": "sha256-placeholder",
-  "last_updated": "2025-10-07",
-  "channels": ["core"],
+  "version": "1.4.0",
+  "checksum": "sha256-321fed654cba",
+  "last_updated": "2026-02-10",
+  "channels": ["core", "modes/yolo", "modes/turbo"],
   "compat": {
     "min_cli": ">=1.0.0"
   }
@@ -115,11 +120,37 @@ cp method/config/features.yml method/config/features.yml.backup
 # Update with profiles section
 cat >> method/config/features.yml << 'EOF'
 
+mode:
+  name: standard
+  turbo: false
 profiles:
   lite:
     guard: true
     init: true
     prompts_version: true
+    yolo_mode: false
+    turbo_mode: false
+    game_addin: false
+  yolo:
+    guard: true
+    init: true
+    prompts_version: true
+    yolo_mode: true
+    turbo_mode: false
+    game_addin: false
+  turbo-standard:
+    guard: true
+    init: true
+    prompts_version: true
+    yolo_mode: false
+    turbo_mode: true
+    game_addin: false
+  turbo-yolo:
+    guard: true
+    init: true
+    prompts_version: true
+    yolo_mode: true
+    turbo_mode: true
     game_addin: false
 EOF
 ```

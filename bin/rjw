@@ -36,13 +36,21 @@ def main():
     guard_parser.add_argument('input', help='Input file path or "-" for stdin')
     guard_parser.add_argument('--format', choices=['json', 'text'], default='text',
                              help='Output format (default: text)')
-    guard_parser.add_argument('--ruleset', choices=['default', 'strict'], default='default',
-                             help='Validation ruleset (default: default)')
+    guard_parser.add_argument(
+        '--ruleset',
+        choices=['auto', 'default', 'strict', 'yolo', 'turbo-standard', 'turbo-yolo'],
+        default='auto',
+        help='Validation ruleset (default: auto)'
+    )
     
     # Init command
     init_parser = subparsers.add_parser('init', help='Initialize a new RJW-IDD project')
-    init_parser.add_argument('--preset', choices=['default', 'lite', 'game'], default='default',
-                            help='Project preset (default: default)')
+    init_parser.add_argument(
+        '--preset',
+        choices=['default', 'standard', 'lite', 'game', 'yolo', 'turbo-standard', 'turbo-yolo'],
+        default='standard',
+        help='Project preset (default: standard)'
+    )
     init_parser.add_argument('--noninteractive', action='store_true',
                             help='Run without interactive prompts')
     

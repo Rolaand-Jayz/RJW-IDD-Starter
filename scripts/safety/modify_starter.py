@@ -5,12 +5,12 @@ Safety gate for starter kit modifications.
 This script provides a controlled way to modify the RJW-IDD Starter Kit with
 appropriate warnings, consent checking, and audit logging.
 """
-import sys
-import json
 import argparse
-from pathlib import Path
-from datetime import datetime
+import json
 import subprocess
+import sys
+from datetime import datetime
+from pathlib import Path
 
 
 def find_project_root() -> Path:

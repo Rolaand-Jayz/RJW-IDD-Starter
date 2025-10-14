@@ -4,29 +4,69 @@ RJW Init - Interactive project initialization with safe defaults
 Implements numbered steps with beginner-friendly prompts and explicit confirmations.
 """
 
-import sys
-import subprocess
 import json
-import yaml
-from pathlib import Path
+import subprocess
+import sys
 from datetime import datetime
-from typing import Dict, Any, List
+from pathlib import Path
+from typing import Any
 
+import yaml
 
 PRESETS = {
+    # Backwards-compatible alias
     'default': {
         'features': ['guard', 'init', 'prompts_version'],
+        'mode': 'standard',
+        'turbo': False,
+        'description': 'Standard RJW-IDD project with core features'
+    },
+    'standard': {
+        'features': ['guard', 'init', 'prompts_version'],
+        'mode': 'standard',
+        'turbo': False,
         'description': 'Standard RJW-IDD project with core features'
     },
     'lite': {
         'features': ['guard', 'init', 'prompts_version'],
+        'mode': 'standard',
+        'turbo': False,
         'description': 'Lightweight project for small codebases'
     },
     'game': {
         'features': ['guard', 'init', 'prompts_version', 'game_addin'],
+        'mode': 'standard',
+        'turbo': False,
         'description': '3D game project with determinism and performance tracking'
+    },
+    'yolo': {
+        'features': ['guard', 'init', 'prompts_version', 'yolo_mode'],
+        'mode': 'yolo',
+        'turbo': False,
+        'description': 'Fast-lane workflow with safeguarded auto-approvals'
+    },
+    'turbo-standard': {
+        'features': ['guard', 'init', 'prompts_version', 'turbo_mode'],
+        'mode': 'standard',
+        'turbo': True,
+        'description': 'Standard workflow with relaxed guard gates for rapid iteration'
+    },
+    'turbo-yolo': {
+        'features': ['guard', 'init', 'prompts_version', 'yolo_mode', 'turbo_mode'],
+        'mode': 'yolo',
+        'turbo': True,
+        'description': 'YOLO workflow with turbo gate relaxations'
     }
 }
+
+FEATURE_OPTIONS = [
+    ('1', 'guard', 'Validate agent responses'),
+    ('2', 'init', 'Project initialization'),
+    ('3', 'prompts_version', 'Prompt pack versioning'),
+    ('4', 'game_addin', '3D game development tools'),
+    ('5', 'yolo_mode', 'Auto-approval workflow with guardrails'),
+    ('6', 'turbo_mode', 'Lower guard thresholds for trusted teams')
+]
 
 
 def prompt_user(question: str, default: str = 'Y') -> bool:
@@ -47,7 +87,7 @@ def prompt_input(question: str, default: str = '') -> str:
         return response
 
 
-def detect_runtime() -> Dict[str, Any]:
+def detect_runtime() -> dict[str, Any]:
     """Detect Python version and environment"""
     try:
         result = subprocess.run(
@@ -128,30 +168,29 @@ def install_dependencies(project_dir: Path, interactive: bool) -> bool:
         return False
 
 
-def select_features(preset: str, interactive: bool) -> List[str]:
-    """Select features to enable"""
+def select_features(preset: str, interactive: bool) -> tuple[list[str], str, bool]:
+    """Select features to enable and infer mode/turbo state"""
     preset_config = PRESETS[preset]
 
     if not interactive:
-        return preset_config['features']
+        features = preset_config['features']
+        return features, preset_config.get('mode', 'standard'), bool(preset_config.get('turbo', False))
 
-    print(f"\nAvailable features:")
-    print("  [1] guard - Validate agent responses")
-    print("  [2] init - Project initialization")
-    print("  [3] prompts-version - Prompt pack versioning")
-    print("  [4] game-addin - 3D game development tools")
+    print("\nAvailable features:")
+    for option, feature, description in FEATURE_OPTIONS:
+        display_name = feature.replace('_', '-')
+        print(f"  [{option}] {display_name} - {description}")
 
     selection = prompt_input(
         "Select features (comma-separated numbers)",
-        ','.join(str(i+1) for i in range(len(preset_config['features'])))
+        ','.join(
+            option
+            for option, feature, _ in FEATURE_OPTIONS
+            if feature in preset_config['features']
+        )
     )
 
-    feature_map = {
-        '1': 'guard',
-        '2': 'init',
-        '3': 'prompts_version',
-        '4': 'game_addin'
-    }
+    feature_map = {option: feature for option, feature, _ in FEATURE_OPTIONS}
 
     selected_features = []
     for num in selection.split(','):
@@ -159,10 +198,21 @@ def select_features(preset: str, interactive: bool) -> List[str]:
         if num in feature_map:
             selected_features.append(feature_map[num])
 
-    return selected_features if selected_features else preset_config['features']
+    selected_features = selected_features if selected_features else preset_config['features']
+    mode = 'yolo' if 'yolo_mode' in selected_features else 'standard'
+    turbo = 'turbo_mode' in selected_features or bool(preset_config.get('turbo', False))
+
+    if turbo and 'turbo_mode' not in selected_features:
+        selected_features.append('turbo_mode')
+
+    # Ensure yolo/turbo relationship
+    if mode == 'standard' and 'yolo_mode' in selected_features:
+        mode = 'yolo'
+
+    return selected_features, mode, turbo
 
 
-def write_configs(project_dir: Path, project_name: str, features: List[str], interactive: bool) -> bool:
+def write_configs(project_dir: Path, project_name: str, features: list[str], mode: str, turbo: bool, interactive: bool) -> bool:
     """Write configuration files"""
     if interactive:
         if not prompt_user("Write configuration files (features.yml, prompt-pack.json)?"):
@@ -177,14 +227,46 @@ def write_configs(project_dir: Path, project_name: str, features: List[str], int
             'guard': 'guard' in features,
             'init': 'init' in features,
             'prompts_version': 'prompts_version' in features,
-            'game_addin': 'game_addin' in features
+            'game_addin': 'game_addin' in features,
+            'yolo_mode': 'yolo_mode' in features,
+            'turbo_mode': 'turbo_mode' in features or turbo
+        },
+        'mode': {
+            'name': mode,
+            'turbo': turbo
         },
         'profiles': {
             'lite': {
                 'guard': True,
                 'init': True,
                 'prompts_version': True,
-                'game_addin': False
+                'game_addin': False,
+                'yolo_mode': False,
+                'turbo_mode': False
+            },
+            'yolo': {
+                'guard': True,
+                'init': True,
+                'prompts_version': True,
+                'game_addin': False,
+                'yolo_mode': True,
+                'turbo_mode': False
+            },
+            'turbo-standard': {
+                'guard': True,
+                'init': True,
+                'prompts_version': True,
+                'game_addin': False,
+                'yolo_mode': False,
+                'turbo_mode': True
+            },
+            'turbo-yolo': {
+                'guard': True,
+                'init': True,
+                'prompts_version': True,
+                'game_addin': False,
+                'yolo_mode': True,
+                'turbo_mode': True
             }
         }
     }
@@ -198,8 +280,8 @@ def write_configs(project_dir: Path, project_name: str, features: List[str], int
     prompt_pack = project_dir / 'prompt-pack.json'
     prompt_config = {
         'name': 'rjw-prompt-pack',
-        'version': '1.0.0',
-        'checksum': 'sha256-placeholder',
+        'version': '1.4.0',
+        'checksum': 'sha256-321fed654cba',
         'last_updated': datetime.now().strftime('%Y-%m-%d'),
         'channels': ['core'],
         'compat': {
@@ -209,6 +291,10 @@ def write_configs(project_dir: Path, project_name: str, features: List[str], int
 
     if 'game_addin' in features:
         prompt_config['channels'].append('add-ins/game')
+    if 'yolo_mode' in features:
+        prompt_config['channels'].append('modes/yolo')
+    if turbo:
+        prompt_config['channels'].append('modes/turbo')
 
     with open(prompt_pack, 'w') as f:
         json.dump(prompt_config, f, indent=2)
@@ -241,7 +327,7 @@ def run_smoke_test(project_dir: Path, interactive: bool) -> bool:
         return True
 
 
-def write_decision_log(project_dir: Path, decisions: List[str]):
+def write_decision_log(project_dir: Path, decisions: list[str]):
     """Write decision log for initialization"""
     log_path = project_dir / 'DECISION_LOG.md'
 
@@ -298,15 +384,16 @@ def run(args) -> int:
             decisions.append("Skipped environment setup")
 
         # Step 4: Feature selection
-        print(f"\n[4/7] Feature selection")
+        print("\n[4/7] Feature selection")
         print(f"Preset: {args.preset} - {PRESETS[args.preset]['description']}")
-        features = select_features(args.preset, interactive)
+        features, mode, turbo = select_features(args.preset, interactive)
         print(f"✔ Selected features: {', '.join(features)}")
         decisions.append(f"Features: {', '.join(features)}")
+        decisions.append(f"Mode: {mode}{' (turbo)' if turbo else ''}")
 
         # Step 5: Write configs
         print("\n[5/7] Configuration")
-        write_configs(project_dir, project_name, features, interactive)
+        write_configs(project_dir, project_name, features, mode, turbo, interactive)
         decisions.append("Wrote features.yml and prompt-pack.json")
 
         # Step 6: Smoke test

@@ -23,9 +23,8 @@ from __future__ import annotations
 import argparse
 import re
 import sys
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable, List, Tuple
-
 
 NOVICE_RE = re.compile(r"(?im)^\s*(?:#+\s*)?(Novice Summary|Novice:)\b")
 TECH_RE = re.compile(r"(?im)^\s*(?:#+\s*)?(Technical Specification|Technical Spec|Technical:)\b")
@@ -62,8 +61,8 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def normalise(paths: Iterable[str]) -> List[str]:
-    normalised: List[str] = []
+def normalise(paths: Iterable[str]) -> list[str]:
+    normalised: list[str] = []
     for raw in paths or []:
         if raw is None:
             continue
@@ -81,11 +80,11 @@ def read_text(path: Path) -> str:
         raise RuntimeError(f"could not read {path}: {exc}") from exc
 
 
-def find_lines_with_indices(text: str) -> List[str]:
+def find_lines_with_indices(text: str) -> list[str]:
     return text.splitlines()
 
 
-def locate_marker_near(lines: List[str], idx: int, marker_re: re.Pattern, window: int = 3) -> bool:
+def locate_marker_near(lines: list[str], idx: int, marker_re: re.Pattern, window: int = 3) -> bool:
     """Check for a marker within a window of lines around index idx (0-based)."""
     start = max(0, idx - window)
     end = min(len(lines), idx + window + 1)
@@ -95,8 +94,8 @@ def locate_marker_near(lines: List[str], idx: int, marker_re: re.Pattern, window
     return False
 
 
-def validate_file(path: Path) -> List[str]:
-    errors: List[str] = []
+def validate_file(path: Path) -> list[str]:
+    errors: list[str] = []
     if not path.exists():
         errors.append(f"agent-response guard: file not found: {path}")
         return errors
@@ -156,7 +155,7 @@ def main() -> int:
         print("agent-response guard: no files provided; nothing to check.", file=sys.stderr)
         return 0
 
-    errors: List[str] = []
+    errors: list[str] = []
     for raw in files:
         p = Path(raw)
         if not p.is_absolute():

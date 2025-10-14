@@ -1,8 +1,8 @@
 """Test isolation model: starter kit stays pristine, project artifacts go to /IDD-DOCS/."""
-import tempfile
 import shutil
-from pathlib import Path
 import subprocess
+import tempfile
+from pathlib import Path
 
 
 def test_sync_creates_project_docs_not_starter_kit():

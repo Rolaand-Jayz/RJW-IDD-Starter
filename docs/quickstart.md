@@ -33,14 +33,18 @@ rjw init
 ### 1. Initialize Your Project
 
 ```bash
-rjw init
+rjw init --preset standard
+# Other options: standard, yolo, turbo-standard, turbo-yolo
 ```
 
 Follow the numbered prompts:
 - **[1/7]** Enter your project name
 - **[2/7]** Verify Python runtime
 - **[3/7]** Create virtual environment
-- **[4/7]** Select features (guard, init, prompts-version)
+- **[4/7]** Select features/modes  
+  - `standard` → guard + init + prompts-version  
+  - `yolo` → adds YOLO auto-approval prompts  
+  - `turbo-*` → adds Turbo prompts and lighter guardrail channel
 - **[5/7]** Write configuration files (`templates/` plus any selected prompts)
 - **[6/7]** Run smoke tests
 - **[7/7]** Review next steps
@@ -76,7 +80,7 @@ rjw guard test-output.json
 
 Expected output:
 ```
-✔ Validation passed (ruleset=default, errors=0, warnings=0)
+✔ Validation passed (ruleset=auto, errors=0, warnings=0)
 ```
 
 ### 3. Check Prompt Pack Version
@@ -85,16 +89,21 @@ Expected output:
 rjw prompts --version
 ```
 
-Expected output:
+Sample output:
 ```
-rjw-prompt-pack 1.0.0 (sha256-placeholder...)
-Last updated: 2025-10-07
+rjw-prompt-pack 1.4.0 (sha256-321fed65...)
+Last updated: 2026-02-10
 ```
+If new channels are available (e.g., turbo workflows), they will appear in the
+channel list.
 
 ### 4. Start Development
 
 1. **Read the solo workflow guide**: `docs/solo.md`
-2. **Review prompts**: `rjw-idd-starter-kit/docs/prompts/` (user vs agent)
+2. **Review prompts**: `rjw-idd-starter-kit/docs/prompts/`  
+   - `core-novice-flow.md` for standard loops  
+   - `core-yolo-flow.md` for guarded auto-approvals  
+   - `core-turbo-flow.md` for reduced gate checks once the team agrees
 3. **Copy templates/examples**: `rjw-idd-starter-kit/templates-and-examples/`
 4. **Bootstrap the environment**: `bash rjw-idd-starter-kit/scripts/setup/bootstrap_project.sh`
 5. **Run tests**: `pytest`

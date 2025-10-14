@@ -7,9 +7,9 @@ It intentionally does NOT execute shell commands. It prepares the prompt text, v
 placeholders, and enforces method deviation rules (returns a refusal message when the requested
 action would violate policy).
 """
-from typing import Dict, Optional
 import datetime
 from pathlib import Path, PurePosixPath
+from typing import Optional
 
 DEFAULTS = {
     "project_root": "./",
@@ -39,7 +39,7 @@ def _now_date():
     return datetime.date.today().isoformat()
 
 
-def generate_prompt(step: str, params: Optional[Dict[str, str]] = None) -> Dict[str, str]:
+def generate_prompt(step: str, params: Optional[dict[str, str]] = None) -> dict[str, str]:
     """Return a dict with 'prompt' and 'notes' for a named step.
 
     step: one of 'bootstrap', 'activate_venv', 'guard_ok', 'guard_bad', 'pytest', 'build_inspect'
@@ -136,15 +136,15 @@ def validate_user_prompt(user_prompt: str, expected_step: str) -> None:
     if "skip tests" in lower or "dont run tests" in lower:
         raise GateBlocked("GATE_SKIP_TESTS", "Skipping tests is not allowed; tests are a required gate before release operations.")
 
-    # if user requests publish to pypi and has not indicated approval, warn — but we'll allow if user explicitly names 'publish'
-    if "publish to pypi" in lower and "publish" not in lower:
+    # if user references PyPI without expressly saying "publish", require confirmation
+    if "pypi" in lower and "publish" not in lower:
         raise GateBlocked("GATE_PUBLISH_APPROVAL", "Publishing requires explicit instruction and verification; please confirm 'publish' if you intend to proceed.")
 
     # otherwise allow
     return None
 
 
-def chat_response(step: str, params: Optional[Dict[str, str]] = None, user_override: Optional[str] = None) -> Dict[str, str]:
+def chat_response(step: str, params: Optional[dict[str, str]] = None, user_override: Optional[str] = None) -> dict[str, str]:
     """Compose a chat-friendly response that includes an assistant message and a copy-paste prompt.
 
     - Generates the dynamic prompt for `step` using `generate_prompt`.

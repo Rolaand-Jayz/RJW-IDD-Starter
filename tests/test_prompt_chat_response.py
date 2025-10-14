@@ -14,7 +14,7 @@ pkg_root = _starter_kit_root()
 if str(pkg_root) not in sys.path:
     sys.path.insert(0, str(pkg_root))
 
-import tools.prompt_helper as prompt_helper
+import tools.prompt_helper as prompt_helper  # noqa: E402
 
 
 def test_chat_response_bootstrap_contains_prompt_and_message():

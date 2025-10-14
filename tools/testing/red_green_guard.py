@@ -4,9 +4,8 @@ from __future__ import annotations
 
 import argparse
 import sys
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable, List
-
 
 TEST_INDICATORS = ("tests/", "test_", "_test.py", "Test.")
 
@@ -31,8 +30,8 @@ def contains_test_path(paths: Iterable[str]) -> bool:
     return False
 
 
-def validate_files(root: Path, files: List[str]) -> List[str]:
-    errors: List[str] = []
+def validate_files(root: Path, files: list[str]) -> list[str]:
+    errors: list[str] = []
     if not files:
         errors.append("no files provided to red-green guard")
         return errors
