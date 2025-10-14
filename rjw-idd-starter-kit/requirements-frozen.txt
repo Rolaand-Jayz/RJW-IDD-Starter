@@ -30,7 +30,7 @@ filelock==3.20.0
 findpython==0.7.0
 fonttools==4.60.1
 FVS==0.3.4
-gi-docgen==2025.4
+gi-docgen==2025.5
 html5lib==1.1
 icoextract==0.2.0
 idna==3.10
