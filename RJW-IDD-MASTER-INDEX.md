@@ -992,7 +992,7 @@ python scripts/validate_evidence.py --input research/evidence_index.json --cutof
 | **3D addon** | `rjw-idd-methodology/addons/3d-game-core/` |
 | **Video addon** | `rjw-idd-methodology/addons/video-ai-enhancer/` |
 | **Feature config** | `method/config/features.yml` |
-| **Demo Project** | `examples/demo_project/` |
+
 | **Workspace** | `workspace/` |
 
 ### Operational Metrics Quick Reference
