@@ -33,7 +33,7 @@ FVS==0.3.4
 gi-docgen==2025.4
 html5lib==1.1
 icoextract==0.2.0
-idna==3.10
+idna==3.11
 installer==0.7.0
 jaraco.classes==3.4.0
 jaraco.collections==5.1.0
