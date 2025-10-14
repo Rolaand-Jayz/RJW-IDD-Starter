@@ -2,6 +2,11 @@ features:
   guard: true
   init: true
   prompts_version: true
+  yolo_mode: false
+  turbo_mode: false
+mode:
+  name: standard
+  turbo: false
 addons:
   3d_game_core:
     enabled: true

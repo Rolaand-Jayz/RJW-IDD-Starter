@@ -9,7 +9,6 @@ and does not perform network operations. Exit codes:
 """
 import shutil
 import subprocess
-from pathlib import Path
 import sys
 
 KNOWN_CLIS = [

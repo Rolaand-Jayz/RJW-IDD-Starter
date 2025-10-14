@@ -5,16 +5,15 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
-from typing import Dict, List, Set
 
 
-def load_json(path: Path) -> Dict:
+def load_json(path: Path) -> dict:
     with path.open("r", encoding="utf-8") as handle:
         return json.load(handle)
 
 
-def load_allowlist(path: Path) -> Set[str]:
-    entries: Set[str] = set()
+def load_allowlist(path: Path) -> set[str]:
+    entries: set[str] = set()
     with path.open("r", encoding="utf-8") as handle:
         for line in handle:
             clean = line.strip()
@@ -24,7 +23,7 @@ def load_allowlist(path: Path) -> Set[str]:
     return entries
 
 
-def main(argv: List[str] | None = None) -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Promote curated evidence records from a raw index")
     parser.add_argument("--raw", required=True, help="Path to evidence_index_raw.json")
     parser.add_argument("--allowlist", required=True, help="Path to allowlist file containing EVD IDs")
@@ -44,7 +43,7 @@ def main(argv: List[str] | None = None) -> int:
     if not allow_ids:
         raise SystemExit("Allowlist is empty; nothing to promote")
 
-    lookup: Dict[str, Dict] = {record.get("evid_id"): record for record in raw_records if isinstance(record, dict)}
+    lookup: dict[str, dict] = {record["evid_id"]: record for record in raw_records if isinstance(record, dict) and "evid_id" in record and isinstance(record["evid_id"], str)}
     missing = sorted(allow_ids - lookup.keys())
     if missing:
         raise SystemExit(f"Allowlist contains unknown EVD IDs: {', '.join(missing)}")

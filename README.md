@@ -174,6 +174,8 @@ RJW-IDD keeps feature enablement declarative in `method/config/features.yml`. Th
 | features.guard | true | CLI guard commands (policy validation) | Set to false only if you are packaging a slim kit and have replacement guard rails. |
 | features.init | true | CLI project bootstrapping | Disable if you replace the interactive “rjw init” workflow with your own. |
 | features.prompts_version | true | Prompt pack metadata (`rjw-idd-starter-kit/prompt-pack.json`) | Disable for fully offline or prompt-free bundles. |
+| features.yolo_mode | false | YOLO auto-approval prompts/templates (`docs/prompts/{user,agent}/core-yolo-flow`) | Enable when you want the helper to auto-approve guarded steps. Keep guard + tests active. |
+| features.turbo_mode | false | Turbo prompts/templates (`docs/prompts/{user,agent}/core-turbo-flow`) | Enable for short sprints that allow lighter guardrails; still run at least one verification. |
 | addons.3d_game_core.enabled | true | 3D game governance, harnesses, specs | Toggle with the script `rjw-idd-starter-kit/scripts/addons/enable_3d_game_core.py` (or the matching disable script). |
 | addons.video_ai_enhancer.enabled | false | Real-time video governance, quality/latency gates | Toggle with the script `rjw-idd-starter-kit/scripts/addons/enable_video_ai_enhancer.py`. |
 

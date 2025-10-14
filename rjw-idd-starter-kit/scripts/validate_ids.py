@@ -7,10 +7,9 @@ import argparse
 import csv
 import re
 import sys
+from collections.abc import Iterable
 from datetime import datetime
 from pathlib import Path
-from typing import Iterable, List
-
 
 EVD_RE = re.compile(r"EVD-\d{4}")
 REQ_RE = re.compile(r"REQ-\d{4}")
@@ -37,7 +36,7 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def validate_requirement_ledger(path: Path, errors: List[str]) -> None:
+def validate_requirement_ledger(path: Path, errors: list[str]) -> None:
     if not path.exists():
         errors.append(f"missing requirement ledger: {path}")
         return
@@ -80,7 +79,7 @@ def validate_requirement_ledger(path: Path, errors: List[str]) -> None:
                     errors.append(f"{path}: {req_id} invalid next_review '{next_review}'")
 
 
-def validate_test_ledger(path: Path, errors: List[str]) -> None:
+def validate_test_ledger(path: Path, errors: list[str]) -> None:
     if not path.exists():
         errors.append(f"missing test ledger: {path}")
         return
@@ -109,7 +108,7 @@ def validate_test_ledger(path: Path, errors: List[str]) -> None:
                 errors.append(f"{path}: {test_id} missing criteria description")
 
 
-def validate_change_log(path: Path, errors: List[str]) -> None:
+def validate_change_log(path: Path, errors: list[str]) -> None:
     if not path.exists():
         errors.append(f"missing change log: {path}")
         return
@@ -131,7 +130,7 @@ def validate_change_log(path: Path, errors: List[str]) -> None:
                 errors.append(f"{path}: {change_id} missing impacted_ids")
 
 
-def validate_paths(root: Path, paths: Iterable[str], errors: List[str]) -> None:
+def validate_paths(root: Path, paths: Iterable[str], errors: list[str]) -> None:
     for raw_path in paths:
         path = (root / raw_path).resolve()
         if not path.exists():
@@ -148,7 +147,7 @@ def validate_paths(root: Path, paths: Iterable[str], errors: List[str]) -> None:
 def main() -> int:
     args = parse_args()
     root = args.root.resolve()
-    errors: List[str] = []
+    errors: list[str] = []
 
     validate_requirement_ledger(root / "artifacts" / "ledgers" / "requirement-ledger.csv", errors)
     validate_test_ledger(root / "artifacts" / "ledgers" / "test-ledger.csv", errors)

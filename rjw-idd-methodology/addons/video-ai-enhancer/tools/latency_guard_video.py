@@ -8,7 +8,6 @@ import math
 import pathlib
 import statistics
 import sys
-from typing import Iterable
 
 from config_loader import ConfigError, MergedConfig, load_merged_config
 

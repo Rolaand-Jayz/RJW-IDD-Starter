@@ -9,7 +9,11 @@ from pathlib import Path
 
 guard_path = Path('rjw-idd-starter-kit/tools/rjw_cli/guard.py')
 spec = importlib.util.spec_from_file_location('rjw_guard', guard_path)
+if spec is None:
+    raise ImportError(f"Could not load spec for module at {guard_path}")
 module = importlib.util.module_from_spec(spec)
+if spec.loader is None:
+    raise ImportError(f"Could not load loader for module at {guard_path}")
 spec.loader.exec_module(module)
 
 def run_with_input(input_path, fmt='text', ruleset='default'):

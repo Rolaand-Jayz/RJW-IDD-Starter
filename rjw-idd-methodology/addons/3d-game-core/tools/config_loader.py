@@ -29,7 +29,6 @@ class ConfigError(RuntimeError):
 def _strip_inline_comment(line: str) -> str:
     if "#" not in line:
         return line
-    in_str = False
     quote = None
     result_chars = []
     for ch in line:

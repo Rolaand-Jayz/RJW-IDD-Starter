@@ -14,14 +14,13 @@ Exit codes:
   2 = errors found
 """
 
-import sys
-import re
-from pathlib import Path
-from typing import List, Dict, Tuple
 import ast
+import re
+import sys
+from pathlib import Path
 
 
-def find_doc_sync_tags(content: str, filepath: Path) -> List[Dict]:
+def find_doc_sync_tags(content: str, filepath: Path) -> list[dict]:
     """Find @doc-sync tags in code"""
     tags = []
     pattern = r'@doc-sync:\s*(\S+)'
@@ -39,13 +38,13 @@ def find_doc_sync_tags(content: str, filepath: Path) -> List[Dict]:
     return tags
 
 
-def find_code_fences(content: str, filepath: Path) -> List[Dict]:
+def find_code_fences(content: str, filepath: Path) -> list[dict]:
     """Find code blocks in markdown"""
     blocks = []
     in_fence = False
     fence_lang = None
     fence_start = 0
-    fence_content = []
+    fence_content: list[str] = []
 
     for line_no, line in enumerate(content.splitlines(), 1):
         if line.strip().startswith('```'):
@@ -70,7 +69,7 @@ def find_code_fences(content: str, filepath: Path) -> List[Dict]:
     return blocks
 
 
-def validate_python_code(code: str) -> Tuple[bool, str]:
+def validate_python_code(code: str) -> tuple[bool, str]:
     """Validate Python code syntax"""
     try:
         ast.parse(code)
@@ -79,9 +78,8 @@ def validate_python_code(code: str) -> Tuple[bool, str]:
         return False, f"Syntax error: {e.msg} at line {e.lineno}"
 
 
-def check_doc_sync_drift(project_root: Path) -> List[Dict]:
-    """Check for doc-sync drift"""
-    issues = []
+def check_doc_sync_drift(project_root: Path) -> list[dict]:
+    issues: list[dict] = []
 
     # Find all @doc-sync tags in Python files
     code_tags = []
@@ -133,9 +131,9 @@ def check_doc_sync_drift(project_root: Path) -> List[Dict]:
     return issues
 
 
-def check_code_examples(project_root: Path) -> List[Dict]:
+def check_code_examples(project_root: Path) -> list[dict]:
     """Validate code examples in documentation"""
-    issues = []
+    issues: list[dict] = []
 
     docs_dir = project_root / 'docs'
     if not docs_dir.exists():
@@ -166,7 +164,7 @@ def check_code_examples(project_root: Path) -> List[Dict]:
     return issues
 
 
-def generate_report(issues: List[Dict]) -> str:
+def generate_report(issues: list[dict]) -> str:
     """Generate human-readable report"""
     if not issues:
         return "✔ No doc-sync issues found"
@@ -176,7 +174,7 @@ def generate_report(issues: List[Dict]) -> str:
     report.append("")
 
     # Group by type
-    by_type = {}
+    by_type: dict[str, list[dict]] = {}
     for issue in issues:
         issue_type = issue['type']
         if issue_type not in by_type:

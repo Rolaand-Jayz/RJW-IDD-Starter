@@ -5,7 +5,6 @@ from __future__ import annotations
 import argparse
 import pathlib
 import sys
-import typing as t
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 TOOLS = ROOT / "addons" / "video-ai-enhancer" / "tools"

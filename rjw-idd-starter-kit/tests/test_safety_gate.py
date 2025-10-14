@@ -1,9 +1,9 @@
 """Test safety gate system for starter kit modifications."""
-import tempfile
-import shutil
-from pathlib import Path
-import subprocess
 import json
+import shutil
+import subprocess
+import tempfile
+from pathlib import Path
 
 
 def test_safety_gate_blocks_unauthorized_modifications():

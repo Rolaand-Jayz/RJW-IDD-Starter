@@ -38,7 +38,6 @@ class FeatureRegistryError(RuntimeError):
 def _strip_inline_comment(line: str) -> str:
     if "#" not in line:
         return line
-    in_str = False
     quote: str | None = None
     out: list[str] = []
     for ch in line:

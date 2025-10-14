@@ -11,7 +11,7 @@ import time
 from contextlib import contextmanager
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Callable, Optional, TypeVar
+from typing import Any, Callable, TypeVar
 
 from tools.logging_config import get_logger
 
@@ -28,8 +28,8 @@ class PerformanceMetrics:
     start_time: float
     end_time: float
     duration: float = field(init=False)
-    memory_usage: Optional[int] = None
-    cpu_usage: Optional[float] = None
+    memory_usage: int | None = None
+    cpu_usage: float | None = None
     metadata: dict[str, Any] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
@@ -68,7 +68,7 @@ class PerformanceMonitor:
 
     def profile_function(
         self,
-        output_file: Optional[Path] = None,
+        output_file: Path | None = None,
         sort_by: str = 'cumulative'
     ) -> Callable[[F], F]:
         """Decorator to profile function performance."""
@@ -101,7 +101,7 @@ class PerformanceMonitor:
             return {}
 
         durations = [m.duration for m in self.metrics]
-        operations = list(set(m.operation for m in self.metrics))
+        operations = list({m.operation for m in self.metrics})
 
         return {
             "total_measurements": len(self.metrics),

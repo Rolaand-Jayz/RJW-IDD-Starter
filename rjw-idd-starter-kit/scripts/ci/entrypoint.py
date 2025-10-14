@@ -10,7 +10,7 @@ import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any
 
 
 def _default_log_dir() -> Path:
@@ -45,7 +45,7 @@ def run_test_gate(
     head_ref: str,
     log_dir: Path,
     timestamp: str,
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     log_dir.mkdir(parents=True, exist_ok=True)
     script_path = repo_root / "scripts" / "ci" / "test_gate.sh"
     env = os.environ.copy()
@@ -90,7 +90,7 @@ def write_summary(
     *,
     log_dir: Path,
     timestamp: str,
-    steps: List[Dict[str, Any]],
+    steps: list[dict[str, Any]],
     repo_root: Path,
 ) -> Path:
     log_dir.mkdir(parents=True, exist_ok=True)
@@ -109,7 +109,7 @@ def main() -> int:
     log_dir = args.log_dir if args.log_dir.is_absolute() else repo_root / args.log_dir
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
 
-    steps: List[Dict[str, Any]] = []
+    steps: list[dict[str, Any]] = []
     steps.append(
         run_test_gate(
             repo_root=repo_root,

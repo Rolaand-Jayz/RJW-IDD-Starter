@@ -16,46 +16,54 @@ rjw-idd-starter-kit/docs/prompts/
    - Agent Pledge (always use first)
    - 7-stage workflow: Start → Explore → Decide → Create → Test → Record → Wrap
    - Quick helper prompts for common needs
+2. **user/core-yolo-flow.md** 🚀 AUTO MODE
+   - Same RJW-IDD stages with guarded auto-approvals
+   - Helper narrates every automatic action and cites guardrails
+   - Great for fast follow-ups when you trust the environment
+3. **user/core-turbo-flow.md** ⚡ FAST CHECKS
+   - Turbo mode keeps RJW-IDD order with lighter guard gates
+   - Logs each relaxed approval and required follow-up
+   - Use when the team agrees on reduced checks for a short sprint
 
-2. **agent/guardrails.md**
+4. **agent/guardrails.md**
    - Plain language request
    - Method pledge
    - Command confirmation rules
    - Drift recovery
 
-3. **user/glossary.md**
+5. **user/glossary.md**
    - Plain-language definitions for RJW-IDD terms
    - Copy-paste explanations
 
-4. **user/example-conversations.md**
+6. **user/example-conversations.md**
    - Sample interactions showing how to use prompts
    - Examples for running commands, reviewing diffs
 
-5. **user/starter-briefing.md**
+7. **user/starter-briefing.md**
    - Initial repository tour and planning
 
-6. **user/implementation-coach.md**
+8. **user/implementation-coach.md**
    - Step-by-step file editing guidance
 
-7. **user/spec-translator.md**
+9. **user/spec-translator.md**
    - Convert plain requirements to specs
 
-8. **user/test-navigator.md**
+10. **user/test-navigator.md**
    - Test planning and design
 
-9. **user/doc-sync.md**
-   - Documentation update guidance
+11. **user/doc-sync.md**
+    - Documentation update guidance
 
-10. **user/governance-audit.md**
+12. **user/governance-audit.md**
     - Pre-PR compliance check
 
-11. **user/change-log-author.md**
+13. **user/change-log-author.md**
     - Change log entry creation
 
-12. **user/merge-ready-checklist.md**
+14. **user/merge-ready-checklist.md**
     - Final merge readiness verification
 
-13. **README.md**
+15. **README.md**
     - Overview and navigation guide
 
 ---

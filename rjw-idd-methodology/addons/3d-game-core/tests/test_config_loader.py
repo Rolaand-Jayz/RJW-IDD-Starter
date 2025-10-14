@@ -1,6 +1,5 @@
-import pathlib
 
-from config_loader import CONFIG_DIR, deep_merge, load_base_config, load_merged_config, load_yaml
+from config_loader import CONFIG_DIR, deep_merge, load_merged_config, load_yaml
 
 
 def test_load_merged_config_generic():

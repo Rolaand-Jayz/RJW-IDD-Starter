@@ -53,21 +53,56 @@ source "${VENV_DIR}/bin/activate"
 echo "bootstrap: upgrading pip" >&2
 python -m pip install --upgrade pip
 
+ensure_python_package() {
+  local package="$1"
+  if python -m pip show "${package}" >/dev/null 2>&1; then
+    return 0
+  fi
+  echo "bootstrap: installing missing dependency ${package}" >&2
+  python -m pip install "${package}"
+}
+
 # Install dependencies based on what's available
 if [[ -f "${ROOT_DIR}/pyproject.toml" ]]; then
   echo "bootstrap: installing project with pyproject.toml" >&2
-  pip install -e "${ROOT_DIR}[dev]" 2>/dev/null || pip install -e "${ROOT_DIR}"
+  if ! python -m pip install -e "${ROOT_DIR}[dev]"; then
+    echo "bootstrap: editable install with [dev] extras failed; retrying without extras" >&2
+    python -m pip install -e "${ROOT_DIR}"
+  fi
 elif [[ -f "${ROOT_DIR}/requirements-dev.txt" ]]; then
   echo "bootstrap: installing from requirements-dev.txt" >&2
-  pip install -r "${ROOT_DIR}/requirements-dev.txt"
+  python -m pip install -r "${ROOT_DIR}/requirements-dev.txt"
   # Also install main requirements if they exist
   if [[ -f "${ROOT_DIR}/requirements.txt" ]]; then
     echo "bootstrap: installing from requirements.txt" >&2
-    pip install -r "${ROOT_DIR}/requirements.txt"
+    python -m pip install -r "${ROOT_DIR}/requirements.txt"
   fi
 else
   echo "WARNING: No dependency files found (pyproject.toml or requirements-dev.txt)" >&2
   echo "Consider copying templates from templates/ directory and customizing them" >&2
+fi
+
+# Guarantee core tooling for guards, tests, and Codacy coverage support
+REQUIRED_PYTHON_PACKAGES=(
+  "pytest"
+  "pytest-cov"
+  "black"
+  "ruff"
+  "mypy"
+  "pre-commit"
+  "pyyaml"
+  "flake8"
+  "pip-audit"
+  "codacy-coverage"
+  "coverage"
+)
+
+for package in "${REQUIRED_PYTHON_PACKAGES[@]}"; do
+  ensure_python_package "${package}"
+done
+
+if ! command -v codacy_cli_analyze >/dev/null 2>&1; then
+  echo "bootstrap: Codacy CLI not detected. Install it (https://docs.codacy.com/) if you plan to run Codacy scans locally." >&2
 fi
 
 echo "bootstrap: running pytest"

@@ -6,7 +6,6 @@ import argparse
 from datetime import date
 from pathlib import Path
 
-
 TEMPLATE_CONTEXT = """# Integration Context\n\n- **Services:**\n- **Contracts:**\n- **Environments:**\n- **Linked IDs:** <add IDs here>\n"""
 
 TEMPLATE_VERIFICATION = """# Verification\n\n- Contract tests: \n- Manual sign-off: \n- Observability snapshot: \n"""

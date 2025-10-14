@@ -21,7 +21,6 @@ import re
 import sys
 from datetime import datetime
 
-
 VALID_TYPES = {
     "feat": "New feature",
     "fix": "Bug fix",
@@ -131,7 +130,7 @@ def interactive_builder() -> str:
         commit_type = type_choice
 
     if commit_type not in VALID_TYPES:
-        print(f"Invalid type. Using 'feat'")
+        print("Invalid type. Using 'feat'")
         commit_type = "feat"
 
     # Scope
@@ -151,7 +150,7 @@ def interactive_builder() -> str:
 
     # Body (optional)
     print("\nLonger description (optional, press Enter twice when done):")
-    body_lines = []
+    body_lines: list[str] = []
     while True:
         line = input()
         if not line and (not body_lines or not body_lines[-1]):

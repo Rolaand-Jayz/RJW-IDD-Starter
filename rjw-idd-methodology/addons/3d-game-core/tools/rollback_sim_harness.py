@@ -5,7 +5,6 @@ import argparse
 import json
 import pathlib
 import sys
-import typing as t
 
 from config_loader import ConfigError, MergedConfig, load_merged_config
 

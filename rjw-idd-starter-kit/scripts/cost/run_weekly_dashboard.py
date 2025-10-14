@@ -9,13 +9,13 @@ import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 COST_DASHBOARD = REPO_ROOT / "tools" / "cost" / "cost_dashboard.py"
 
 
-def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--usage-csv", type=Path, required=True, help="Usage CSV passed to cost_dashboard.py")
     parser.add_argument("--invoice-csv", type=Path, required=True, help="Invoice CSV passed to cost_dashboard.py")
@@ -35,7 +35,7 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
-def run_dashboard(args: argparse.Namespace) -> Dict[str, Any]:
+def run_dashboard(args: argparse.Namespace) -> dict[str, Any]:
     command = [
         sys.executable,
         str(COST_DASHBOARD),
@@ -50,7 +50,7 @@ def run_dashboard(args: argparse.Namespace) -> Dict[str, Any]:
     ]
     result = subprocess.run(command, capture_output=True, text=True)
 
-    payload: Dict[str, Any]
+    payload: dict[str, Any]
     if result.stdout.strip():
         try:
             payload = json.loads(result.stdout)
@@ -69,7 +69,7 @@ def run_dashboard(args: argparse.Namespace) -> Dict[str, Any]:
 def write_snapshot(
     *,
     output_dir: Path,
-    payload: Dict[str, Any],
+    payload: dict[str, Any],
     args: argparse.Namespace,
     timestamp: str,
 ) -> Path:

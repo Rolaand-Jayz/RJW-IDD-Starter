@@ -9,12 +9,15 @@ Exit codes:
   5 = internal error
 """
 
-import sys
 import json
+import os
+import re
+import sys
 import time
 from pathlib import Path
-from typing import Dict, List, Any, Tuple
+from typing import Any, Optional
 
+import yaml
 
 # Validation rules
 FORBIDDEN_CAPABILITIES = [
@@ -33,6 +36,49 @@ ALLOWED_TOOLS = [
     'grep',
 ]
 
+def _find_features_file() -> Optional[Path]:
+    """Locate method/config/features.yml relative to current working dir."""
+    cwd = Path.cwd()
+    candidates = [
+        cwd / 'method' / 'config' / 'features.yml',
+        cwd / 'rjw-idd-starter-kit' / 'method' / 'config' / 'features.yml'
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return None
+
+
+def _detect_ruleset(requested: Optional[str]) -> str:
+    """Resolve effective guard ruleset based on features.yml when requested is auto/None."""
+    if requested and requested != 'auto':
+        return requested
+
+    features_file = _find_features_file()
+    if not features_file:
+        return 'default'
+
+    try:
+        config = yaml.safe_load(features_file.read_text()) or {}
+    except Exception:
+        return 'default'
+
+    features = config.get('features', {})
+    mode = (config.get('mode') or {}).get('name') or ('yolo' if features.get('yolo_mode') else 'standard')
+    turbo = bool((config.get('mode') or {}).get('turbo')) or bool(features.get('turbo_mode'))
+
+    if turbo and mode == 'yolo':
+        return 'turbo-yolo'
+    if turbo:
+        return 'turbo-standard'
+    if mode == 'yolo':
+        return 'yolo'
+    return 'default'
+
+
+def _turbo_ruleset(ruleset: str) -> bool:
+    return ruleset in {'turbo-standard', 'turbo-yolo'}
+
 REQUIRED_PROVENANCE_FIELDS = [
     'agent_id',
     'timestamp',
@@ -40,7 +86,7 @@ REQUIRED_PROVENANCE_FIELDS = [
 ]
 
 
-def validate_schema(data: Dict[str, Any]) -> Tuple[bool, List[Dict]]:
+def validate_schema(data: dict[str, Any]) -> tuple[bool, list[dict]]:
     """Validate basic JSON schema"""
     violations = []
 
@@ -68,7 +114,7 @@ def validate_schema(data: Dict[str, Any]) -> Tuple[bool, List[Dict]]:
     return len(violations) == 0, violations
 
 
-def check_forbidden_capabilities(data: Dict[str, Any], ruleset: str) -> List[Dict]:
+def check_forbidden_capabilities(data: dict[str, Any], ruleset: str) -> list[dict]:
     """Check for forbidden code patterns"""
     violations = []
 
@@ -94,7 +140,24 @@ def check_forbidden_capabilities(data: Dict[str, Any], ruleset: str) -> List[Dic
     return violations
 
 
-def check_file_operations(data: Dict[str, Any], ruleset: str) -> List[Dict]:
+def _is_absolute_path(path: str) -> bool:
+    """Detect absolute paths across POSIX, Windows drive letters, and UNC shares."""
+    if os.path.isabs(path):
+        return True
+    if path.startswith("\\\\") or path.startswith("//"):
+        return True
+    return bool(re.match(r"^[a-zA-Z]:[\\/]", path))
+
+
+def _is_within_sandbox(path: str) -> bool:
+    """True if path resides under the sandbox directory irrespective of platform separators."""
+    normalized = path.replace("\\", "/").lower()
+    if normalized.startswith("/sandbox/") or normalized.startswith("sandbox/"):
+        return True
+    return bool(re.match(r"^[a-z]:/sandbox/", normalized))
+
+
+def check_file_operations(data: dict[str, Any], ruleset: str) -> list[dict]:
     """Check for unsafe file operations"""
     violations = []
 
@@ -106,9 +169,10 @@ def check_file_operations(data: Dict[str, Any], ruleset: str) -> List[Dict]:
             # Check for unsigned file writes
             if action.get('type') == 'file_write':
                 if not action.get('signed', False):
+                    severity = 'warn' if _turbo_ruleset(ruleset) else 'error'
                     violations.append({
                         'code': 'DRIFT_UNSAFE_WRITE',
-                        'severity': 'error',
+                        'severity': severity,
                         'message': 'Unsigned file write detected',
                         'path': f'$.actions[{i}]',
                         'remediation': 'Use sandboxed path or add signature verification'
@@ -116,7 +180,7 @@ def check_file_operations(data: Dict[str, Any], ruleset: str) -> List[Dict]:
 
                 # Check for writes outside sandbox
                 file_path = action.get('path', '')
-                if file_path.startswith('/') and '/sandbox/' not in file_path:
+                if _is_absolute_path(file_path) and not _is_within_sandbox(file_path):
                     violations.append({
                         'code': 'DRIFT_UNSAFE_PATH',
                         'severity': 'error',
@@ -128,7 +192,7 @@ def check_file_operations(data: Dict[str, Any], ruleset: str) -> List[Dict]:
     return violations
 
 
-def check_network_operations(data: Dict[str, Any], ruleset: str) -> List[Dict]:
+def check_network_operations(data: dict[str, Any], ruleset: str) -> list[dict]:
     """Check for unauthorized network calls"""
     violations = []
 
@@ -141,9 +205,10 @@ def check_network_operations(data: Dict[str, Any], ruleset: str) -> List[Dict]:
             # Check for network calls
             if item.get('type') in ['http_request', 'api_call', 'fetch']:
                 if not item.get('network_allowed', False):
+                    severity = 'warn' if _turbo_ruleset(ruleset) else 'error'
                     violations.append({
                         'code': 'NET_CALL_FORBIDDEN',
-                        'severity': 'error',
+                        'severity': severity,
                         'message': 'Network call without permission',
                         'path': f'$.steps[{i}]' if 'steps' in data else f'$.actions[{i}]',
                         'remediation': 'Rerun with --online or disable network access'
@@ -152,7 +217,7 @@ def check_network_operations(data: Dict[str, Any], ruleset: str) -> List[Dict]:
     return violations
 
 
-def check_provenance(data: Dict[str, Any], ruleset: str) -> List[Dict]:
+def check_provenance(data: dict[str, Any], ruleset: str) -> list[dict]:
     """Check for required provenance fields"""
     violations = []
 
@@ -170,7 +235,7 @@ def check_provenance(data: Dict[str, Any], ruleset: str) -> List[Dict]:
     return violations
 
 
-def check_tool_allowlist(data: Dict[str, Any], ruleset: str) -> List[Dict]:
+def check_tool_allowlist(data: dict[str, Any], ruleset: str) -> list[dict]:
     """Check tool usage against allowlist"""
     violations = []
 
@@ -188,7 +253,7 @@ def check_tool_allowlist(data: Dict[str, Any], ruleset: str) -> List[Dict]:
     return violations
 
 
-def validate(data: Dict[str, Any], ruleset: str = 'default') -> Dict[str, Any]:
+def validate(data: dict[str, Any], ruleset: str = 'default') -> dict[str, Any]:
     """Run all validation checks"""
     start_time = time.time()
     violations = []
@@ -234,7 +299,7 @@ def validate(data: Dict[str, Any], ruleset: str = 'default') -> Dict[str, Any]:
     }
 
 
-def format_text_output(result: Dict[str, Any], input_source: str) -> str:
+def format_text_output(result: dict[str, Any], input_source: str) -> str:
     """Format validation result as human-readable text"""
     lines = []
 
@@ -261,6 +326,8 @@ def format_text_output(result: Dict[str, Any], input_source: str) -> str:
 def run(args) -> int:
     """Execute guard validation"""
     try:
+        ruleset = _detect_ruleset(getattr(args, 'ruleset', None))
+
         # Read input
         if args.input == '-':
             input_source = 'stdin'
@@ -278,7 +345,7 @@ def run(args) -> int:
                 return 4  # I/O error
 
             try:
-                with open(input_path, 'r') as f:
+                with open(input_path) as f:
                     data = json.load(f)
             except json.JSONDecodeError as e:
                 print(f"ERROR: Invalid JSON in {args.input}: {e}", file=sys.stderr)
@@ -288,7 +355,7 @@ def run(args) -> int:
                 return 4  # I/O error
 
         # Validate
-        result = validate(data, args.ruleset)
+        result = validate(data, ruleset)
         result['input_source'] = input_source
 
         # Output

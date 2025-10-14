@@ -13,14 +13,13 @@ import os
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, List, Optional
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 _DEFAULT_LOG_DIR = Path("logs/security")
 _DEFAULT_RESET_SCRIPT = _REPO_ROOT / "scripts" / "sandbox" / "reset.sh"
 
 
-def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--operator", required=True, help="Operator running the drill (recorded for governance).")
     parser.add_argument("--scenario", default="sandbox-breach-drill", help="Scenario identifier for the drill run.")
@@ -39,7 +38,7 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
-def _build_env(args: argparse.Namespace) -> Dict[str, str]:
+def _build_env(args: argparse.Namespace) -> dict[str, str]:
     env = os.environ.copy()
     if args.sandbox_session_id:
         env["RJW_SANDBOX_SESSION_ID"] = args.sandbox_session_id
@@ -50,7 +49,7 @@ def _build_env(args: argparse.Namespace) -> Dict[str, str]:
     return env
 
 
-def execute(args: argparse.Namespace) -> Dict[str, object]:
+def execute(args: argparse.Namespace) -> dict[str, object]:
     repo_root = _REPO_ROOT
     log_dir = args.log_dir if args.log_dir.is_absolute() else repo_root / args.log_dir
     log_dir.mkdir(parents=True, exist_ok=True)
@@ -58,7 +57,7 @@ def execute(args: argparse.Namespace) -> Dict[str, object]:
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     log_path = log_dir / f"sandbox_drill_{timestamp}.json"
 
-    record: Dict[str, object] = {
+    record: dict[str, object] = {
         "timestamp": timestamp,
         "operator": args.operator,
         "scenario": args.scenario,
@@ -95,7 +94,7 @@ def execute(args: argparse.Namespace) -> Dict[str, object]:
     return record
 
 
-def main(argv: Optional[List[str]] = None) -> int:
+def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     summary = execute(args)
     print(json.dumps(summary, indent=2))

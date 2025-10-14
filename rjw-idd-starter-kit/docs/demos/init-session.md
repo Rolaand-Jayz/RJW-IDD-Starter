@@ -37,6 +37,7 @@ Available features:
   [2] init - Project initialization
   [3] prompts-version - Prompt pack versioning
   [4] game-addin - 3D game development tools
+  [5] yolo-mode - Auto approvals (guarded fast lane)
 
 Select features (comma-separated numbers) [1,2,3]: 1,2,3
 ✔ Selected features: guard, init, prompts_version
@@ -158,18 +159,46 @@ features:
   guard: true
   init: true
   prompts_version: true
+  yolo_mode: false
+  turbo_mode: false
   game_addin: false
+mode:
+  name: standard
+  turbo: false
 profiles:
   lite:
     guard: true
     init: true
     prompts_version: true
+    yolo_mode: false
+    turbo_mode: false
+    game_addin: false
+  yolo:
+    guard: true
+    init: true
+    prompts_version: true
+    yolo_mode: true
+    turbo_mode: false
+    game_addin: false
+  turbo-standard:
+    guard: true
+    init: true
+    prompts_version: true
+    yolo_mode: false
+    turbo_mode: true
+    game_addin: false
+  turbo-yolo:
+    guard: true
+    init: true
+    prompts_version: true
+    yolo_mode: true
+    turbo_mode: true
     game_addin: false
 
 # Check prompt pack
 $ rjw prompts --version
-rjw-prompt-pack 1.0.0 (sha256-abc123de...)
-Last updated: 2025-10-07
+ rjw-prompt-pack 1.4.0 (sha256-321fed65...)
+Last updated: 2026-02-10
 
 # Run a guard test
 $ rjw guard examples/ok.json

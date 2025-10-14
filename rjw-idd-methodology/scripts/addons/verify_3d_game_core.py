@@ -7,7 +7,6 @@ import pathlib
 import subprocess
 import sys
 import tempfile
-import typing as t
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 TOOLS = ROOT / "addons" / "3d-game-core" / "tools"

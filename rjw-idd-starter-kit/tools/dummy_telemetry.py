@@ -7,8 +7,8 @@ Emits stable schema for CI validation.
 """
 
 import json
-import uuid
 import random
+import uuid
 from datetime import datetime
 from pathlib import Path
 

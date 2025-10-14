@@ -10,9 +10,10 @@ Behavior:
 
 This script intentionally does NOT modify repository CHANGELOGs or ledgers automatically to respect manual review.
 """
-import re
 import json
+import re
 from pathlib import Path
+
 
 def find_project_root() -> Path:
     """Find project root by looking for starter kit within project structure."""

@@ -1,7 +1,6 @@
 import pathlib
 from types import SimpleNamespace
 
-import pytest
 
 from config_loader import load_merged_config
 from asset_linter_3d import lint_assets
