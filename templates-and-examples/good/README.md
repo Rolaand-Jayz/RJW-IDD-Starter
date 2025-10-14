@@ -22,5 +22,5 @@ Find category-specific examples in:
 - `logs/` — stage-audit notes that meet compliance requirements.
 - `tests/` — pytest files with assertions and documentation.
 
-The `demo_project/` directory shows a fully traced miniature project. Add
+
 additional examples under meaningful names so we keep the catalogue organised.
