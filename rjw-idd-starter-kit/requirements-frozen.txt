@@ -67,7 +67,7 @@ orjson==3.11.3
 packaging==25.0
 pathvalidate==3.3.1
 patool==4.0.1
-pbs-installer==2025.9.18
+pbs-installer==2025.10.10
 pefile==2024.8.26
 pexpect==4.9.0
 pillow==11.3.0
