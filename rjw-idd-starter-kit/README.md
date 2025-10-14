@@ -4,6 +4,30 @@ This kit bootstraps the RJW Intelligence Driven Development workflow in any
 repository. It ships templates, examples, prompts, scripts, and documentation so
 novice-friendly teams can follow the method without inheriting project history.
 
+## Method Overview
+[Read the RJW-IDD methodology](https://github.com/Rolaand-Jayz/RJW-IDD-Methodology)
+
+RJW-IDD is a stage-driven system for pairing humans and AI safely. Every cycle
+passes through seven checkpoints (Start → Explore → Decide → Create → Test →
+Record → Wrap), collects evidence, and links each decision to the supporting
+research and tests. The method emphasises traceability over heroics: prompt
+turns and tool invocations are logged, guardrails constrain risky actions, and
+living documentation is refreshed in lockstep with code. By default it assumes
+beginners are at the keyboard, so instructions, prompts, and logs all use plain
+language while still giving experts enough structure to enforce governance.
+
+## About This Starter
+[Explore this starter kit](https://github.com/Rolaand-Jayz/RJW-IDD-Starter.git)
+
+The starter is the method enforced. It packages the workflow into a drop-in
+baseline with curated prompts, change-log templates, guard scripts, decision and
+spec scaffolds, and operating manuals. Standard mode keeps the full guard suite,
+YOLO adds auto-approval prompts for fast loops, and Turbo variants lighten gate
+requirements while still logging every compromise. Use the starter to spin up a
+fresh repo: copy only the templates you need, wire the prompts into your AI
+helper, and rely on the built-in scripts to keep evidence, change logs, and
+traceability aligned from the first commit.
+
 ## Quick Start
 1. **Copy the kit** into an empty repository and commit the baseline.
 2. **Set up tooling**:
