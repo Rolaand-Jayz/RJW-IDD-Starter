@@ -117,7 +117,7 @@ trove-classifiers==2025.9.11.17
 typing_extensions==4.15.0
 typogrify==2.1.0
 urllib3==2.5.0
-virtualenv==20.34.0
+virtualenv==20.35.3
 vkbasalt-cli==3.1.1
 webencodings==0.5.1
 wheel==0.45.1
