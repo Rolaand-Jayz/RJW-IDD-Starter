@@ -23,7 +23,7 @@ dbus-python==1.4.0
 distlib==0.4.0
 distro==1.9.0
 docutils==0.21.2
-dulwich==0.24.1
+dulwich==0.24.3
 evdev==1.9.2
 fastjsonschema==2.21.2
 filelock==3.20.0
