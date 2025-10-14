@@ -1,0 +1,18 @@
+[
+  {
+    "source": "github",
+    "query": "feature toggle rollout",
+    "tags": ["deployment", "risk"],
+    "stance": "insight",
+    "limit": 5,
+    "notes": "Look for postmortems that mention staged rollouts or toggle clean-up."
+  },
+  {
+    "source": "hn",
+    "query": "ai code guardrails",
+    "tags": ["governance", "ai"],
+    "stance": "risk",
+    "limit": 3,
+    "notes": "Capture warnings where automation created incidents."
+  }
+]

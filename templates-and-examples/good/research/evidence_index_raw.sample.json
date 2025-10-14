@@ -1,0 +1,13 @@
+[
+  {
+    "id": "RAW-101",
+    "source": "hn",
+    "url": "https://news.ycombinator.com/item?id=42424242",
+    "title": "We broke prod with an unchecked feature flag",
+    "timestamp": "2024-12-28T16:45:00Z",
+    "stance": "pain",
+    "tags": ["feature-flags", "deployment"],
+    "content_snippet": "Rolling out without a kill switch cost us a weekend.",
+    "relevance_score": 0.81
+  }
+]

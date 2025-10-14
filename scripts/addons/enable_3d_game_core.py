@@ -28,13 +28,13 @@ def find_project_root() -> Path:
 def enable_addon(root: Path) -> None:
     """Enable the 3d_game_core addon in the feature registry."""
     features_path = root / "method" / "config" / "features.yml"
-    
+
     with features_path.open("r", encoding="utf-8") as f:
         config = yaml.safe_load(f) or {}
-    
+
     if "addons" not in config:
         config["addons"] = {}
-    
+
     if "3d_game_core" not in config["addons"]:
         config["addons"]["3d_game_core"] = {
             "enabled": True,
@@ -46,14 +46,14 @@ def enable_addon(root: Path) -> None:
     else:
         config["addons"]["3d_game_core"]["enabled"] = True
         print("✓ Enabled 3d_game_core addon (was already defined)")
-    
+
     with features_path.open("w", encoding="utf-8") as f:
         yaml.safe_dump(config, f, default_flow_style=False, sort_keys=False)
-    
+
     print(f"✓ Updated {features_path}")
     print("\nNext steps:")
     print("  1. Set a profile: python scripts/addons/set_3d_profile.py --profile <profile>")
-    print("  2. Add a change log entry in docs/change-log.md")
+    print("  2. Add a change log entry in templates-and-examples/templates/change-logs/CHANGELOG-template.md")
     print("  3. Record the decision in docs/decisions/")
 
 

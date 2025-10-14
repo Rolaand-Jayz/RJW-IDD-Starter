@@ -1,11 +1,18 @@
 # Decision Log Directory
 
-Use this folder to store `DEC-####.md` files created from `../../rjw-idd-methodology/templates/PROJECT-DEC-template.md`.
+Store project decisions here using slugged filenames (for example
+`decisions/search-index-shard-strategy.md`). Copy the template from
+`../templates-and-examples/templates/decisions/DEC-template.md` so every record
+links to the supporting evidence, specs, tests, change-log entry, and status
+updates.
 
 ## How to Use
-1. Copy the template file into this directory and rename it using the next available decision ID (for example `DEC-0001.md`).
-2. Fill in the template sections with your project’s reasoning, evidence references, and follow-up actions.
-3. Update cross-links (change log, specs, requirements, tests, docs) after the decision is final.
+1. Copy the decision template into this folder and rename it with a descriptive
+   slug (no numeric `DEC-####` IDs required).
+2. Fill in the context, options, decision, follow-ups, and traceability fields.
+3. Update cross-links (change log, specs, requirements, tests, docs) after the
+   decision is final.
 4. Remove placeholder comments before committing.
 
-Keep only the decisions that belong to your project; this starter kit intentionally ships with no pre-populated entries.
+Keep only the decisions that belong to your project; this starter kit
+intentionally ships with no pre-populated entries.

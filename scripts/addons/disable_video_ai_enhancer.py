@@ -28,22 +28,22 @@ def find_project_root() -> Path:
 def disable_addon(root: Path) -> None:
     """Disable the video_ai_enhancer addon in the feature registry."""
     features_path = root / "method" / "config" / "features.yml"
-    
+
     with features_path.open("r", encoding="utf-8") as f:
         config = yaml.safe_load(f) or {}
-    
+
     if "addons" not in config or "video_ai_enhancer" not in config["addons"]:
         print("✓ video_ai_enhancer addon was not enabled")
         return
-    
+
     config["addons"]["video_ai_enhancer"]["enabled"] = False
-    
+
     with features_path.open("w", encoding="utf-8") as f:
         yaml.safe_dump(config, f, default_flow_style=False, sort_keys=False)
-    
+
     print(f"✓ Disabled video_ai_enhancer addon in {features_path}")
     print("\nNext steps:")
-    print("  1. Add a change log entry in docs/change-log.md")
+    print("  1. Add a change log entry in templates-and-examples/templates/change-logs/CHANGELOG-template.md")
     print("  2. Record the decision in docs/decisions/")
 
 

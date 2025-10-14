@@ -11,7 +11,7 @@ TARGET_FILE = Path("docs/living-docs-reconciliation.md")
 PLACEHOLDER_TOKEN = "YYYY-MM-DD"
 STATUS_TOKEN = "| open |"
 DOC_PATH_PREFIXES = ("docs/", "specs/")
-DOC_EXEMPTIONS = {"docs/change-log.md"}
+DOC_EXEMPTIONS = {"templates-and-examples/templates/change-logs/CHANGELOG-template.md"}
 IGNORED_PREFIXES = ("workspace/", "sandbox/", "tmp/")
 
 

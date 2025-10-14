@@ -15,7 +15,7 @@ from pathlib import Path
 
 def generate_metrics(engine='dummy', session_duration=120):
     """Generate dummy telemetry metrics"""
-    
+
     metrics = {
         'schema_version': '1.0',
         'session_id': str(uuid.uuid4()),
@@ -29,33 +29,33 @@ def generate_metrics(engine='dummy', session_duration=120):
         'warnings': [],
         'notes': 'Dummy telemetry for testing'
     }
-    
+
     # Add warnings if thresholds exceeded
     if metrics['avg_fps'] < 58:
         metrics['warnings'].append(f"FPS below target: {metrics['avg_fps']}")
     if metrics['cpu_pct'] > 30:
         metrics['warnings'].append(f"High CPU usage: {metrics['cpu_pct']}%")
-    
+
     return metrics
 
 
 def main():
     output_dir = Path('ci_samples')
     output_dir.mkdir(exist_ok=True)
-    
+
     output_file = output_dir / 'metrics.json'
-    
+
     metrics = generate_metrics()
-    
+
     with open(output_file, 'w') as f:
         json.dump(metrics, f, indent=2)
-    
+
     print(f"✔ Generated dummy telemetry: {output_file}")
     print(f"  Session: {metrics['session_id']}")
     print(f"  Engine: {metrics['engine']}")
     print(f"  FPS: {metrics['avg_fps']}")
     print(f"  Warnings: {len(metrics['warnings'])}")
-    
+
     return 0
 
 

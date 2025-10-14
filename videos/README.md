@@ -1,6 +1,9 @@
 # Video Tutorial Guidance
 
-This directory should contain short tutorial videos and accompanying metadata for the RJW-IDD starter kit and its tutorials. The starter kit includes written tutorials under `tutorials/`. Adding short video explainers to the README and a `videos/` folder helps newcomers learn faster.
+This directory will eventually host short videos for the Slot Car Racing
+tutorials (15/30/60-minute wins) and other RJW-IDD explainers. Written stubs
+live under `tutorials/`; the future `videos.yml` manifest will mirror those
+entries once recordings exist.
 
 Hosting options
 
@@ -22,7 +25,9 @@ Example YouTube embed (markdown):
 
 Metadata
 
-- Keep a `videos.yml` in this folder listing video IDs, titles, durations, and short descriptions. This file can be used by scripts to build an index in the README or landing page.
+- Keep a `videos.yml` in this folder listing video IDs, titles, durations, and
+  short descriptions. Include entries for the Slot Car Racing tutorials once
+  they are recorded.
 
 Sample videos.yml (YAML)
 

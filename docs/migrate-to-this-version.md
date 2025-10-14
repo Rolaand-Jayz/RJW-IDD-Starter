@@ -4,9 +4,9 @@ This guide helps you migrate existing RJW-IDD projects to the latest version wit
 
 ## Version Information
 
-**Current Version**: 1.1.0
-**Previous Version**: 1.0.0
-**Release Date**: 2025-10-07
+**Current Version**: 1.2.0
+**Previous Version**: 1.1.0
+**Release Date**: 2025-10-12
 
 ## Breaking Changes
 
@@ -181,12 +181,12 @@ jobs:
 
 ### Step 9: Update Change Log
 
-Add migration entry to `docs/change-log.md`:
+Add migration entry to `templates-and-examples/templates/change-logs/CHANGELOG-template.md`:
 
 ```markdown
 | change_id | date | description | impacted_ids | operator | verification |
 |-----------|------|-------------|--------------|----------|--------------|
-| change-20251007-01 | 2025-10-07 | Migrated to CLI v1.1.0 | TOOLS-CLI-GUARD, TOOLS-CLI-INIT, DOC-QUICKSTART, DOC-SOLO | YourName | Migration validation passed |
+| change-20251007-01 | 2025-10-07 | Migrated to CLI v1.1.0 | TOOLS-CLI-GUARD, TOOLS-CLI-INIT, quickstart.md, docs/solo.md | YourName | Migration validation passed |
 ```
 
 ### Step 10: Commit Migration

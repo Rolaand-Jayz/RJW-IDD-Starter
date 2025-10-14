@@ -3,12 +3,12 @@
 
 set -euo pipefail
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ROOT_DIR="$(git -C "$(dirname "${BASH_SOURCE[0]}")" rev-parse --show-toplevel)"
 PYTHON_BIN="${PYTHON_BIN:-python3}"
 BASE_REF="${RJW_BASE_REF:-origin/main}"
 HEAD_REF="${RJW_HEAD_REF:-HEAD}"
 
-mapfile -t CHANGED_FILES < <(cd "${ROOT_DIR}" && git diff --name-only "${BASE_REF}" "${HEAD_REF}")
+mapfile -t CHANGED_FILES < <(git -C "${ROOT_DIR}" diff --name-only --diff-filter=ACMRTUXB "${BASE_REF}" "${HEAD_REF}")
 
 if [[ "${#CHANGED_FILES[@]}" -eq 0 ]]; then
   echo "red-green guard: no changes detected, skipping"
@@ -57,6 +57,8 @@ fi
   --files "${CHANGED_FILES[@]}"
 
 # Ensure specs, ledgers, and decision logs stay aligned with governed changes.
-"${PYTHON_BIN}" "${ROOT_DIR}/tools/testing/governance_alignment_guard.py" \
+"${PYTHON_BIN}" "${ROOT_DIR}/rjw-idd-starter-kit/tools/testing/governance_alignment_guard.py" \
   --root "${ROOT_DIR}" \
+  --files "${CHANGED_FILES[@]}"
+DIR}" \
   --files "${CHANGED_FILES[@]}"

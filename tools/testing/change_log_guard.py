@@ -13,7 +13,7 @@ IGNORED_PREFIXES = (
     "sandbox/",
     "tmp/",
 )
-REQUIRED_FILE = "docs/change-log.md"
+REQUIRED_FILE = "templates-and-examples/templates/change-logs/CHANGELOG-template.md"
 CHANGE_ID_RE = re.compile(r"^change-\d{8}-\d{2}$")
 ID_TOKEN_RE = re.compile(r"^[A-Z]{2,}-\d{4}$")
 
@@ -119,11 +119,11 @@ def main() -> int:
     change_log_path = args.root / REQUIRED_FILE
     if REQUIRED_FILE not in changed:
         print(
-            "change-log guard: detected updates without a matching docs/change-log.md entry",
+            "change-log guard: detected updates without a matching templates-and-examples/templates/change-logs/CHANGELOG-template.md entry",
             file=sys.stderr,
         )
         print(
-            "Include an updated row in docs/change-log.md referencing impacted IDs.",
+            "Include an updated row in templates-and-examples/templates/change-logs/CHANGELOG-template.md referencing impacted IDs.",
             file=sys.stderr,
         )
         for path in relevant:

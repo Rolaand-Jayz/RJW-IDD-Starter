@@ -412,7 +412,7 @@ if __name__ == "__main__":
 1. **Documentation**: Check `docs/` directory first
 2. **GitHub Issues**: Search existing issues
 3. **Discussions**: Use GitHub Discussions for questions
-4. **Change Log**: Review recent changes in `docs/change-log.md`
+4. **Change Log**: Review recent changes in `templates-and-examples/templates/change-logs/CHANGELOG-template.md`
 
 ### Escalation Path
 
