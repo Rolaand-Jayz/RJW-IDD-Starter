@@ -7,16 +7,16 @@
 ### Plan a Deployment
 
 1. **Specs:** `SPEC-0701-deployment-operations.md` (strategies, gates, rollback)
-2. **Runbook:** `DOC-0020-deployment-runbook.md` (step-by-step procedures)
+2. **Runbook:** `docs/runbooks/deployment-runbook.md` (step-by-step procedures)
 3. **Checklist:** Production Readiness Checklist in `SPEC-0701`
 4. **Gate:** Phase 4 Gate 1 in `METHOD-0005`
 
 ### Respond to an Incident
 
-1. **Runbook:** `DOC-0018-general-incident-runbook.md` (detection → resolution → postmortem)
-2. **Severity:** Check SEV classification table (DOC-0018 Section: Incident Severity Classification)
-3. **Escalation:** Follow escalation chain (DOC-0018 Section: Escalation Paths)
-4. **Postmortem:** Use template in DOC-0018 Section: Phase 5
+1. **Runbook:** `docs/runbooks/general-incident-runbook.md` (detection → resolution → postmortem)
+2. **Severity:** Check SEV classification table (docs/runbooks/general-incident-runbook.md Section: Incident Severity Classification)
+3. **Escalation:** Follow escalation chain (docs/runbooks/general-incident-runbook.md Section: Escalation Paths)
+4. **Postmortem:** Use template in docs/runbooks/general-incident-runbook.md Section: Phase 5
 
 ### Set Up Monitoring & Alerts
 
@@ -27,10 +27,10 @@
 
 ### Handle a Rollback
 
-1. **When:** Decision criteria in `DOC-0020` Section: When to Rollback
-2. **How:** Execution steps in `DOC-0020` Section: Rollback Execution
-3. **Post-Rollback:** Actions in `DOC-0020` Section: Post-Rollback Actions
-4. **Postmortem:** Follow `DOC-0018` for incident documentation
+1. **When:** Decision criteria in `docs/runbooks/deployment-runbook.md` Section: When to Rollback
+2. **How:** Execution steps in `docs/runbooks/deployment-runbook.md` Section: Rollback Execution
+3. **Post-Rollback:** Actions in `docs/runbooks/deployment-runbook.md` Section: Post-Rollback Actions
+4. **Postmortem:** Follow `docs/runbooks/general-incident-runbook.md` for incident documentation
 
 ### Manage Data & Backups
 
@@ -91,7 +91,7 @@
 
 - **Owns:** Deployment, observability, incident response, capacity planning
 - **Key Specs:** SPEC-0701, SPEC-0801, SPEC-1001
-- **Key Runbooks:** DOC-0020 (deployment), DOC-0018 (incidents)
+- **Key Runbooks:** docs/runbooks/deployment-runbook.md (deployment), docs/runbooks/general-incident-runbook.md (incidents)
 - **Artifacts:** Deployment logs, SLO reports, DR drill results
 
 ### Service Owner
@@ -104,7 +104,7 @@
 ### On-Call Engineer
 
 - **Owns:** First response, triage, mitigation
-- **Key Runbook:** DOC-0018 (incident response)
+- **Key Runbook:** docs/runbooks/general-incident-runbook.md (incident response)
 - **Response Times:** 5 min (SEV-1), 15 min (SEV-2), 1 hour (SEV-3)
 - **Artifacts:** Incident timelines, handoff notes
 
@@ -130,7 +130,7 @@
 8. Postmortem within 24 hours
 ```
 
-**References:** DOC-0020 Section: Emergency Hotfix Deployment
+**References:** docs/runbooks/deployment-runbook.md Section: Emergency Hotfix Deployment
 
 ### Incident Response Workflow
 
@@ -142,7 +142,7 @@
 5. Postmortem (blameless, actionable)
 ```
 
-**References:** DOC-0018 (full workflow with timelines)
+**References:** docs/runbooks/general-incident-runbook.md (full workflow with timelines)
 
 ### SLO Violation Workflow
 
@@ -216,8 +216,8 @@ rjw-idd-starter-kit/specs/
 ### Runbooks
 ```
 rjw-idd-starter-kit/docs/runbooks/
-  ├── DOC-0018-general-incident-runbook.md
-  └── DOC-0020-deployment-runbook.md
+  ├── docs/runbooks/general-incident-runbook.md
+  └── docs/runbooks/deployment-runbook.md
 ```
 
 ### Method Extensions
@@ -262,4 +262,4 @@ For documenting operational choices:
 ---
 
 **For detailed procedures:** Consult the full spec/runbook documents.  
-**For questions:** Reference the change log in `rjw-idd-starter-kit/docs/change-log.md` for context on what was added and why.
+**For questions:** Reference the change log in `rjw-idd-starter-kit/templates-and-examples/templates/change-logs/CHANGELOG-template.md` for context on what was added and why.

@@ -84,7 +84,7 @@ jobs:
           body: |
             ## Changes
 
-            See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/docs/change-log.md) for details.
+            See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/templates-and-examples/templates/change-logs/CHANGELOG-template.md) for details.
 
             ## Installation
 

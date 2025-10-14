@@ -11,15 +11,15 @@
 - Configure profiles using `set_3d_profile.py` or `set_video_ai_profile.py` with `--profile <name>`.
 - Disable cleanly with `disable_{3d_game_core,video_ai_enhancer}.py`.
 - Bootstrap installer (`scripts/bootstrap/install.sh`) prompts for add-on selection during initial setup.
-- Always update `docs/change-log.md` and `docs/decisions/` when toggling add-ons.
+- Always update `templates-and-examples/templates/change-logs/CHANGELOG-template.md` and `docs/decisions/` when toggling add-ons.
 
 ## Template boundaries
-- Ship the starter kit pristine: leave placeholder tables such as `docs/change-log.md`, `artifacts/ledgers/*.csv`, and `specs/*.md` untouched so downstream projects can fill them after copying.
+- Ship the starter kit pristine: leave placeholder tables such as `templates-and-examples/templates/change-logs/CHANGELOG-template.md`, `artifacts/ledgers/*.csv`, and `specs/*.md` untouched so downstream projects can fill them after copying.
 - Use `rjw-idd-starter-kit/docs/manual/starter-kit-manual.md` for the end-to-end bring-up checklist, guard explanations, and role expectations.
 - Sample scaffolds (`workspace/`, `ci_samples/`) illustrate expected artefacts; treat them as documentation rather than editable inputs.
 
 ## When you change things
-- Every material update gets a new `change-YYYYMMDD-##` row in `rjw-idd-starter-kit/docs/change-log.md`, linked to affected IDs and integration artifacts.
+- Every material update gets a new `change-YYYYMMDD-##` row in `rjw-idd-starter-kit/templates-and-examples/templates/change-logs/CHANGELOG-template.md`, linked to affected IDs and integration artifacts.
 - Specs live in `rjw-idd-starter-kit/specs/`; use the templates and keep IDs aligned with `artifacts/ledgers/requirement-ledger.csv` and `test-ledger.csv`.
 - Decisions stay in `rjw-idd-starter-kit/docs/decisions/` using `rjw-idd-methodology/templates/PROJECT-DEC-template.md`; cross-link evidence (`EVD-####`), requirements (`REQ-####`), and tests (`TEST-####`).
 - Integration work should create a transcript bundle via `tools/integration/archive_scaffold.py` and log its path in the Change Log.

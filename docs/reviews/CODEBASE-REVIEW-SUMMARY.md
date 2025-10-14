@@ -127,7 +127,7 @@ Comprehensive review completed of the RJW-IDD (Rolaand Jayz Wayz Intelligence Dr
 - Properly formatted with impacted IDs and verification
 
 **Files Modified:**
-- `/rjw-idd-starter-kit/docs/change-log.md`
+- `/rjw-idd-starter-kit/templates-and-examples/templates/change-logs/CHANGELOG-template.md`
 
 ## Verification Results
 

@@ -22,8 +22,8 @@ Implement basic user authentication with JWT tokens for the API service.
 
 ### Planned Documentation Updates
 - Update `docs/implementation/auth-guide.md`
-- Add authentication section to `docs/runbooks/DOC-0017-test-first-runbook.md`
-- Create deployment notes in `docs/runbooks/DOC-0020-deployment-runbook.md`
+- Add authentication section to `docs/runbooks/docs/runbooks/test-first-runbook.md`
+- Create deployment notes in `docs/runbooks/docs/runbooks/deployment-runbook.md`
 
 ## Prompts & Responses
 

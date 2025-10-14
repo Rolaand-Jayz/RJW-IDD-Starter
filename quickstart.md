@@ -28,4 +28,5 @@ bash scripts/checks/run_checks.sh
 bash rjw-idd-starter-kit/scripts/setup/bootstrap_project.sh
 ```
 
-5. Open `README.md` and follow the novice guide prompts under `rjw-idd-starter-kit/docs/manual/novice-quickstart.md`.
+5. Open `rjw-idd-starter-kit/README.md` and follow the novice guide prompts in
+   `rjw-idd-starter-kit/manual/novice-quickstart.md`.

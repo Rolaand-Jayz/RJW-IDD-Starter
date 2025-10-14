@@ -1,10 +1,10 @@
 # METHOD-0002 — RJW-IDD Phase Driver Checklists
 
-Use these checklists to force the same lifecycle run that originally created RJW-IDD. Every box must be checked before advancing to the next phase. Record completion in `docs/change-log.md` and append the relevant `DEC-####` entry each time you revisit the method.
+Use these checklists to force the same lifecycle run that originally created RJW-IDD. Every box must be checked before advancing to the next phase. Record completion in `templates-and-examples/templates/change-logs/CHANGELOG-template.md` and append the relevant `DEC-####` entry each time you revisit the method.
 
 ## Phase 0 — Governance Setup
 - [ ] `docs/decisions/` directory exists with sequential `DEC-####.md` records; new work starts by drafting a decision stub.
-- [ ] `docs/change-log.md` initialised and ready to track `change-YYYYMMDD-##` entries.
+- [ ] `templates-and-examples/templates/change-logs/CHANGELOG-template.md` initialised and ready to track `change-YYYYMMDD-##` entries.
 - [ ] Roles confirmed (Evidence Lead, Spec Architect, Security Liaison, Implementation Wrangler).
 - [ ] Stage audit log initialised (`logs/LOG-0001-stage-audits.md`) with audit tag `⟦audit-id:1⟧` reserved.
 
@@ -19,7 +19,7 @@ Use these checklists to force the same lifecycle run that originally created RJW
    - [ ] Promote curated entries into `research/evidence_index.json` and log any gaps.
 3. **Validate & Log**
    - [ ] Execute validators (`scripts/validate_evidence.py`, `scripts/validate_ids.py --paths research/evidence_index.json`).
-   - [ ] Append Change Log row in `docs/change-log.md` detailing harvest, validator status, and outstanding gaps.
+   - [ ] Append Change Log row in `templates-and-examples/templates/change-logs/CHANGELOG-template.md` detailing harvest, validator status, and outstanding gaps.
    - [ ] Complete `⟦audit-id:n⟧ <reflect/>` entry in stage audit log summarising coverage and open items.
 
 ### Specification Loop
@@ -32,7 +32,7 @@ Use these checklists to force the same lifecycle run that originally created RJW
    - [ ] Update living documentation reconciliation log with any outstanding doc gaps.
 3. **Validate & Log**
    - [ ] Run ID validator on updated specs/ledger.
-   - [ ] Record change in `docs/change-log.md` with linked `DEC-####` and validation results.
+   - [ ] Record change in `templates-and-examples/templates/change-logs/CHANGELOG-template.md` with linked `DEC-####` and validation results.
    - [ ] Capture `⟦audit-id:n⟧ <reflect/>` stage summary noting remaining assumptions and scheduled micro-harvests.
 
 ### Discovery Exit Gate (must be true)
@@ -51,7 +51,7 @@ Use these checklists to force the same lifecycle run that originally created RJW
    - [ ] Maintain consent records and metrics receipts when instrumentation is exercised.
 3. **Validation & Log**
    - [ ] Run full test suite (`python -m unittest ...` or equivalent) and capture artefacts.
-   - [ ] Update `docs/change-log.md` with guard/test results, consent receipt paths, and transcript locations.
+   - [ ] Update `templates-and-examples/templates/change-logs/CHANGELOG-template.md` with guard/test results, consent receipt paths, and transcript locations.
    - [ ] Add `⟦audit-id:n⟧ <reflect/>` noting whether observability, security, and cost controls remain intact.
 4. **Exit Gate (must be true)**
    - [ ] Tests, docs, and transcripts present for the change set.

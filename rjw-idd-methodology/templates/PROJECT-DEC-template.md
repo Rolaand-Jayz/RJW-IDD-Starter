@@ -26,7 +26,7 @@ Briefly capture the question or tension to resolve.
 ## Cross-Links
 - `REQ-####`
 - `SPEC-####`
-- `DOC-####`
+- `documentation`
 
 ## Follow-Up Actions
 1. Immediate next steps.

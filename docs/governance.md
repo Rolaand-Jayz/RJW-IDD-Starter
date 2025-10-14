@@ -19,10 +19,13 @@ What runs automatically
 
 How this ties to the method
 ---------------------------
-1. DEC: a governance decision (see `docs/decisions/DEC-GOV-0001.md`) records the requirement for automated checks.
+1. Decision: governance decisions in `docs/decisions/` record the requirement
+   for automated checks.
 2. Evidence & Spec: small evidence tasks and a `SPEC-GOV-functional.md` style entry (kept local to the decision) define acceptance criteria (which tests must pass, which scanners to run).
 3. Implementation: the `scripts/checks/run_checks.sh` helper and the GitHub Actions workflow implement the automation.
-4. Runbooks: `docs/runbooks/DOC-governance-runbook.md` documents how to run checks locally and remediate common failures.
+4. Runbooks: `docs/runbooks/git-workflow-runbook.md` and
+   `docs/runbooks/test-first-runbook.md` document how to run checks locally and
+   remediate common failures.
 
 How learners use it (chat-driven)
 --------------------------------

@@ -25,59 +25,6 @@ Coding standards
 
 Security
 - For security issues, follow `SECURITY.md`.
-# RDD Evidence Harvest Log Template
-
-This directory stores logs from evidence harvesting runs per SPEC-0003.
-
-## Log Format
-
-Harvest logs should follow the naming convention:
-```
-harvest-<date>-<task-id>.log
-harvest-summary-<date>.md
-```
-
-### Example Filenames
-```
-harvest-20250103-reddit-governance.log
-harvest-20250103-github-security.log
-harvest-summary-20250103.md
-```
-
-## Harvest Execution Log Template
-
-```
-=== RDD Evidence Harvest Log ===
-Harvest ID: HRV-2025-001
-Date: 2025-01-03T10:00:00Z
-Operator: Evidence Lead
-Task Configuration: research/evidence_tasks.json
-
---- Task 1: Reddit Search ---
-Source: reddit
-Subreddit: r/devops, r/programming
-Query: "test-driven development failures"
-Time Filter: month
-Status: SUCCESS
-Results: 15 items collected
-Output: research/evidence_index_raw.json (entries 1-15)
-
---- Task 2: GitHub Issues ---
-Source: github
-Repository: microsoft/vscode
-Query: "automation governance"
-Status: SUCCESS
-Results: 8 items collected
-Output: research/evidence_index_raw.json (entries 16-23)
-
---- Task 3: Hacker News ---
-Source: hn
-Query: "security incident postmortem"
-Tag: story
-Status: SUCCESS
-Results: 12 items collected
-Output: research/evidence_index_raw.json (entries 24-35)
-
 === Summary ===
 Total Tasks: 3
 Successful: 3
@@ -200,7 +147,7 @@ $ python scripts/validate_evidence.py
 - Raw log: `logs/rdd-harvest/harvest-20250103-full.log`
 - Task config: `research/evidence_tasks.json` (commit a1b2c3d)
 - Output indices: `research/evidence_index_raw.json`, `research/evidence_index.json`
-- Change log: `docs/change-log.md` (change-20250103-02)
+- Change log: `templates-and-examples/templates/change-logs/CHANGELOG-template.md` (change-20250103-02)
 
 ---
 
@@ -219,7 +166,7 @@ $ python scripts/validate_evidence.py
 Every harvest should update:
 - `research/evidence_index_raw.json` (all collected items)
 - `research/evidence_index.json` (curated items only)
-- `docs/change-log.md` (new change row)
+- `templates-and-examples/templates/change-logs/CHANGELOG-template.md` (new change row)
 - `logs/LOG-0001-stage-audits.md` (audit reflection)
 
 ## Troubleshooting
@@ -233,7 +180,7 @@ Common issues:
 ---
 
 **Tool:** `tools/rjw_idd_evidence_harvester.py`  
-**Runbook:** `docs/runbooks/DOC-0004-rdd-harvest-runbook.md`
+**Runbook:** `docs/runbooks/docs/runbooks/rdd-harvest-runbook.md`
 # Contributing to RJW-IDD
 
 Thank you for your interest in contributing to the Rolaand Jayz Wayz - Intelligence Driven Development (RJW-IDD) project! This guide will help you understand our workflow and make effective contributions.
@@ -398,7 +345,7 @@ pytest rjw-idd-starter-kit/tests/test_your_feature.py
 ### 4. Update Documentation
 
 **Required updates:**
-- Change log entry in `docs/change-log.md`
+- Change log entry in `templates-and-examples/templates/change-logs/CHANGELOG-template.md`
 - Relevant specs in `specs/`
 - Decision record if methodology changes
 - Living documentation (runbooks, standards)
@@ -549,7 +496,7 @@ pytest -x
 
 ### Change Log Entry
 
-**Every** meaningful change requires a row in `docs/change-log.md`:
+**Every** meaningful change requires a row in `templates-and-examples/templates/change-logs/CHANGELOG-template.md`:
 
 ```markdown
 | change-20250103-01 | 2025-01-03 | Add red_green_guard test coverage | TEST-0301;DEC-0012 | Contributor | test_red_green_guard.py:pass |

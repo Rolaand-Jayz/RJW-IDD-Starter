@@ -91,7 +91,7 @@ Add-on state is tracked in `method/config/features.yml`. Each add-on has:
 
 When enabling, disabling, or changing add-on configuration:
 
-1. **Update the Change Log** - Add an entry to `docs/change-log.md` with the change ID and impacted add-on
+1. **Update the Change Log** - Add an entry to `templates-and-examples/templates/change-logs/CHANGELOG-template.md` with the change ID and impacted add-on
 2. **Record the Decision** - Document why the add-on was enabled/disabled in `docs/decisions/`
 3. **Update Audit Log** - Note the change in `logs/LOG-0001-stage-audits.md`
 

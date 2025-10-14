@@ -31,7 +31,7 @@ addons:
 Then run `python rjw-idd-starter-kit/scripts/config_enforce.py` to ensure the declared state matches the repository artefacts.
 
 ### Governance reminders
-- Log the change in `docs/change-log.md`
+- Log the change in `templates-and-examples/templates/change-logs/CHANGELOG-template.md`
 - Capture the rationale in `docs/decisions/DEC-####.md`
 - Update `logs/LOG-0001-stage-audits.md`
 

@@ -97,8 +97,8 @@ RJW-IDD runs through **four** repeatable phases with continuous governance aroun
     - Update living documentation using the standards in `rjw-idd-starter-kit/docs/standards/` and record verification artefacts in the Change Log.
 
 4.  **Operations & Production Support (NEW)** 🎉
-    - Deploy with blue-green/canary strategies and automated rollback (`rjw-idd-starter-kit/specs/SPEC-0701-deployment-operations.md`, `rjw-idd-starter-kit/docs/runbooks/DOC-0020-deployment-runbook.md`).
-    - Monitor SLOs, manage error budgets, respond to incidents (`rjw-idd-starter-kit/specs/SPEC-0801-slo-sli-framework.md`, `rjw-idd-starter-kit/docs/runbooks/DOC-0018-general-incident-runbook.md`).
+    - Deploy with blue-green/canary strategies and automated rollback (`rjw-idd-starter-kit/specs/SPEC-0701-deployment-operations.md`, `rjw-idd-starter-kit/docs/runbooks/docs/runbooks/deployment-runbook.md`).
+    - Monitor SLOs, manage error budgets, respond to incidents (`rjw-idd-starter-kit/specs/SPEC-0801-slo-sli-framework.md`, `rjw-idd-starter-kit/docs/runbooks/docs/runbooks/general-incident-runbook.md`).
     - Collect user feedback, conduct usability testing, ensure accessibility (`rjw-idd-starter-kit/specs/SPEC-0901-user-feedback-loops.md`).
     - Manage data lifecycle, backups, migrations, and compliance (`rjw-idd-starter-kit/specs/SPEC-1001-data-governance.md`).
     - Pass operational maturity gates: Production Readiness → Post-Launch Stabilization → Operational Excellence (`rjw-idd-methodology/operations/METHOD-0005-operations-production-support.md`).
@@ -113,10 +113,10 @@ Cross-cutting governance (audits, cost reviews, security drills) runs continuous
 5. **Run Initial Harvest:** Configure `rjw-idd-starter-kit/research/evidence_tasks.json`, execute the harvester, validate output, and log the run in the Change Log.
 6. **Author Specs:** Clone the spec templates, fill in project-specific details, and link to evidence/requirements/tests.
 7. **Adopt Runbooks:** Tailor documents in `rjw-idd-starter-kit/docs/runbooks/` for your environment (e.g., sandbox reset commands, finance workflows).
-8. **Update Naming Conventions:** Follow `rjw-idd-starter-kit/docs/standards/DOC-0013-naming-conventions.md` to keep artefacts consistent.
+8. **Update Naming Conventions:** Follow `rjw-idd-starter-kit/docs/standards/docs/standards/naming-conventions.md` to keep artefacts consistent.
 
 ## Key Templates & Scripts
-- `rjw-idd-starter-kit/docs/change-log.md` – table ready for change entries.
+- `rjw-idd-starter-kit/templates-and-examples/templates/change-logs/CHANGELOG-template.md` – table ready for change entries.
 - `rjw-idd-starter-kit/docs/living-docs-reconciliation.md` – log for documentation gaps.
 - `rjw-idd-starter-kit/docs/runbooks/` – operational playbooks (harvest, test-first, security, finance).
 - `rjw-idd-starter-kit/specs/` – editable specifications covering major governance areas.
@@ -130,7 +130,7 @@ Cross-cutting governance (audits, cost reviews, security drills) runs continuous
 - `rjw-idd-starter-kit/tools/integration/archive_scaffold.py` – scaffolds integration transcript directories.
 
 ## Change Control
-- Every meaningful change creates a row in `rjw-idd-starter-kit/docs/change-log.md` with impacted IDs and verification proof.
+- Every meaningful change creates a row in `rjw-idd-starter-kit/templates-and-examples/templates/change-logs/CHANGELOG-template.md` with impacted IDs and verification proof.
 - Decisions are recorded using `rjw-idd-methodology/templates/PROJECT-DEC-template.md` and stored in `docs/decisions/`.
 - Audit reflections append ⟦audit-id:n⟧ <reflect/> entries to stage summaries (see `rjw-idd-starter-kit/logs/LOG-0001-stage-audits.md`).
 

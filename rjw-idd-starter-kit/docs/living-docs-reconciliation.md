@@ -4,7 +4,8 @@ Use this log whenever the Doc Steward identifies gaps between living documentati
 
 | date (UTC) | agent | doc_id(s) | gap summary | resolution plan | status |
 |------------|-------|-----------|-------------|-----------------|--------|
-| YYYY-MM-DD | ROLE-NAME | DOC-0000 | Describe the drift or missing coverage. | Outline the steps and link to the owning `change_id`. | open |
+| 2025-10-12 | Doc Steward | rjw-idd-starter-kit/* | Reorganised starter kit: moved templates/examples into `templates-and-examples/`, archived legacy tutorials/tests, updated manual/quickstart to point to methodology specs. | Verify downstream references in consuming repos, run guard suite once virtualenv available. | open |
+| YYYY-MM-DD | ROLE-NAME | docs/path/to/doc.md | Describe the drift or missing coverage. | Outline the steps and link to the owning `change_id`. | open |
 
 > The CI guard (`tools/testing/living_docs_guard.py`) rejects merges while any non-placeholder row remains `open`. Close the gap or remove the row once the change log, docs, and audits confirm resolution. The same guard also requires a documentation/spec update whenever implementation work changes non-doc files.
 

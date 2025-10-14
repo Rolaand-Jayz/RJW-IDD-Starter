@@ -1,0 +1,18 @@
+[
+  {
+    "id": "EVD-0201",
+    "source": "reddit",
+    "url": "https://reddit.com/r/devops/comments/xyz123/test_driven_development_at_scale",
+    "title": "Test-Driven Development at Scale: Our 6-Month Journey",
+    "author": "senior_dev_2024",
+    "timestamp": "2025-01-02T14:30:00Z",
+    "stance": "fix",
+    "tags": ["testing", "tdd", "governance"],
+    "summary": "Practitioners saw 40% fewer production bugs after adopting guardrails that enforce TDD.",
+    "related_specs": ["spec-ci-guardrails.md"],
+    "related_decisions": [
+      "../decisions/decision-use-feature-toggles.md"
+    ],
+    "action_taken": "Informed guard implementation plan and change-log expectations."
+  }
+]

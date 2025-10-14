@@ -15,7 +15,7 @@
 
 ### Step 1: Open This File
 ```
-rjw-idd-starter-kit/docs/prompts/PROMPT-CORE-novice-flow.md
+rjw-idd-starter-kit/docs/prompts/user/core-novice-flow.md
 ```
 
 ### Step 2: Copy the Agent Pledge
@@ -47,23 +47,23 @@ Just copy and paste each stage's prompt when the helper tells you to!
 ### Core Workflow (Novice-Friendly)
 | File | Purpose | When To Use |
 |------|---------|-------------|
-| **PROMPT-CORE-novice-flow.md** | Complete 7-stage workflow with quick helpers | Every session - START HERE |
-| **AGENT-GUARDRAILS.md** | Rules to keep AI helper on track | When helper goes off-track |
-| **GLOSSARY.md** | Plain definitions of technical terms | When you see unfamiliar words |
-| **EXAMPLE-CONVERSATIONS.md** | Sample interactions showing usage | When unsure how to phrase requests |
+| **user/core-novice-flow.md** | Complete 7-stage workflow with quick helpers | Every session - START HERE |
+| **agent/guardrails.md** | Rules to keep AI helper on track | When helper goes off-track |
+| **user/glossary.md** | Plain definitions of technical terms | When you see unfamiliar words |
+| **user/example-conversations.md** | Sample interactions showing usage | When unsure how to phrase requests |
 | **README.md** | Navigation and overview | First-time orientation |
 
 ### Stage-Specific Prompts (Advanced)
 | File | Purpose | When To Use |
 |------|---------|-------------|
-| **PROMPT-0001-starter-briefing.md** | Repository tour and initial planning | Starting new feature/project |
-| **PROMPT-0002-implementation-coach.md** | Step-by-step coding guidance | Ready to write code |
-| **PROMPT-0003-spec-translator.md** | Convert ideas to formal specs | Need to document requirements |
-| **PROMPT-0004-test-navigator.md** | Test planning and design | Before writing tests |
-| **PROMPT-0005-doc-sync.md** | Update documentation | After code changes |
-| **PROMPT-0006-governance-audit.md** | Pre-PR compliance check | Before opening pull request |
-| **PROMPT-0007-change-log-author.md** | Write change log entries | Recording changes |
-| **PROMPT-0008-merge-ready-checklist.md** | Final merge verification | Before merging PR |
+| **user/starter-briefing.md** | Repository tour and initial planning | Starting new feature/project |
+| **user/implementation-coach.md** | Step-by-step coding guidance | Ready to write code |
+| **user/spec-translator.md** | Convert ideas to formal specs | Need to document requirements |
+| **user/test-navigator.md** | Test planning and design | Before writing tests |
+| **user/doc-sync.md** | Update documentation | After code changes |
+| **user/governance-audit.md** | Pre-PR compliance check | Before opening pull request |
+| **user/change-log-author.md** | Write change log entries | Recording changes |
+| **user/merge-ready-checklist.md** | Final merge verification | Before merging PR |
 
 ---
 
@@ -81,7 +81,7 @@ This file already has some starter prompts and space for you to add more!
 ## 💡 QUICK TIPS
 
 ### First Time Here?
-1. Read: `rjw-idd-starter-kit/docs/manual/novice-quickstart.md`
+1. Read: `rjw-idd-starter-kit/manual/novice-quickstart.md`
 2. Use: `PROMPT-CORE-novice-flow.md`
 3. Keep: `GLOSSARY.md` and `AGENT-GUARDRAILS.md` handy
 
@@ -99,7 +99,7 @@ Section: "Prompts & Workflows"
 
 ## 🔗 RELATED RESOURCES
 
-- **Full Documentation:** `rjw-idd-starter-kit/docs/manual/starter-kit-manual.md`
+- **Full Documentation:** `rjw-idd-starter-kit/manual/starter-kit-manual.md`
 - **Method Overview:** `rjw-idd-methodology/core/METHOD-0001-core-method.md`
 - **Troubleshooting:** `rjw-idd-starter-kit/docs/troubleshooting.md`
 

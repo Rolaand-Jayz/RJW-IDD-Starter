@@ -26,12 +26,12 @@ Assign each role to a named person before starting. These responsibilities enfor
 - Drives the Execution layer.
 - Enforces test-first discipline: rejects merges without failing tests and guard logs.
 - Ensures documentation changes ship alongside code.
-- Archives integration transcripts and attaches artefacts (tests, receipts) to the relevant rows in `docs/change-log.md`.
+- Archives integration transcripts and attaches artefacts (tests, receipts) to the relevant rows in `templates-and-examples/templates/change-logs/CHANGELOG-template.md`.
 - Signs Execution stage audits.
 
 ## Governance Board (All Roles)
 - Collectively author and approve decisions stored in `docs/decisions/`.
-- Review `docs/change-log.md` and `logs/LOG-0001-stage-audits.md` at each gate.
+- Review `templates-and-examples/templates/change-logs/CHANGELOG-template.md` and `logs/LOG-0001-stage-audits.md` at each gate.
 - Trigger additional Discovery loops whenever assumptions or gaps surface.
 
 ## Operating Rhythm

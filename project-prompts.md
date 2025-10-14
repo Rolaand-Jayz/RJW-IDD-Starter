@@ -12,47 +12,47 @@ rjw-idd-starter-kit/docs/prompts/
 ```
 
 ### Available Prompt Files:
-1. **PROMPT-CORE-novice-flow.md** ⭐ START HERE
+1. **user/core-novice-flow.md** ⭐ START HERE
    - Agent Pledge (always use first)
    - 7-stage workflow: Start → Explore → Decide → Create → Test → Record → Wrap
    - Quick helper prompts for common needs
 
-2. **AGENT-GUARDRAILS.md**
+2. **agent/guardrails.md**
    - Plain language request
    - Method pledge
    - Command confirmation rules
    - Drift recovery
 
-3. **GLOSSARY.md**
+3. **user/glossary.md**
    - Plain-language definitions for RJW-IDD terms
    - Copy-paste explanations
 
-4. **EXAMPLE-CONVERSATIONS.md**
+4. **user/example-conversations.md**
    - Sample interactions showing how to use prompts
    - Examples for running commands, reviewing diffs
 
-5. **PROMPT-0001-starter-briefing.md**
+5. **user/starter-briefing.md**
    - Initial repository tour and planning
 
-6. **PROMPT-0002-implementation-coach.md**
+6. **user/implementation-coach.md**
    - Step-by-step file editing guidance
 
-7. **PROMPT-0003-spec-translator.md**
+7. **user/spec-translator.md**
    - Convert plain requirements to specs
 
-8. **PROMPT-0004-test-navigator.md**
+8. **user/test-navigator.md**
    - Test planning and design
 
-9. **PROMPT-0005-doc-sync.md**
+9. **user/doc-sync.md**
    - Documentation update guidance
 
-10. **PROMPT-0006-governance-audit.md**
+10. **user/governance-audit.md**
     - Pre-PR compliance check
 
-11. **PROMPT-0007-change-log-author.md**
+11. **user/change-log-author.md**
     - Change log entry creation
 
-12. **PROMPT-0008-merge-ready-checklist.md**
+12. **user/merge-ready-checklist.md**
     - Final merge readiness verification
 
 13. **README.md**
@@ -63,24 +63,24 @@ rjw-idd-starter-kit/docs/prompts/
 ## 🚀 QUICK START
 
 ### For Complete Beginners:
-1. Open `rjw-idd-starter-kit/docs/prompts/PROMPT-CORE-novice-flow.md`
+1. Open `rjw-idd-starter-kit/docs/prompts/user/core-novice-flow.md`
 2. Copy the **Agent Pledge** (Section 0)
 3. Paste it to your AI helper to start every session
 4. Follow the 7 stages in order: Start → Explore → Decide → Create → Test → Record → Wrap
 
 ### For Experienced Users:
-Use the numbered PROMPT-#### files for specific tasks as needed during your workflow.
+Use the stage-specific files in `docs/prompts/user/` when you need focused help.
 
 ---
 
 ## Core Prompts (always handy)
-These live in `rjw-idd-starter-kit/docs/prompts/PROMPT-CORE-novice-flow.md`. Copy them as needed:
+These live in `rjw-idd-starter-kit/docs/prompts/user/core-novice-flow.md`. Copy them as needed:
 - `Agent Pledge` — sets the tone for plain language and RJW-IDD stages.
 - `Start → Wrap` prompts — one prompt per stage so you can run a full cycle without guessing.
 - `Quick Helpers` — use them to slow the helper down, ask for a file tour, or restate things in simple words.
 
 ## Guardrail Prompts
-See `rjw-idd-starter-kit/docs/prompts/AGENT-GUARDRAILS.md` for ready-to-send reminders that keep the helper on the rails (plain language, confirmation before edits, end-of-session wrap up).
+See `rjw-idd-starter-kit/docs/prompts/agent/guardrails.md` for ready-to-send reminders that keep the helper on the rails (plain language, confirmation before edits, end-of-session wrap up).
 
 ---
 

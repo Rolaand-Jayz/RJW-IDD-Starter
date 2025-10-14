@@ -14,13 +14,13 @@ Before first production deployment, verify:
 
 - [ ] **Deployment automation:** Tested deployment pipeline with rollback capability (`SPEC-0701`).
 - [ ] **SLO/SLI framework:** Defined service-level objectives and instrumentation (`SPEC-0801`).
-- [ ] **Incident response:** On-call rotation established; runbooks prepared (`DOC-0018`).
+- [ ] **Incident response:** On-call rotation established; runbooks prepared (`docs/runbooks/general-incident-runbook.md`).
 - [ ] **Backup/restore:** Disaster recovery tested within 7 days of launch (`SPEC-1001`).
 - [ ] **Security posture:** Penetration testing complete; security runbooks updated (`SPEC-0501`).
 - [ ] **Observability:** Dashboards, alerts, and log aggregation operational (`SPEC-0401`).
 - [ ] **User feedback:** Feedback collection mechanisms active (`SPEC-0901`).
 - [ ] **Cost governance:** Monitoring and alert thresholds configured (`SPEC-0602`).
-- [ ] **Documentation:** User-facing docs, API reference, operational runbooks current (`DOC-0006`).
+- [ ] **Documentation:** User-facing docs, API reference, operational runbooks current (`docs/standards/living-docs-guideline.md`).
 - [ ] **Accessibility:** WCAG 2.1 AA compliance verified (`SPEC-0901` checklist).
 
 **Sign-off:** Governance Sentinel + Service Owner + Security Liaison.
@@ -67,9 +67,9 @@ Extend `METHOD-0003` role definitions:
 
 - **Owns:** Deployment automation, observability, incident response, capacity planning.
 - **Responsibilities:**
-  - Maintain deployment runbooks and automation (`DOC-0020`, `SPEC-0701`).
+  - Maintain deployment runbooks and automation (`docs/runbooks/deployment-runbook.md`, `SPEC-0701`).
   - Monitor SLO compliance and error budget (`SPEC-0801`).
-  - Lead incident response for SEV-1/2 incidents (`DOC-0018`).
+  - Lead incident response for SEV-1/2 incidents (`docs/runbooks/general-incident-runbook.md`).
   - Conduct disaster recovery drills quarterly (`SPEC-1001`).
   - Review and approve infrastructure changes.
 - **Artifacts:** Deployment logs, incident postmortems, SLO reports, DR drill results.
@@ -90,7 +90,7 @@ Extend `METHOD-0003` role definitions:
 - **Owns:** First response to production incidents, triage, mitigation.
 - **Responsibilities:**
   - Respond to alerts within SLA (5 minutes for SEV-1).
-  - Execute runbook procedures or escalate (`DOC-0018`).
+  - Execute runbook procedures or escalate (`docs/runbooks/general-incident-runbook.md`).
   - Document incident timeline and initial mitigation steps.
   - Hand off context during on-call rotation.
   - Suggest runbook and alert improvements based on incidents.
@@ -257,9 +257,9 @@ Follow the RJW-IDD layers:
 ### Required Runbooks
 
 Maintain in `docs/runbooks/`:
-- `DOC-0018-general-incident-runbook.md` (incidents, triage, postmortems)
-- `DOC-0020-deployment-runbook.md` (deployment, rollback procedures)
-- `DOC-0026-backup-restore-runbook.md` (DR, backup verification)
+- `docs/runbooks/general-incident-runbook.md` (incidents, triage, postmortems)
+- `docs/runbooks/deployment-runbook.md` (deployment, rollback procedures)
+- `docs/runbooks/deployment-runbook.md-backup-restore-runbook.md` (DR, backup verification)
 - `DOC-0021-database-troubleshooting.md` (DB-specific issues)
 - `DOC-0022-cache-management.md` (cache operations, stampede mitigation)
 - `DOC-0023-dependency-failures.md` (third-party API handling)
@@ -291,7 +291,7 @@ Review runbooks quarterly or after every usage.
 
 ### Change Log Integration
 
-Every operational event logged in `docs/change-log.md`:
+Every operational event logged in `templates-and-examples/templates/change-logs/CHANGELOG-template.md`:
 - **Deployments:** Version, timestamp, approver, verification.
 - **Incidents:** SEV level, duration, postmortem link.
 - **SLO changes:** New targets, rationale, effective date.

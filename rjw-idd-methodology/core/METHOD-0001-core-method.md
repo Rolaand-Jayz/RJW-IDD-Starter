@@ -9,7 +9,7 @@ This document distils the Rolaand Jayz Wayz – Coding with Natural Language: In
 
 ## 2. Governance Baseline
 - Maintain a dedicated decisions directory with monotonically increasing `DEC-####` identifiers (`DEC-0001`).
-- Keep method doctrine inside `rjw-idd-methodology/` under the `METHOD-####` namespace and store project artefacts in the starter kit using project prefixes (`DEC-####`, `DOC-####`, `SPEC-####`, etc.).
+- Keep method doctrine inside `rjw-idd-methodology/` under the `METHOD-####` namespace and store project artefacts in the starter kit using project prefixes (`DEC-####`, `documentation`, `SPEC-####`, etc.).
 - Each change to the method must be paired with an updated decision entry and an aligned change-log row so downstream teams can understand rationale without rereading the full history.
 - Standard operating documents (runbooks, standards, prompts) mirror the decision identifiers they depend on, creating a direct map from thinking to practice.
 
@@ -70,7 +70,7 @@ Each gate adds a new decision record, audit tag, and change-log entry so the lif
 
 ## 8. Method Adoption Steps
 1. Clone this document and the companion decision set into the target environment.
-2. Stand up the decision logging structure (`docs/decisions/`) and Change Log template (`docs/change-log.md`) before beginning new research.
+2. Stand up the decision logging structure (`docs/decisions/`) and Change Log template (`templates-and-examples/templates/change-logs/CHANGELOG-template.md`) before beginning new research.
 3. Run the automated harvest, curate results, and document gaps.
 4. Drive the Discovery specification loop, leaning on decision outcomes to keep specifications honest and provisional guidance well-marked.
 5. Launch the Execution layer with consent-aware tooling and red→green→refactor cycles.

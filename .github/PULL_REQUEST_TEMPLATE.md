@@ -28,8 +28,8 @@ Add a short summary for the CHANGELOG entry.
 ## RJW-IDD Governance Checklist
 <!-- All items must be checked before merge -->
 - [ ] **Tests added/updated** — Red-green cycle followed per METHOD-0004
-- [ ] **Documentation updated** — Living docs synchronized per DOC-0006
-- [ ] **Change log entry added** — Entry in `docs/change-log.md` with format `change-YYYYMMDD-##`
+- [ ] **Documentation updated** — Living docs synchronized per docs/standards/living-docs-guideline.md
+- [ ] **Change log entry added** — Entry in `templates-and-examples/templates/change-logs/CHANGELOG-template.md` with format `change-YYYYMMDD-##`
 - [ ] **Governance guards pass locally** — `bash scripts/ci/test_gate.sh` succeeds
 - [ ] **Linked IDs updated** — Requirement/test ledgers reflect changes
 - [ ] **Evidence current** — If research artifacts changed, evidence is <14 days old
@@ -48,8 +48,8 @@ Add a short summary for the CHANGELOG entry.
 - TEST-####: Description
 
 **Documentation:**
-- DOC-####: Description
-- DOC-####: Description
+- documentation: Description
+- documentation: Description
 
 **Requirements:**
 - REQ-####: Description
@@ -135,10 +135,10 @@ bash scripts/ci/test_gate.sh
 - [ ] Storage validation: PASSED/FAILED
 
 ## Change Log Entry
-<!-- Copy exact entry added to docs/change-log.md -->
+<!-- Copy exact entry added to templates-and-examples/templates/change-logs/CHANGELOG-template.md -->
 ```
 change-YYYYMMDD-##: Brief description
-Impacted IDs: SPEC-####, REQ-####, TEST-####, DOC-####
+Impacted IDs: SPEC-####, REQ-####, TEST-####, documentation
 Verification: pytest passes, guards pass, [additional verification]
 ```
 

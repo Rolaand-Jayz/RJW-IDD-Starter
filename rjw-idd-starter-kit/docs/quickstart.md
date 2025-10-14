@@ -41,9 +41,14 @@ Follow the numbered prompts:
 - **[2/7]** Verify Python runtime
 - **[3/7]** Create virtual environment
 - **[4/7]** Select features (guard, init, prompts-version)
-- **[5/7]** Write configuration files
+- **[5/7]** Write configuration files (`templates/` plus any selected prompts)
 - **[6/7]** Run smoke tests
 - **[7/7]** Review next steps
+
+When the helper finishes, copy the templates you need from
+`rjw-idd-starter-kit/templates-and-examples/templates/` (decisions, specs,
+runbooks, logs, change logs, tests, status reports) and compare them with the
+matching good/bad examples.
 
 ### 2. Validate Agent Outputs
 
@@ -89,10 +94,11 @@ Last updated: 2025-10-07
 ### 4. Start Development
 
 1. **Read the solo workflow guide**: `docs/solo.md`
-2. **Review prompts**: `rjw-idd-starter-kit/docs/prompts/`
-3. **Bootstrap the environment**: `bash rjw-idd-starter-kit/scripts/setup/bootstrap_project.sh`
-4. **Run tests**: `pytest`
-5. **Check guards**: `bash rjw-idd-starter-kit/scripts/ci/test_gate.sh`
+2. **Review prompts**: `rjw-idd-starter-kit/docs/prompts/` (user vs agent)
+3. **Copy templates/examples**: `rjw-idd-starter-kit/templates-and-examples/`
+4. **Bootstrap the environment**: `bash rjw-idd-starter-kit/scripts/setup/bootstrap_project.sh`
+5. **Run tests**: `pytest`
+6. **Check guards**: `bash rjw-idd-starter-kit/scripts/ci/test_gate.sh`
 
 ## Verification
 
@@ -147,8 +153,8 @@ source .venv/bin/activate  # Linux/macOS
 
 - Read **[Solo Mode Guide](solo.md)** for one-person workflow
 - Review **[Troubleshooting Guide](troubleshooting.md)** for common issues
-- Explore **[Agent Pledge](#)** for AI safety guidelines
-- Check **[Starter Kit Manual](manual/starter-kit-manual.md)** for comprehensive documentation
+- Browse **templates-and-examples/** to understand expected artifacts
+- Check **[Starter Kit Manual](../manual/starter-kit-manual.md)** for comprehensive documentation and methodology links
 
 ## Quick Reference
 

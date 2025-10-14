@@ -58,7 +58,7 @@ method/
 - `rjw-idd-starter-kit/requirements-dev.txt` (added PyYAML)
 - `rjw-idd-starter-kit/pyproject.toml` (added PyYAML)
 - `rjw-idd-starter-kit/scripts/bootstrap/install.sh` (complete rewrite)
-- `rjw-idd-starter-kit/docs/change-log.md` (added change-20251003-04)
+- `rjw-idd-starter-kit/templates-and-examples/templates/change-logs/CHANGELOG-template.md` (added change-20251003-04)
 - `rjw-idd-starter-kit/docs/manual/starter-kit-manual.md` (added §9)
 - `rjw-idd-starter-kit/README.md` (added addon section)
 - `.github/copilot-instructions.md` (updated addon paths)

@@ -30,7 +30,7 @@ addons:
 Edit the block in `method/config/features.yml`, then run `python rjw-idd-starter-kit/scripts/config_enforce.py` to confirm the registry and filesystem are aligned.
 
 ### Governance reminders
-- Record a change entry in `docs/change-log.md`
+- Record a change entry in `templates-and-examples/templates/change-logs/CHANGELOG-template.md`
 - Capture the decision in `docs/decisions/`
 - Update the audit log (`logs/LOG-0001-stage-audits.md`)
 

@@ -52,25 +52,25 @@ def find_project_root() -> Path:
 def set_profile(root: Path, profile: str) -> None:
     """Update the 3d_game_core profile in the feature registry."""
     features_path = root / "method" / "config" / "features.yml"
-    
+
     with features_path.open("r", encoding="utf-8") as f:
         config = yaml.safe_load(f) or {}
-    
+
     if "addons" not in config or "3d_game_core" not in config["addons"]:
         print(
             "ERROR: 3d_game_core addon not found. Run enable_3d_game_core.py first.",
             file=sys.stderr,
         )
         sys.exit(1)
-    
+
     config["addons"]["3d_game_core"]["profile"] = profile
-    
+
     with features_path.open("w", encoding="utf-8") as f:
         yaml.safe_dump(config, f, default_flow_style=False, sort_keys=False)
-    
+
     print(f"✓ Set 3d_game_core profile to '{profile}' in {features_path}")
     print("\nNext steps:")
-    print("  1. Add a change log entry in docs/change-log.md")
+    print("  1. Add a change log entry in templates-and-examples/templates/change-logs/CHANGELOG-template.md")
     print("  2. Review profile-specific defaults in rjw-idd-methodology/addons/3d-game-core/profiles/")
 
 

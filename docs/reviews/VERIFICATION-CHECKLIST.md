@@ -46,7 +46,7 @@ Change ID: change-20251003-04
 - [x] Updated `README.md` with add-on support section
 - [x] Updated `.github/copilot-instructions.md` with addon paths
 - [x] Created `scripts/addons/README.md`
-- [x] Updated `docs/change-log.md` with change-20251003-04
+- [x] Updated `templates-and-examples/templates/change-logs/CHANGELOG-template.md` with change-20251003-04
 - [x] All documentation cross-references valid
 
 ### 6. Governance Guards ✅
@@ -62,7 +62,7 @@ Change ID: change-20251003-04
 - [x] `method/config/features.yml` - Present and valid
 - [x] `artifacts/ledgers/requirement-ledger.csv` - Present
 - [x] `artifacts/ledgers/test-ledger.csv` - Present
-- [x] `docs/change-log.md` - Updated with latest changes
+- [x] `templates-and-examples/templates/change-logs/CHANGELOG-template.md` - Updated with latest changes
 - [x] `docs/living-docs-reconciliation.md` - Present
 - [x] `specs/*.md` - Templates present
 - [x] `tools/testing/*.py` - All guards present

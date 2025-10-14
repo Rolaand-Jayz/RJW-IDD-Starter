@@ -228,8 +228,8 @@ If you'd like, I can start the Discovery step for a chosen tutorial now. Which t
 | **Execution Wrangler** | Drives Execution layer, enforces test-first | Tests, documentation, integration transcripts | Execution stage audits |
 | **Agent Conductor** | Runs prompts, captures transcripts, executes guards | `docs/prompts/`, `artifacts/integration/`, `logs/ci/` | CI gate compliance |
 | **Spec Curator** | Maintains ledgers, specs, reconciliation log | `specs/`, `artifacts/ledgers/` | Spec alignment |
-| **Doc Steward** | Updates living documentation, verifies Change Log | `docs/standards/DOC-0006`, `docs/change-log.md` | Documentation completeness |
-| **Governance Sentinel** | Runs validators, records audits, blocks releases | `logs/LOG-0001-stage-audits.md` | All stage gates |
+| **Doc Steward** | Updates living documentation, verifies Change Log | `docs/standards/living-docs-guideline.md`, `templates-and-examples/templates/change-logs/CHANGELOG-template.md` | Documentation completeness |
+| **Governance Sentinel** | Runs validators, records audits, blocks releases | stage-audit log entries (template in `templates-and-examples/templates/log-templates/`) | All stage gates |
 
 ### Operating Rhythm
 - **Daily:** Stand-up reporting on harvest plans and guard/test status
@@ -244,7 +244,7 @@ If you'd like, I can start the Discovery step for a chosen tutorial now. Which t
 ### Phase 0: Governance Setup
 **Checklist Items:**
 - [ ] `docs/decisions/` directory with sequential `DEC-####.md` records
-- [ ] `docs/change-log.md` initialized
+- [ ] `templates-and-examples/templates/change-logs/CHANGELOG-template.md` initialized
 - [ ] Roles confirmed and assigned
 - [ ] Stage audit log initialized (`logs/LOG-0001-stage-audits.md`)
 
@@ -309,13 +309,13 @@ If you'd like, I can start the Discovery step for a chosen tutorial now. Which t
 **Requirements:**
 - Deployment automation with rollback (`SPEC-0701`)
 - SLO/SLI framework defined (`SPEC-0801`)
-- Incident response and on-call rotation (`DOC-0018`)
+- Incident response and on-call rotation (`docs/runbooks/general-incident-runbook.md`)
 - Backup/restore DR tested (`SPEC-1001`)
 - Security posture verified (`SPEC-0501`)
 - Observability operational (`SPEC-0401`)
 - User feedback mechanisms active (`SPEC-0901`)
 - Cost governance configured (`SPEC-0602`)
-- Documentation current (`DOC-0006`)
+- Documentation current (`docs/standards/living-docs-guideline.md`)
 - Accessibility compliance (`SPEC-0901`)
 
 **Sign-off:** Governance Sentinel + Service Owner + Security Liaison
@@ -399,7 +399,7 @@ python rjw-idd-starter-kit/scripts/addons/disable_video_ai_enhancer.py
 
 ### Add-on Governance
 **Required when enabling/disabling:**
-1. Add entry to `docs/change-log.md`
+1. Add entry to `templates-and-examples/templates/change-logs/CHANGELOG-template.md`
 2. Document decision in `docs/decisions/`
 3. Update `logs/LOG-0001-stage-audits.md`
 
@@ -415,13 +415,13 @@ python rjw-idd-starter-kit/scripts/addons/disable_video_ai_enhancer.py
 | **SPEC-0201** | `specs/SPEC-0201-quality-gates.md` | Quality gate requirements | TEST-####, CI guards |
 | **SPEC-0301** | `specs/SPEC-0301-performance-metrics.md` | Performance measurement | Metrics, benchmarks |
 | **SPEC-0401** | `specs/SPEC-0401-observability-telemetry.md` | Observability and telemetry | Consent, metrics |
-| **SPEC-0501** | `specs/SPEC-0501-security-privacy-controls.md` | Security and privacy | DOC-0016, sandbox |
+| **SPEC-0501** | `specs/SPEC-0501-security-privacy-controls.md` | Security and privacy | docs/runbooks/security-incident-runbook.md, sandbox |
 | **SPEC-0601** | `specs/SPEC-0601-integration-context.md` | Integration requirements | INTEG-####, transcripts |
 | **SPEC-0602** | `specs/SPEC-0602-cost-governance.md` | Cost governance | Cost logs, dashboards |
-| **SPEC-0701** | `specs/SPEC-0701-deployment-operations.md` | Deployment automation | DOC-0020, rollback |
+| **SPEC-0701** | `specs/SPEC-0701-deployment-operations.md` | Deployment automation | docs/runbooks/deployment-runbook.md, rollback |
 | **SPEC-0801** | `specs/SPEC-0801-slo-sli-framework.md` | SLO/SLI definitions | Operational metrics |
 | **SPEC-0901** | `specs/SPEC-0901-user-feedback-loops.md` | User feedback collection | Satisfaction metrics |
-| **SPEC-1001** | `specs/SPEC-1001-data-governance.md` | Data governance and DR | DOC-0026, backups |
+| **SPEC-1001** | `specs/SPEC-1001-data-governance.md` | Data governance and DR | docs/runbooks/deployment-runbook.md, backups |
 
 ### Specification Template Structure
 **Common Sections:**
@@ -437,37 +437,37 @@ python rjw-idd-starter-kit/scripts/addons/disable_video_ai_enhancer.py
 
 ---
 
-## 📚 DOCUMENTATION STANDARDS (DOCs)
+## 📚 Documentation Standards & Runbooks
 
-### Standards Documents
-| DOC ID | Location | Purpose | Key Concepts |
-|--------|----------|---------|--------------|
-| **DOC-0001** | `docs/standards/DOC-0001-tot-capture-standard.md` | Tree-of-Thought capture standard | Decision recording |
-| **DOC-0005** | `docs/standards/DOC-0005-traceability-schema.md` | Traceability ID schema | ID formats, linking |
-| **DOC-0006** | `docs/standards/DOC-0006-living-docs-guideline.md` | Living documentation guideline | Doc classes, maintenance |
-| **DOC-0011** | `docs/standards/DOC-0011-intelligence-driven-methodology.md` | RJW-IDD overview | Roles, lifecycle, tooling |
-| **DOC-0012** | `docs/standards/DOC-0012-cost-governance-standard.md` | Cost governance standard | Budgets, tracking, alerts |
-| **DOC-0013** | `docs/standards/DOC-0013-naming-conventions.md` | Naming conventions | Files, IDs, artifacts |
-| **DOC-0021** | `docs/standards/DOC-0021-git-setup-configuration.md` | Git configuration and workflows | Version control, commits |
+### Standards
+| File | Location | Purpose | Key Concepts |
+|------|----------|---------|--------------|
+| `tot-capture-standard.md` | `docs/standards/` | Tree-of-Thought capture | Decision recording |
+| `traceability-schema.md` | `docs/standards/` | Traceability schema | Linking artifacts |
+| `living-docs-guideline.md` | `docs/standards/` | Living documentation | Doc classes, maintenance |
+| `intelligence-driven-methodology.md` | `docs/standards/` | RJW-IDD overview | Roles, lifecycle, tooling |
+| `cost-governance-standard.md` | `docs/standards/` | Cost governance | Budgets, tracking, alerts |
+| `naming-conventions.md` | `docs/standards/` | Naming conventions | Files, slugs, metadata |
+| `git-setup-configuration.md` | `docs/standards/` | Git configuration | Branching, commits |
 
 ### Runbooks
-| DOC ID | Location | Purpose | Used By |
-|--------|----------|---------|---------|
-| **DOC-0004** | `docs/runbooks/DOC-0004-rdd-harvest-runbook.md` | Evidence harvest procedures | Evidence Lead |
-| **DOC-0015** | `docs/runbooks/DOC-0015-finance-variance-runbook.md` | Finance variance handling | Governance Sentinel |
-| **DOC-0016** | `docs/runbooks/DOC-0016-security-incident-runbook.md` | Security incident response | Security Liaison |
-| **DOC-0017** | `docs/runbooks/DOC-0017-test-first-runbook.md` | Test-first enforcement | Execution Wrangler |
-| **DOC-0018** | `docs/runbooks/DOC-0018-general-incident-runbook.md` | General incident response | On-call, SRE |
-| **DOC-0020** | `docs/runbooks/DOC-0020-deployment-runbook.md` | Deployment procedures | SRE, DevOps Lead |
-| **DOC-0022** | `docs/runbooks/DOC-0022-git-workflow-runbook.md` | Step-by-step git procedures | All developers |
+| File | Location | Purpose | Used By |
+|------|----------|---------|---------|
+| `rdd-harvest-runbook.md` | `docs/runbooks/` | Evidence harvest procedures | Evidence Lead |
+| `finance-variance-runbook.md` | `docs/runbooks/` | Finance variance handling | Governance Sentinel |
+| `security-incident-runbook.md` | `docs/runbooks/` | Security incident response | Security Liaison |
+| `test-first-runbook.md` | `docs/runbooks/` | Test-first enforcement | Execution Wrangler |
+| `general-incident-runbook.md` | `docs/runbooks/` | General incident response | On-call, SRE |
+| `deployment-runbook.md` | `docs/runbooks/` | Deployment procedures | SRE, DevOps Lead |
+| `git-workflow-runbook.md` | `docs/runbooks/` | Git guidance for novices | All developers |
 
-### Document Classes (from DOC-0006)
+### Document Classes
 | Class | Location | Purpose | Required Metadata |
 |-------|----------|---------|-------------------|
-| **Implementation Notes** | `implementation/` | Code-level decisions, API shapes | DOC-####, SPEC-####, REQ-####, TEST-####, change_id |
-| **API & Integration Guides** | `docs/api/`, `docs/integration/` | Public interfaces, contracts | DOC-####, INTEG-####, version, contact |
-| **Runbooks & Playbooks** | `docs/runbooks/` | Operational workflows | DOC-####, spec IDs, validation refs |
-| **Change Notes** | `docs/changelog/` | Iteration summaries | DOC-####, change_id, impacted artifacts |
+| **Implementation Notes** | `implementation/` | Code-level decisions, API shapes | decision links, specs, tests, change_id |
+| **API & Integration Guides** | `docs/api/`, `docs/integration/` | Public interfaces, contracts | contact, version, related specs |
+| **Runbooks & Playbooks** | `docs/runbooks/` | Operational workflows | related specs, validation refs |
+| **Change Notes** | project-level change log | Iteration summaries | change_id, impacted artifacts |
 
 ---
 
@@ -557,14 +557,14 @@ python rjw-idd-starter-kit/scripts/addons/disable_video_ai_enhancer.py
 ### Validation & ID Management
 | Script | Location | Purpose | Validates |
 |--------|----------|---------|-----------|
-| **validate_ids.py** | `scripts/validate_ids.py` | ID format and cross-link validation | REQ-####, SPEC-####, TEST-####, EVD-####, DOC-####, DEC-####, INTEG-#### |
+| **validate_ids.py** | `scripts/validate_ids.py` | ID format and cross-link validation | REQ-####, SPEC-####, TEST-####, EVD-####, documentation, DEC-####, INTEG-#### |
 
 **ID Format Rules:**
 - `EVD-####` - Evidence records
 - `REQ-####` - Requirements
 - `SPEC-####` - Specifications
 - `TEST-####` - Test cases
-- `DOC-####` - Documentation
+- `documentation` - Documentation
 - `DEC-####` - Decisions
 - `INTEG-####` - Integration records
 - Add-on prefixes: `REQ-VIDEO-####`, `SPEC-3D-####`, etc.
@@ -625,7 +625,7 @@ python rjw-idd-starter-kit/scripts/addons/disable_video_ai_enhancer.py
 | **Red/Green** | `red_green_guard.py` | Enforce test-first discipline | Code changes without test updates | Add/update tests |
 | **ID Validator** | `validate_ids.py` (via scripts/) | Validate ID formats and cross-links | Any file with IDs | Fix broken references |
 | **Evidence Freshness** | `validate_evidence.py` (via scripts/) | Ensure evidence is recent | Research artifact changes | Refresh evidence via harvester |
-| **Change Log** | `change_log_guard.py` | Require change log entries | Any material change | Add row to `docs/change-log.md` |
+| **Change Log** | `change_log_guard.py` | Require change log entries | Any material change | Add row to `templates-and-examples/templates/change-logs/CHANGELOG-template.md` |
 | **Living Docs** | `living_docs_guard.py` | Enforce doc updates with code | Non-doc file changes | Update docs or log gap |
 | **Governance Alignment** | `governance_alignment_guard.py` | Sync specs/ledgers/decisions | Spec or ledger changes | Update aligned artifacts |
 | **Agent Response** | `agent_response_guard.py` | Validate agent output structure | Agent-generated files | Fix output format |
@@ -741,8 +741,8 @@ python tools/integration/archive_scaffold.py <task-slug>
 1. Copy template to `docs/decisions/`
 2. Rename to next sequential `DEC-####`
 3. Fill in all sections
-4. Cross-link to REQ-####, SPEC-####, DOC-####
-5. Reference in `docs/change-log.md`
+4. Cross-link to REQ-####, SPEC-####, documentation
+5. Reference in `templates-and-examples/templates/change-logs/CHANGELOG-template.md`
 6. Update `logs/LOG-0001-stage-audits.md` if material
 
 ### Foundation Decisions
@@ -873,7 +873,7 @@ python scripts/validate_evidence.py --input research/evidence_index.json --cutof
 - Increment `n` for each new audit
 
 ### Change Log
-**Location:** `docs/change-log.md`
+**Location:** `templates-and-examples/templates/change-logs/CHANGELOG-template.md`
 
 **Format:**
 ```markdown
@@ -892,7 +892,7 @@ python scripts/validate_evidence.py --input research/evidence_index.json --cutof
 ```markdown
 | date (UTC) | agent | doc_id(s) | gap summary | resolution plan | status |
 |------------|-------|-----------|-------------|-----------------|--------|
-| 2025-10-05 | Doc Steward | DOC-0006 | ... | Plan | open/closed |
+| 2025-10-05 | Doc Steward | docs/standards/living-docs-guideline.md | ... | Plan | open/closed |
 ```
 
 **Status Values:** `open`, `closed`  
@@ -913,7 +913,7 @@ python scripts/validate_evidence.py --input research/evidence_index.json --cutof
 #### Security Logs
 **Location:** `logs/security/`  
 **Contains:** Sandbox drill results, incident responses  
-**Scripts:** `scripts/sandbox/drill.py`, `DOC-0016`
+**Scripts:** `scripts/sandbox/drill.py`, `docs/runbooks/security-incident-runbook.md`
 
 #### RDD Harvest Logs
 **Location:** `logs/rdd-harvest/`  
@@ -967,7 +967,7 @@ python scripts/validate_evidence.py --input research/evidence_index.json --cutof
 | Requirement | `REQ-####` | REQ-0001 | Requirements |
 | Specification | `SPEC-####` | SPEC-0101 | Specifications |
 | Test | `TEST-####` | TEST-0001 | Test cases |
-| Documentation | `DOC-####` | DOC-0001 | Documents |
+| Documentation | `documentation` | docs/standards/tot-capture-standard.md | Documents |
 | Decision | `DEC-####` | DEC-0001 | Decisions |
 | Integration | `INTEG-####` | INTEG-0001 | Integration records |
 | Change | `change-YYYYMMDD-##` | change-20251005-01 | Change log entries |
@@ -983,7 +983,7 @@ python scripts/validate_evidence.py --input research/evidence_index.json --cutof
 | **Standards** | `rjw-idd-starter-kit/docs/standards/` |
 | **Runbooks** | `rjw-idd-starter-kit/docs/runbooks/` |
 | **Decisions** | `rjw-idd-starter-kit/docs/decisions/` |
-| **Change log** | `rjw-idd-starter-kit/docs/change-log.md` |
+| **Change log** | `rjw-idd-starter-kit/templates-and-examples/templates/change-logs/CHANGELOG-template.md` |
 | **Ledgers** | `rjw-idd-starter-kit/artifacts/ledgers/` |
 | **Evidence** | `rjw-idd-starter-kit/research/` |
 | **Guards** | `rjw-idd-starter-kit/tools/testing/` |
@@ -1053,7 +1053,7 @@ python scripts/validate_evidence.py --input research/evidence_index.json --cutof
 | Spec | Enforced By | Produces | Logged In |
 |------|-------------|----------|-----------|
 | **SPEC-0003** | validate_evidence.py | Evidence indices | logs/rdd-harvest/ |
-| **SPEC-0101** | governance_alignment_guard.py | Requirement ledger | docs/change-log.md |
+| **SPEC-0101** | governance_alignment_guard.py | Requirement ledger | templates-and-examples/templates/change-logs/CHANGELOG-template.md |
 | **SPEC-0201** | red_green_guard.py | Test results | logs/ci/ |
 | **SPEC-0401** | (manual) | Metrics, consent | logs/operational-metrics/ |
 | **SPEC-0501** | sandbox/drill.py | Security logs | logs/security/ |
@@ -1071,7 +1071,7 @@ python scripts/validate_evidence.py --input research/evidence_index.json --cutof
 | **PROMPT-0002** | Agent Conductor | Implementation plan | REQ-####, TEST-#### |
 | **PROMPT-0003** | Spec Curator | Spec updates | REQ-####, EVD-#### |
 | **PROMPT-0004** | Execution Wrangler | Test plans | TEST-####, REQ-#### |
-| **PROMPT-0005** | Doc Steward | Doc updates | DOC-####, change_id |
+| **PROMPT-0005** | Doc Steward | Doc updates | documentation, change_id |
 | **PROMPT-0006** | Governance Sentinel | Guard checklist | All IDs |
 | **PROMPT-0007** | Doc Steward | Change log entry | change_id, impacted IDs |
 | **PROMPT-0008** | Governance Sentinel | Merge decision | All artifacts |
@@ -1092,8 +1092,8 @@ python scripts/validate_evidence.py --input research/evidence_index.json --cutof
 9. **Merge:** Run PROMPT-0008, final check
 
 ### Responding to an Incident
-1. **Triage:** Follow DOC-0018 (general incident)
-2. **Security:** If security-related, follow DOC-0016
+1. **Triage:** Follow docs/runbooks/general-incident-runbook.md (general incident)
+2. **Security:** If security-related, follow docs/runbooks/security-incident-runbook.md
 3. **Mitigate:** Execute runbook procedures
 4. **Document:** Create DEC-INCIDENT-####
 5. **Postmortem:** If SEV-1/2, complete within 7 days
@@ -1139,7 +1139,7 @@ python scripts/validate_evidence.py --input research/evidence_index.json --cutof
 
 ### Path 3: Governance Role
 1. Read: All METHOD-#### documents
-2. Study: `docs/standards/DOC-0005-traceability-schema.md`
+2. Study: `docs/standards/docs/standards/traceability-schema.md`
 3. Master: `scripts/validate_ids.py` and all guards
 4. Practice: Run `scripts/ci/test_gate.sh` locally
 5. Audit: Review `logs/LOG-0001-stage-audits.md` patterns
@@ -1162,7 +1162,7 @@ python scripts/validate_evidence.py --input research/evidence_index.json --cutof
 | **Guards failing on fresh clone** | `docs/troubleshooting.md` | Run bootstrap script |
 | **`origin/main` missing** | `docs/manual/starter-kit-manual.md` §10 | Set `RJW_BASE_REF` to first commit |
 | **Evidence validation fails** | `scripts/validate_evidence.py` | Refresh evidence via harvester |
-| **ID format errors** | `scripts/validate_ids.py` | Fix format per DOC-0005 |
+| **ID format errors** | `scripts/validate_ids.py` | Fix format per docs/standards/traceability-schema.md |
 | **Living docs guard blocks** | `docs/living-docs-reconciliation.md` | Close gaps or update status |
 | **Change log guard fails** | `tools/testing/change_log_guard.py` | Add change log entry |
 | **Test coverage fails** | `tools/testing/red_green_guard.py` | Add tests for changed code |
@@ -1215,8 +1215,8 @@ cat method/config/features.yml
 - **Troubleshooting:** `docs/troubleshooting.md`
 
 ### Git Configuration Files
-- **Git Setup Standard:** `docs/standards/DOC-0021-git-setup-configuration.md` ⭐ **NEW**
-- **Git Workflow Runbook:** `docs/runbooks/DOC-0022-git-workflow-runbook.md` ⭐ **NEW**
+- **Git Setup Standard:** `docs/standards/docs/standards/git-setup-configuration.md` ⭐ **NEW**
+- **Git Workflow Runbook:** `docs/runbooks/docs/runbooks/git-workflow-runbook.md` ⭐ **NEW**
 - **Sample .gitconfig:** `.github/gitconfig-sample` ⭐ **NEW**
 - **Pull Request Template:** `.github/PULL_REQUEST_TEMPLATE.md` ⭐ **NEW**
 - **Commit Message Helper:** `tools/git/commit_msg_helper.py` ⭐ **NEW**

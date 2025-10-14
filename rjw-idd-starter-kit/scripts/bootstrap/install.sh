@@ -94,7 +94,7 @@ if [[ -n "${ADDON_TO_ENABLE}" ]]; then
   echo "✓ Add-on ${ADDON_TO_ENABLE} enabled and configured"
   echo ""
   echo "IMPORTANT: Remember to:"
-  echo "  1. Add a change log entry in docs/change-log.md"
+  echo "  1. Add a change log entry in templates-and-examples/templates/change-logs/CHANGELOG-template.md"
   echo "  2. Record the add-on decision in docs/decisions/"
 fi
 
