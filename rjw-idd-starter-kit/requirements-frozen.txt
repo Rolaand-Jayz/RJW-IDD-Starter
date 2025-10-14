@@ -118,7 +118,7 @@ typing_extensions==4.15.0
 typogrify==2.1.0
 urllib3==2.5.0
 virtualenv==20.34.0
-vkbasalt-cli==3.1.1
+vkbasalt-cli==3.1.1.post2
 webencodings==0.5.1
 wheel==0.45.1
 wxPython==4.2.3
