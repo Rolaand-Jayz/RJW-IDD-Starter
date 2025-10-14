@@ -59,6 +59,4 @@ fi
 # Ensure specs, ledgers, and decision logs stay aligned with governed changes.
 "${PYTHON_BIN}" "${ROOT_DIR}/rjw-idd-starter-kit/tools/testing/governance_alignment_guard.py" \
   --root "${ROOT_DIR}" \
-  --files "${CHANGED_FILES[@]}"
-DIR}" \
-  --files "${CHANGED_FILES[@]}"
+
