@@ -28,6 +28,15 @@ fresh repo: copy only the templates you need, wire the prompts into your AI
 helper, and rely on the built-in scripts to keep evidence, change logs, and
 traceability aligned from the first commit.
 
+## Modes & Activation
+The starter bundles three prompt packs that you can toggle without leaving chat. Say `Activate <mode name>` to switch; repeat with another mode when you want to change gears.
+
+- **Standard mode** (default) – maps to the core novice flow prompts and enforces every RJW checkpoint. Activate with `Activate Standard mode`.
+- **YOLO mode** – enables auto-approval prompts for rapid loops while still logging every guard. First set `features.yolo_mode: true` in `method/config/features.yml`, run `python scripts/config_enforce.py`, then say `Activate YOLO mode`.
+- **Turbo mode** – relaxes certain gate thresholds for short sprints, but still requires at least one verification step. Enable `features.turbo_mode: true`, enforce the config, then use `Activate Turbo mode`.
+
+The chat command switches only the active prompt set; governance scripts, CI, and change-log expectations remain in place regardless of the mode you choose.
+
 ## Quick Start
 1. **Copy the kit** into an empty repository and commit the baseline.
 2. **Set up tooling**:
