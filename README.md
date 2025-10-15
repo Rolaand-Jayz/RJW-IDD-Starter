@@ -1,5 +1,10 @@
 # RJW-IDD Starter Kit
 
+> [!TIP]
+> **New? Run Turbo.** Tell your assistant “Activate Turbo mode.” They’ll flip on
+> the Turbo feature flag with the helper script, enforce the config, and paste
+> the Turbo prompt so you start in the accelerated lane.
+
 This kit bootstraps the RJW Intelligence Driven Development workflow in any
 repository. It ships templates, examples, prompts, scripts, and documentation so
 novice-friendly teams can follow the method without inheriting project history.
@@ -29,13 +34,13 @@ helper, and rely on the built-in scripts to keep evidence, change logs, and
 traceability aligned from the first commit.
 
 ## Modes & Activation
-The starter bundles three prompt packs that you can toggle without leaving chat. Say `Activate <mode name>` to switch; repeat with another mode when you want to change gears.
+The starter bundles three prompt packs that you can toggle without leaving chat. Say `Activate <mode name>` and the assistant will run the helper macro to set the feature flags, enforce `scripts/config_enforce.py`, and confirm the active lane before continuing.
 
 - **Standard mode** (default) – maps to the core novice flow prompts and enforces every RJW checkpoint. Activate with `Activate Standard mode`.
-- **YOLO mode** – enables auto-approval prompts for rapid loops while still logging every guard. First set `features.yolo_mode: true` in `method/config/features.yml`, run `python scripts/config_enforce.py`, then say `Activate YOLO mode`.
-- **Turbo mode** – relaxes certain gate thresholds for short sprints, but still requires at least one verification step. Enable `features.turbo_mode: true`, enforce the config, then use `Activate Turbo mode`.
+- **YOLO mode** – enables auto-approval prompts for rapid loops while still logging every guard. Activate with `Activate YOLO mode` and the assistant will flip the YOLO flag for you.
+- **Turbo mode** – relaxes certain gate thresholds for short sprints, but still requires at least one verification step. Activate with `Activate Turbo mode`; the assistant handles the config update.
 
-The chat command switches only the active prompt set; governance scripts, CI, and change-log expectations remain in place regardless of the mode you choose.
+Need to double-check outside of chat? The same helper lives at `./bin/rjw mode <lane>` (PowerShell: `pwsh ./bin/rjw.ps1 mode <lane>`), and `./bin/rjw plan` prints the shared Next-Steps queue. The chat command switches only the active prompt set; governance scripts, CI, and change-log expectations remain in place regardless of the mode you choose.
 
 ## Quick Start
 1. **Copy the kit** into an empty repository and commit the baseline.
@@ -46,17 +51,48 @@ The chat command switches only the active prompt set; governance scripts, CI, an
      test the guards (optional but recommended).
 3. **Read the manual** in `manual/starter-kit-manual.md` for roles, cadence, and
    FAQs.
-4. **Brief your assistant** with `docs/prompts/user/starter-briefing.md` and
-   keep `docs/prompts/agent/guardrails.md` handy.
+4. **Run the Prompt Synthesizer** (`docs/prompts/user/prompt-synthesizer.md`) to
+   tailor the assistant instructions, test scaffolds, and log templates to your
+   stack.
 5. **Plan your first cycle**:
    - Copy templates from `templates-and-examples/templates/` (decisions, specs,
      runbooks, change logs, logs, research JSON, tests, status updates).
    - Compare with the matching examples in `templates-and-examples/good/` and
      anti-patterns in `templates-and-examples/bad/`.
-6. **Track evidence** using the blank files in `research/` and record harvests
+6. **Brief your assistant** with `docs/prompts/user/starter-briefing.md` and
+   keep `docs/prompts/agent/guardrails.md` handy.
+7. **Track evidence** using the blank files in `research/` and record harvests
    with the log templates.
-7. **Document everything**: decisions, specs, runbooks, standards, change log,
+8. **Document everything**: decisions, specs, runbooks, standards, change log,
    and status entries all link together by file path (no numeric IDs).
+
+## Key Docs
+| Doc | Why it matters |
+| --- | --- |
+| [`manual/starter-kit-manual.md`](manual/starter-kit-manual.md) | Full governance, cadence, and glossary reference for every participant. |
+| [`docs/prompts/user/prompt-synthesizer.md`](docs/prompts/user/prompt-synthesizer.md) | Generates a project-scoped assistant prompt, smoke-test list, and logging links before you start. |
+| [`docs/prompts/user/batch-cycle.md`](docs/prompts/user/batch-cycle.md) | Step-by-step instructions for research, decision, spec, and approval batching in a single Turbo cycle. |
+| [`docs/prompts/agent/guardrails.md`](docs/prompts/agent/guardrails.md) | Guard instructions the assistant must follow while working inside your repo. |
+| [`docs/status/next-steps.md`](docs/status/next-steps.md) | Living queue the agent updates during each stage (Do Now / Do Next / Backlog). |
+
+## Your First Win
+Ship a single, novice-friendly improvement before touching feature work. Use
+Turbo mode by default so the assistant batches approvals stage-by-stage, then
+keep Standard mode on standby for stricter runs.
+
+### Win-1 prompt (Turbo default)
+```
+You are the RJW-IDD Turbo lane copilot for a novice developer.
+Stage-batch the work: collect research, draft the decision, and produce a
+single consolidated spec for each stage before coding. Ask for approval once per
+stage, never every micro-step.
+Minimise surface area, protect history, and call out any extra risks before
+moving on.
+```
+
+If you need the full guard cadence, switch to the Standard lane prompts in
+[`docs/prompts/user/core-novice-flow.md`](docs/prompts/user/core-novice-flow.md)
+after the first win.
 
 ## Directory Map
 - `bin/` – novice-friendly CLI wrappers (`rjw` helper) and README.

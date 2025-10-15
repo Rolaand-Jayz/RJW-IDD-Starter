@@ -1,89 +1,160 @@
-#!/usr/bin/env python3
-"""
-RJW-IDD CLI - Intelligence Driven Development Command-Line Interface
+#!/usr/bin/env bash
+set -euo pipefail
 
-Agent Pledge (Hardened):
-- Fail safe, not silent. If unsure, stop with clear, actionable error and remediation.
-- No destructive defaults. Use beginner-friendly, reversible settings with explicit confirmations.
-- Deterministic CLI behavior. Same inputs => same outputs; stable exit codes and JSON schemas.
-- Respect config sources of truth. Auto-correct drift only when explicitly enabled.
-- Transparent changes. Emit decision log for assumptions, defaults, and migrations.
-- No hidden network calls during guard or init unless documented and approved by --online flag.
-"""
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+KIT_ROOT=$(cd "${SCRIPT_DIR}/.." && pwd)
+PYTHON_BIN="${PYTHON:-}"
+if [ -z "$PYTHON_BIN" ]; then
+  if command -v python3 >/dev/null 2>&1; then
+    PYTHON_BIN="python3"
+  elif command -v python >/dev/null 2>&1; then
+    PYTHON_BIN="python"
+  else
+    echo "ERROR: python3 is required to run rjw helpers." >&2
+    exit 1
+  fi
+fi
 
+usage() {
+  cat <<USAGE
+Usage: rjw <command>
+
+Built-ins:
+  rjw mode <turbo|yolo|standard>   Toggle the learning lane in method/config/features.yml
+  rjw plan                         Print docs/status/next-steps.md (creates a stub if missing)
+
+Other commands are delegated to the Python CLI (guard, init, prompts, ...).
+USAGE
+}
+
+find_project_root() {
+  local dir="$PWD"
+  local fallback=""
+  while [ "$dir" != "/" ]; do
+    if [ -f "$dir/method/config/features.yml" ]; then
+      echo "$dir"
+      return 0
+    fi
+    if [ -d "$dir/.git" ] && [ -z "$fallback" ]; then
+      fallback="$dir"
+    fi
+    dir="$(dirname "$dir")"
+  done
+  if [ -f "$KIT_ROOT/method/config/features.yml" ]; then
+    echo "$KIT_ROOT"
+    return 0
+  fi
+  if [ -n "$fallback" ]; then
+    echo "$fallback"
+  else
+    echo "$KIT_ROOT"
+  fi
+}
+
+update_mode() {
+  local lane="$1"
+  local project_root
+  project_root=$(find_project_root)
+  local features_file="$project_root/method/config/features.yml"
+  mkdir -p "$(dirname "$features_file")"
+
+  "$PYTHON_BIN" - "$lane" "$features_file" <<'PY'
 import sys
-import os
-import argparse
-import json
 from pathlib import Path
+import yaml  # type: ignore
 
-# Add parent directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent.parent))
+lane = sys.argv[1]
+features_path = Path(sys.argv[2])
+if features_path.exists():
+    data = yaml.safe_load(features_path.read_text()) or {}
+else:
+    data = {}
 
-from tools.rjw_cli import guard, init, prompts
+features = dict(data.get('features') or {})
+mode = dict(data.get('mode') or {})
 
+if lane == 'turbo':
+    features['turbo_mode'] = True
+    features['yolo_mode'] = False
+    mode['name'] = 'turbo'
+    mode['turbo'] = True
+elif lane == 'yolo':
+    features['yolo_mode'] = True
+    features['turbo_mode'] = False
+    mode['name'] = 'yolo'
+    mode['turbo'] = False
+elif lane == 'standard':
+    features['yolo_mode'] = False
+    features['turbo_mode'] = False
+    mode['name'] = 'standard'
+    mode['turbo'] = False
+else:
+    sys.stderr.write(f"Unsupported mode: {lane}\n")
+    sys.exit(1)
 
-def main():
-    parser = argparse.ArgumentParser(
-        description="RJW-IDD CLI - Intelligence Driven Development toolkit",
-        epilog="Agent Pledge: Fail safe, not silent. Deterministic behavior. Transparent changes."
-    )
-    
-    subparsers = parser.add_subparsers(dest='command', help='Available commands')
-    
-    # Guard command
-    guard_parser = subparsers.add_parser('guard', help='Validate agent responses against safety policy')
-    guard_parser.add_argument('input', help='Input file path or "-" for stdin')
-    guard_parser.add_argument('--format', choices=['json', 'text'], default='text',
-                             help='Output format (default: text)')
-    guard_parser.add_argument(
-        '--ruleset',
-        choices=['auto', 'default', 'strict', 'yolo', 'turbo-standard', 'turbo-yolo'],
-        default='auto',
-        help='Validation ruleset (default: auto)'
-    )
-    
-    # Init command
-    init_parser = subparsers.add_parser('init', help='Initialize a new RJW-IDD project')
-    init_parser.add_argument(
-        '--preset',
-        choices=['default', 'standard', 'lite', 'game', 'yolo', 'turbo-standard', 'turbo-yolo'],
-        default='standard',
-        help='Project preset (default: standard)'
-    )
-    init_parser.add_argument('--noninteractive', action='store_true',
-                            help='Run without interactive prompts')
-    
-    # Prompts command
-    prompts_parser = subparsers.add_parser('prompts', help='Manage prompt packs')
-    prompts_parser.add_argument('--version', action='store_true',
-                               help='Show prompt pack version')
-    prompts_parser.add_argument('--update', action='store_true',
-                               help='Update to latest prompt pack')
-    prompts_parser.add_argument('--online', action='store_true',
-                               help='Check for updates online')
-    
-    args = parser.parse_args()
-    
-    if not args.command:
-        parser.print_help()
-        return 0
-    
-    try:
-        if args.command == 'guard':
-            return guard.run(args)
-        elif args.command == 'init':
-            return init.run(args)
-        elif args.command == 'prompts':
-            return prompts.run(args)
-        else:
-            print(f"Unknown command: {args.command}", file=sys.stderr)
-            return 1
-    except Exception as e:
-        print(f"ERROR: {e}", file=sys.stderr)
-        print("Remediation: Check logs and ensure all dependencies are installed.", file=sys.stderr)
-        return 5  # Internal error
+data['features'] = features
+if data.get('mode') != mode:
+    data['mode'] = mode
 
+features_path.write_text(yaml.safe_dump(data, sort_keys=False))
+PY
 
-if __name__ == '__main__':
-    sys.exit(main())
+  echo "✓ Updated $features_file"
+  echo "→ Enforcing configuration drift checks"
+  (
+    cd "$project_root"
+    "$PYTHON_BIN" "$KIT_ROOT/scripts/config_enforce.py"
+  )
+}
+
+show_plan() {
+  local project_root
+  project_root=$(find_project_root)
+  local queue_file="$project_root/docs/status/next-steps.md"
+  if [ ! -f "$queue_file" ]; then
+    cat <<'STUB' | tee "$queue_file" >/dev/null
+# Next-Steps Queue
+
+## Do Now (≤3)
+- 
+- 
+- 
+
+## Do Next (≤5)
+- 
+- 
+- 
+- 
+- 
+
+## Backlog
+- 
+STUB
+    echo "Created template at $queue_file" >&2
+  fi
+  cat "$queue_file"
+}
+
+if [ $# -eq 0 ]; then
+  usage
+  exit 0
+fi
+
+case "$1" in
+  mode)
+    if [ $# -lt 2 ]; then
+      echo "ERROR: Missing mode name (turbo, yolo, standard)." >&2
+      exit 1
+    fi
+    update_mode "$2"
+    ;;
+  plan)
+    show_plan
+    ;;
+  -h|--help|help)
+    usage
+    ;;
+  *)
+    exec "$PYTHON_BIN" "$SCRIPT_DIR/rjw.py" "$@"
+    ;;
+ esac
