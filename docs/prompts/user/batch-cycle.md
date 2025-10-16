@@ -27,5 +27,5 @@ Rules:
   with code suggestions.
 - Flag any missing evidence or risks before requesting approval.
 - Once approved, remind me to capture outcomes in the change log, logs, and
-  status queue.
+  [status queue](../../status/next-steps.md).
 ```
