@@ -40,7 +40,7 @@ The starter bundles three prompt packs that you can toggle without leaving chat.
 - **YOLO mode** – enables auto-approval prompts for rapid loops while still logging every guard. Activate with `Activate YOLO mode` and the assistant will flip the YOLO flag for you.
 - **Turbo mode** – relaxes certain gate thresholds for short sprints, but still requires at least one verification step. Activate with `Activate Turbo mode`; the assistant handles the config update.
 
-Need to double-check outside of chat? The same helper lives at `./bin/rjw mode <lane>` (PowerShell: `pwsh ./bin/rjw.ps1 mode <lane>`), and `./bin/rjw plan` prints the shared Next-Steps queue. The chat command switches only the active prompt set; governance scripts, CI, and change-log expectations remain in place regardless of the mode you choose.
+Need to double-check outside of chat? The same helper lives at `./bin/rjw mode <lane>` (PowerShell: `pwsh ./bin/rjw.ps1 mode <lane>`), and `./bin/rjw plan` (PowerShell: `pwsh ./bin/rjw.ps1 plan`) prints the shared Next-Steps queue. The chat command switches only the active prompt set; governance scripts, CI, and change-log expectations remain in place regardless of the mode you choose.
 
 ## Quick Start
 1. **Copy the kit** into an empty repository and commit the baseline.
