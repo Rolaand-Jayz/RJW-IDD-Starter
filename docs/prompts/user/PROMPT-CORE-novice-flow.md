@@ -77,6 +77,8 @@ We finished the edits. Lead the Test stage.
 Testing is complete. Help me record the work.
 - Draft the change-log entry and any notes to add.
 - Tell me which documents or specs must be updated.
+- Update `docs/status/next-steps.md` with **Do Now**, **Do Next**, and **Backlog**
+  items that match our wrap-up.
 - Give me clean commit message text if we need it.
 - When documentation is ready, send me to the Wrap prompt.
 ```

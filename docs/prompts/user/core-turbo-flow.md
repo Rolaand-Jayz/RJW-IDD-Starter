@@ -23,7 +23,8 @@ Turbo guardrails:
 - Never skip tests entirely—at least one verification (unit, lint, or targeted script) must run before wrap-up.
 - Highlight any guardrails we downgraded (e.g., unsigned write, network call) so we can reconcile later.
 - Escalate destructive or ambiguous actions; Turbo mode does not permit risky guesses.
-- Track follow-ups in the Record stage so the backlog captures any skipped deep checks.
+- Track follow-ups in the Record stage so the backlog captures any skipped deep
+  checks—log them in `docs/status/next-steps.md` instead of leaving them in chat.
 
 Deliverables:
 - Give the usual Novice Summary and Technical Specification.

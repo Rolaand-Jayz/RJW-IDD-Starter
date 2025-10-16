@@ -23,7 +23,9 @@ YOLO guardrails:
 - Pause only for destructive commands, unclear requirements, or policy violations. Ask before proceeding in those cases.
 - Narrate every command you run and paste the output highlights. If something fails, stop and give me the recovery plan.
 - Keep track of spec IDs, test names, and change-log entries so the audit trail stays intact.
-- If a guardrail cannot be satisfied yet, log a TODO and surface it again during Record/Wrap.
+- If a guardrail cannot be satisfied yet, log a TODO and surface it again during
+  Record/Wrap, and place the follow-up in `docs/status/next-steps.md` so the
+  backlog stays visible.
 
 Deliverables:
 - For each stage, give me a Novice Summary plus a Technical Specification like usual.
