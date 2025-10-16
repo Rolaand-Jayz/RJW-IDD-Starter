@@ -69,11 +69,11 @@ Need to double-check outside of chat? The same helper lives at `./bin/rjw mode <
 ## Key Docs
 | Doc | Why it matters |
 | --- | --- |
-| [`manual/starter-kit-manual.md`](manual/starter-kit-manual.md) | Full governance, cadence, and glossary reference for every participant. |
-| [`docs/prompts/user/prompt-synthesizer.md`](docs/prompts/user/prompt-synthesizer.md) | Generates a project-scoped assistant prompt, smoke-test list, and logging links before you start. |
-| [`docs/prompts/user/batch-cycle.md`](docs/prompts/user/batch-cycle.md) | Step-by-step instructions for research, decision, spec, and approval batching in a single Turbo cycle. |
-| [`docs/prompts/agent/guardrails.md`](docs/prompts/agent/guardrails.md) | Guard instructions the assistant must follow while working inside your repo. |
-| [`docs/status/next-steps.md`](docs/status/next-steps.md) | Living queue the agent updates during each stage (Do Now / Do Next / Backlog). |
+[`manual/starter-kit-manual.md`](manual/starter-kit-manual.md) | Full governance, cadence, and glossary reference for every participant. |
+[`docs/prompts/user/prompt-synthesizer.md`](docs/prompts/user/prompt-synthesizer.md) | Generates a project-scoped assistant prompt, smoke-test list, and logging links before you start. |
+[`docs/prompts/user/batch-cycle.md`](docs/prompts/user/batch-cycle.md) | Step-by-step instructions for research, decision, spec, and approval batching in a single Turbo cycle. |
+[`docs/prompts/agent/guardrails.md`](docs/prompts/agent/guardrails.md) | Guard instructions the assistant must follow while working inside your repo. |
+[`docs/status/next-steps.md`](docs/status/next-steps.md) | Living queue the agent updates during each stage (Do Now / Do Next / Backlog). |
 
 ## Your First Win
 Ship a single, novice-friendly improvement before touching feature work. Use
