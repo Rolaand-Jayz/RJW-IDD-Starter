@@ -31,7 +31,7 @@ def test_load_prompt_pack_valid():
 
         pack_data = {
             'name': 'test-pack',
-            'version': '1.2.3',
+            'version': '0.1.0-alpha',
             'checksum': 'sha256-test',
             'last_updated': '2025-10-07',
             'channels': ['core'],

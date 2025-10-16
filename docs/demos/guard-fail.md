@@ -8,7 +8,7 @@ Validating an unsafe agent output that violates multiple policies.
 {
   "agent_id": "unsafe-agent",
   "timestamp": "2025-10-07T10:00:00Z",
-  "version": "1.0",
+  "version": "0.1.0-alpha",
   "actions": [
     {
       "type": "file_write",

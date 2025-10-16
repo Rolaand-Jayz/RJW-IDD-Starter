@@ -1,6 +1,6 @@
 {
   "name": "rjw-prompt-pack",
-  "version": "1.4.0-alpha",
+  "version": "0.1.0-alpha",
   "checksum": "sha256-321fed654cba",
   "last_updated": "2026-02-10",
   "channels": ["core", "add-ins/game", "lite", "modes/yolo", "modes/turbo"],

@@ -24,7 +24,7 @@ Update available: 1.1.0-alpha (run: rjw prompts --update)
 
 ```bash
 $ rjw prompts --version --online
-rjw-prompt-pack 1.1.0-alpha (sha256-def456ab...)
+rjw-prompt-pack 0.1.0-alpha (sha256-abc123de...)
 Last updated: 2025-10-07
 You have the latest version
 ```
@@ -32,16 +32,16 @@ You have the latest version
 ## Update Prompt Pack (Placeholder)
 
 ```bash
-$ rjw prompts --update
+rjw-prompt-pack 0.1.0-alpha (sha256-abc123de...)
 Prompt pack update functionality
-This would download and install the latest prompt pack
+Update available: 0.1.0-alpha (run: rjw prompts --update)
 Not implemented in this version - manual update required
 ```
 
 ## Offline Mode (Default)
 
 ```bash
-$ rjw prompts --version
+rjw-prompt-pack 0.1.0-alpha (sha256-def456ab...)
 rjw-prompt-pack 1.0.0-alpha (sha256-abc123de...)
 Last updated: 2025-10-07
 
@@ -50,7 +50,7 @@ Last updated: 2025-10-07
 
 ## Inspect Prompt Pack File
 
-```bash
+rjw-prompt-pack 0.1.0-alpha (sha256-abc123de...)
 $ cat prompt-pack.json
 {
   "name": "rjw-prompt-pack",
@@ -60,7 +60,7 @@ $ cat prompt-pack.json
   "channels": ["core", "add-ins/game", "lite"],
   "compat": {
     "min_cli": ">=1.0.0"
-  }
+  "version": "0.1.0-alpha",
 }
 ```
 

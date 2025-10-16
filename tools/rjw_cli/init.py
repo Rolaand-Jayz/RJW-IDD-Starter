@@ -280,7 +280,7 @@ def write_configs(project_dir: Path, project_name: str, features: list[str], mod
     prompt_pack = project_dir / 'prompt-pack.json'
     prompt_config = {
         'name': 'rjw-prompt-pack',
-    'version': '1.4.0-alpha',
+    'version': '0.1.0-alpha',
         'checksum': 'sha256-321fed654cba',
         'last_updated': datetime.now().strftime('%Y-%m-%d'),
         'channels': ['core'],

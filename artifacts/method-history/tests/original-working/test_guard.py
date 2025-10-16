@@ -16,7 +16,7 @@ def test_validate_good_input():
     data = {
         "agent_id": "test",
         "timestamp": "2025-10-07T10:00:00Z",
-        "version": "1.0",
+    "version": "0.1.0-alpha",
         "actions": [
             {
                 "type": "read_file",

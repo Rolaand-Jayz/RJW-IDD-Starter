@@ -50,7 +50,7 @@ def test_enable_3d_game_core_updates_existing(tmp_path: Path, monkeypatch: pytes
         "addons": {
             "3d_game_core": {
                 "enabled": False,
-                "version": "1.0.0",
+                "version": "0.1.0-alpha",
                 "profile": "first_person",
                 "description": "Test",
             }
@@ -85,7 +85,7 @@ def test_disable_3d_game_core(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -
         "addons": {
             "3d_game_core": {
                 "enabled": True,
-                "version": "1.0.0",
+                "version": "0.1.0-alpha",
                 "profile": "generic",
                 "description": "Test",
             }
@@ -119,7 +119,7 @@ def test_set_3d_profile(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None
         "addons": {
             "3d_game_core": {
                 "enabled": True,
-                "version": "1.0.0",
+                "version": "0.1.0-alpha",
                 "profile": "generic",
                 "description": "Test",
             }
@@ -178,7 +178,7 @@ def test_set_video_ai_profile(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -
         "addons": {
             "video_ai_enhancer": {
                 "enabled": True,
-                "version": "1.0.0",
+                "version": "0.1.0-alpha",
                 "profile": "baseline",
                 "description": "Test",
             }

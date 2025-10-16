@@ -38,7 +38,7 @@ def enable_addon(root: Path) -> None:
     if "3d_game_core" not in config["addons"]:
         config["addons"]["3d_game_core"] = {
             "enabled": True,
-            "version": "1.0.0-alpha",
+            "version": "0.1.0-alpha",
             "profile": "generic",
             "description": "RJW-IDD add-in for all 3D games: profiles, determinism/rollback harnesses, tolerant replays, asset & perf gates, GDD/engine spec templates, IDD pacts.",
         }

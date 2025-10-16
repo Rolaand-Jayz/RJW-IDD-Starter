@@ -62,7 +62,7 @@ Create a test file `test-output.json`:
 {
   "agent_id": "copilot",
   "timestamp": "2025-10-07T10:00:00Z",
-  "version": "1.0",
+  "version": "0.1.0-alpha",
   "actions": [
     {
       "type": "read_file",
@@ -91,7 +91,7 @@ rjw prompts --version
 
 Sample output:
 ```
-rjw-prompt-pack 1.4.0-alpha (sha256-321fed65...)
+rjw-prompt-pack 0.1.0-alpha (sha256-321fed65...)
 Last updated: 2026-02-10
 ```
 If new channels are available (e.g., turbo workflows), they will appear in the

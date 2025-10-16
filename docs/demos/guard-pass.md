@@ -8,7 +8,7 @@ Validating a safe agent output that follows all policies.
 {
   "agent_id": "github-copilot",
   "timestamp": "2025-10-07T10:00:00Z",
-  "version": "1.0",
+  "version": "0.1.0-alpha",
   "actions": [
     {
       "type": "read_file",
