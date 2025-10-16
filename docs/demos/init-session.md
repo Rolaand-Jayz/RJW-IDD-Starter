@@ -197,7 +197,7 @@ profiles:
 
 # Check prompt pack
 $ rjw prompts --version
- rjw-prompt-pack 1.4.0 (sha256-321fed65...)
+ rjw-prompt-pack 1.4.0-alpha (sha256-321fed65...)
 Last updated: 2026-02-10
 
 # Run a guard test

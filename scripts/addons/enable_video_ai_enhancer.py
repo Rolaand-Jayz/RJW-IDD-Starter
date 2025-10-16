@@ -38,7 +38,7 @@ def enable_addon(root: Path) -> None:
     if "video_ai_enhancer" not in config["addons"]:
         config["addons"]["video_ai_enhancer"] = {
             "enabled": True,
-            "version": "1.0.0",
+            "version": "1.0.0-alpha",
             "profile": "baseline",
             "description": "RJW-IDD add-in for real-time video enhancement/upscaling pipelines with capture, quality, latency, and storage governance.",
         }

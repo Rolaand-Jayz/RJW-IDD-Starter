@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rjw-idd-starter-kit"
-version = "1.2.0"
+version = "1.2.0a0"
 description = "Intelligence Driven Development Starter Kit - Governance framework for AI-assisted development"
 readme = "README.md"
 requires-python = ">=3.9"

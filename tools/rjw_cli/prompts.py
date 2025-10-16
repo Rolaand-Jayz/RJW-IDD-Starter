@@ -15,7 +15,7 @@ def load_prompt_pack(project_dir: Path) -> dict[str, Any]:
     if not pack_path.exists():
         return {
             'name': 'rjw-prompt-pack',
-            'version': '0.0.0',
+            'version': '0.0.0-alpha',
             'checksum': 'unknown',
             'last_updated': 'unknown',
             'channels': [],
@@ -29,7 +29,7 @@ def load_prompt_pack(project_dir: Path) -> dict[str, Any]:
         print(f"WARNING: Could not load prompt-pack.json: {e}", file=sys.stderr)
         return {
             'name': 'rjw-prompt-pack',
-            'version': '0.0.0',
+            'version': '0.0.0-alpha',
             'checksum': 'error',
             'last_updated': 'unknown',
             'channels': [],
@@ -49,7 +49,7 @@ def check_for_updates(online: bool) -> dict[str, Any]:
     # For now, return placeholder
     return {
         'available': True,
-        'version': '1.1.0',
+    'version': '1.1.0-alpha',
         'url': 'https://github.com/Rolaand-Jayz/prompts/releases/latest',
         'message': 'Update available'
     }

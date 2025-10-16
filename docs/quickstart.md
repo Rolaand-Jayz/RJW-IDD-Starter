@@ -91,7 +91,7 @@ rjw prompts --version
 
 Sample output:
 ```
-rjw-prompt-pack 1.4.0 (sha256-321fed65...)
+rjw-prompt-pack 1.4.0-alpha (sha256-321fed65...)
 Last updated: 2026-02-10
 ```
 If new channels are available (e.g., turbo workflows), they will appear in the

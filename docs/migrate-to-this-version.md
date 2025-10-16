@@ -4,7 +4,7 @@ This guide helps you migrate existing RJW-IDD projects to the latest version wit
 
 ## Version Information
 
-**Current Version**: 1.4.0
+**Current Version**: 1.4.0-alpha
 **Previous Version**: 1.3.0
 **Release Date**: 2026-02-10
 
@@ -100,7 +100,7 @@ Create `prompt-pack.json` in project root:
 cat > prompt-pack.json << 'EOF'
 {
   "name": "rjw-prompt-pack",
-  "version": "1.4.0",
+  "version": "1.4.0-alpha",
   "checksum": "sha256-321fed654cba",
   "last_updated": "2026-02-10",
   "channels": ["core", "modes/yolo", "modes/turbo"],
