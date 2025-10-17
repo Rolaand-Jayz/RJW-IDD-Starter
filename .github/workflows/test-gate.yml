@@ -27,13 +27,10 @@ jobs:
       - name: Run pytest with coverage
         run: pytest --cov=tools --cov=scripts --cov-report=term --cov-report=xml --cov-report=html
 
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          files: ./coverage.xml
-          flags: unittests
-          name: codecov-umbrella
-          fail_ci_if_error: false
+      - name: Upload coverage to Codecov (disabled)
+        run: |
+          echo "Codecov action disabled in CI for secure default."
+          echo "To enable, pin codecov/codecov-action to a full commit SHA or provide explicit approval."
 
       - name: Run governance test gate
         run: bash scripts/ci/test_gate.sh
