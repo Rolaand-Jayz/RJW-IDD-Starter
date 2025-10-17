@@ -41,18 +41,18 @@ Agent documents architectural patterns, design decisions, and lessons applicable
 
 ## How to Begin
 
-### Step 1: Run the Bootstrap Script
+### Step 1: Run the canonical bootstrap
+
+The starter repository includes a canonical bootstrap installer that prepares the project and prompts for initial configuration. Use that script to initialize your environment and select add-ons or modes where applicable.
+
+Run the repository's installer/bootstrap script (example path):
 
 ```bash
-chmod +x bootstrap-bonus-90min.sh
-./bootstrap-bonus-90min.sh
+chmod +x scripts/bootstrap/install.sh
+bash scripts/bootstrap/install.sh
 ```
 
-This will:
-- Ask you to select your mode (Turbo, YOLO, or Classic)
-- Create `.rjw-idd-mode` file to track your choice
-- Commit to git
-- Ready the development environment
+What this does depends on the installer and your chosen options. It typically prepares dependencies, configuration, and any optional add-ons. After running it, the agent-driven tutorial flow can begin.
 
 ### Step 2: Chat with the Agent
 
@@ -125,9 +125,9 @@ You can always look back and understand **why something was done**.
 
 ## Next Steps
 
-1. **Run the bootstrap script:**
+1. **Run the canonical bootstrap (example):**
    ```bash
-   ./bootstrap-bonus-90min.sh
+   bash scripts/bootstrap/install.sh
    ```
 
 2. **Chat with the agent:**
