@@ -19,31 +19,58 @@ language while still giving experts enough structure to enforce governance.
 ## About This Starter
 [Explore this starter kit](https://github.com/Rolaand-Jayz/RJW-IDD-Starter.git)
 
-The starter is the method enforced. It packages the workflow into a drop-in
-baseline with curated prompts, change-log templates, guard scripts, decision and
-spec scaffolds, and operating manuals. Standard mode keeps the full guard suite,
-YOLO adds auto-approval prompts for fast loops, and Turbo variants lighten gate
-requirements while still logging every compromise. Use the starter to spin up a
-fresh repo: copy only the templates you need, wire the prompts into your AI
-helper, and rely on the built-in scripts to keep evidence, change logs, and
-traceability aligned from the first commit.
+This repository packages the RJW-IDD workflow as a developer-friendly starter.
+It provides guard scripts, prompt packs, decision/spec scaffolds, logging and
+change-log templates, and a lightweight tutorial system that demonstrates how
+to use the starter in real development workflows.
+
+Key differences in this branch (v0.1.1-alpha):
+- The "bonus" tutorial is now a dynamic, agent-driven experience (see
+  `tutorials/bonus-90-minute-win.md`). The tutorial is an execution framing
+  and educational guide; the actual work is performed through agent-driven
+  interactions and repository artifacts (decisions, specs, logs) rather than
+  pre-baked code samples.
+- The canonical bootstrap/installer is `scripts/bootstrap/install.sh`. The
+  tutorial and onboarding now reference that script instead of any auxiliary
+  helper scripts. Run the canonical installer to prepare the environment and
+  enable add-ons.
+- Modes have been standardized to: `Turbo`, `YOLO`, and `Strict` (strict is the
+  deliberate/approval-first workflow). These maps to prompt packs and guard
+  behavior rather than hard-coded runtime behavior.
+- The CI workflow no longer uses an unpinned third-party Codecov GitHub Action
+  by default; the test gate was adjusted to avoid unpinned third-party actions
+  and comply with secure defaults.
 
 ## Modes & Activation
-The starter bundles three prompt packs that you can toggle without leaving chat. Say `Activate <mode name>` to switch; repeat with another mode when you want to change gears.
+The starter bundles three prompt packs and operational modes. Modes are
+semantics for the agent and prompt packs (they do not bypass governance unless
+explicitly configured): `Turbo`, `YOLO`, and `Strict`.
 
-- **Standard mode** (default) – maps to the core novice flow prompts and enforces every RJW checkpoint. Activate with `Activate Standard mode`.
-- **YOLO mode** – enables auto-approval prompts for rapid loops while still logging every guard. First set `features.yolo_mode: true` in `method/config/features.yml`, run `python scripts/config_enforce.py`, then say `Activate YOLO mode`.
-- **Turbo mode** – relaxes certain gate thresholds for short sprints, but still requires at least one verification step. Enable `features.turbo_mode: true`, enforce the config, then use `Activate Turbo mode`.
+- `Turbo` — high velocity. Agent proposes and implements with fewer interactive
+  confirmation points; good for experienced developers who want fast iteration.
+- `YOLO` — maximal velocity. Agent runs the research→spec→implement cycle, and
+  you review results post-implementation. Suitable for demonstration runs or
+  learning by example.
+- `Strict` — conservative mode. Agent presents research and options; you must
+  explicitly approve each phase transition (Research → Decision → Spec →
+  Implement → Verify).
 
-The chat command switches only the active prompt set; governance scripts, CI, and change-log expectations remain in place regardless of the mode you choose.
+Activation is primarily done via chat or configuration toggles; consult the
+manual for how to wire your assistant to the local prompt packs and guards.
 
 ## Quick Start
 1. **Copy the kit** into an empty repository and commit the baseline.
 2. **Set up tooling**:
-   - Copy the files you actually need from `templates/` (requirements,
-     bootstrap scripts) and follow `templates/README.md`.
-   - Run `scripts/setup/bootstrap_project.sh` to create a virtual env and smoke
-     test the guards (optional but recommended).
+   - Use the canonical bootstrap/installer to prepare dependencies and select
+     optional add-ons:
+
+```bash
+chmod +x scripts/bootstrap/install.sh
+bash scripts/bootstrap/install.sh
+```
+
+   - Optionally run `scripts/setup/bootstrap_project.sh` to create a virtualenv
+     and smoke-test guard scripts (recommended for CI parity).
 3. **Read the manual** in `manual/starter-kit-manual.md` for roles, cadence, and
    FAQs.
 4. **Brief your assistant** with `docs/prompts/user/starter-briefing.md` and
