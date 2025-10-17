@@ -1,41 +1,41 @@
 # Slot Car Racing — BONUS: 90-Minute Win
 
-## What This Is
+## Overview
 
-This bonus section is **an educational tour** of how to build professional features using the RJW-IDD framework. You will:
+This bonus section implements the RJW-IDD framework through actual feature development. You will:
 
-1. Run the bootstrap script to select your mode
-2. Chat with the agent to drive feature development
-3. Experience the real RJW-IDD cycle in action
-4. Build features that extend your game
-5. See how everything gets documented and versioned
+1. Execute `bootstrap-bonus-90min.sh` to set development mode
+2. Engage with the agent to drive feature prioritization and implementation
+3. Execute the full RJW-IDD cycle: Discover → Decide → Spec → Implement → Verify → Commit
+4. Build production-ready features that extend the 60-minute game
+5. Generate all relevant decision documentation, specifications, and change logs in version control
 
-**Nothing is premade.** Your agent will research, propose, spec, implement, and verify—all based on your decisions and your chosen mode.
+**Nothing is templated.** The agent will perform research, propose trade-offs, spec requirements, implement code, perform verification testing, and maintain git history—entirely driven by your decisions and chosen mode.**
 
 ---
 
 ## The RJW-IDD Development Cycle (The Real Version)
 
 ### Phase 1: RESEARCH & DISCOVERY
-Agent researches what's possible and feasible. Gathers context about your current game, technical constraints, time budget.
+Agent analyzes project state, technical constraints, time budget. Produces feasibility assessment and option matrix.
 
 ### Phase 2: DECISION (DEC)
-Agent proposes options with trade-offs. **You choose** which features matter most. Decision is documented: `docs/decisions/DEC-*.md`
+Agent proposes prioritized features with impact/complexity trade-offs. You select approved features. Documented: `docs/decisions/DEC-*.md`
 
 ### Phase 3: SPECIFICATION (SPEC)
-Agent writes detailed spec for approved features. Clear acceptance criteria, data models, UI requirements. Documented: `docs/specs/SPEC-*.md`
+Agent writes formal specifications with acceptance criteria, data models, API contracts, and integration points. Documented: `docs/specs/SPEC-*.md`
 
 ### Phase 4: IMPLEMENTATION
-Agent prompts AI to write code. Code is reviewed for quality, tested for correctness. Applied to your project.
+Agent generates code via AI assistance. Code review for quality, correctness, and adherence to spec. Integrated into project.
 
 ### Phase 5: VERIFICATION
-Agent tests the code in your game. Ensures no crashes, performance is good, integrates cleanly with existing features.
+Agent executes integration testing. Validates feature functionality, performance characteristics, and absence of regressions.
 
 ### Phase 6: COMMIT & DOCUMENTATION
-All changes committed to git with clear messages. Change log created in `logs/` explaining what was built and why.
+All changes committed with descriptive messages. Change logs created in `logs/` with technical rationale.
 
-### Phase 7: LEARNING
-Agent guides you through what was built, why those decisions were made, and what patterns you can apply to your own projects.
+### Phase 7: ANALYSIS
+Agent documents architectural patterns, design decisions, and lessons applicable to future development.
 
 ---
 
@@ -90,22 +90,22 @@ Everything is committed to git. Agent explains what was built, the patterns used
 ## The Modes Explained
 
 ### TURBO Mode (Default)
-**Speed:** Fast. Agent makes research decisions, proposes options quickly.  
-**Control:** You approve at checkpoints (features to build, specs, implementation verification).  
-**Output:** Lots of changes, documented well, you stay informed at key moments.  
-**Best for:** Experienced developers who want to move fast.
+**Cadence:** Fast. Agent conducts research, proposes decisions, specs, and implements with minimal friction.  
+**Decision Points:** You approve at feature-level checkpoints and verification gates.  
+**Output:** High-velocity feature delivery with documentation at key transitions.  
+**Use Case:** Experienced developers seeking expedited feedback loops.
 
 ### YOLO Mode
-**Speed:** Maximum. Agent researches, decides, specs, implements everything.  
-**Control:** You review the results after implementation is complete.  
-**Output:** Fully built features, everything documented, one big review at the end.  
-**Best for:** Hands-off learning; see how it all fits together.
+**Cadence:** Maximum velocity. Agent conducts full research-to-commit cycle uninterrupted.  
+**Decision Points:** Post-implementation review of specifications, code, and change logs.  
+**Output:** Complete feature set with full git history and documentation.  
+**Use Case:** Learning-oriented; understand compositional patterns and architectural decisions retroactively.
 
-### CLASSIC Mode
-**Speed:** Deliberate. Agent presents options, you decide before every major action.  
-**Control:** Full. You're involved in every decision.  
-**Output:** Deep learning; you understand why each choice was made.  
-**Best for:** Learning-focused; you want to understand the framework deeply.
+### STRICT Mode
+**Cadence:** Deliberate. Agent presents research findings and options; you approve before each phase transition.  
+**Decision Points:** Research → Decision → Spec → Implementation → Verification gates.  
+**Output:** Deep engagement with rationale behind each decision.  
+**Use Case:** Educational focus; understand the framework mechanics in detail.
 
 ---
 
@@ -141,15 +141,15 @@ You can always look back and understand **why something was done**.
 
 ## A Note on This Tutorial
 
-This tutorial is **not a step-by-step guide with predetermined answers.**
+This is **not a templated walkthrough.** It's a **framework specification and execution environment.**
 
-It's a **framework explanation**. The real learning happens through:
-- Deciding which features matter (your choice)
-- Seeing how specs are written
-- Understanding why modularity matters
-- Building features that actually work
-- Reviewing git history to understand decisions
+The real learning occurs through:
+- **Decision ownership** — You prioritize features based on impact/complexity analysis
+- **Specification review** — Understand how requirements translate to acceptance criteria
+- **Code integration** — See how features compose without breaking existing functionality
+- **Git archaeology** — Review commit history and change logs to understand architectural evolution
+- **Pattern recognition** — Extract generalizable software engineering principles
 
-**The work is real.** Your decisions matter. The code will be committed. The patterns you learn apply to any software project.
+**This development is real.** Decisions are versioned. Code is committed. Specifications are documented. The patterns you learn generalize to any software project at scale.
 
-Ready? Run the bootstrap script and chat with the agent.
+Execute `./bootstrap-bonus-90min.sh` to begin.

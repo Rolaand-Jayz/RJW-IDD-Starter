@@ -10,9 +10,9 @@ echo "================================"
 echo ""
 echo "Select your development mode:"
 echo ""
-echo "  [1] TURBO   - Fast. Agent proposes, you approve at checkpoints."
-echo "  [2] YOLO    - Full steam. Agent builds, you review after."
-echo "  [3] CLASSIC - Deliberate. You decide before each major action."
+echo "  [1] TURBO  - Fast. Agent proposes, you approve at checkpoints."
+echo "  [2] YOLO   - Full steam. Agent builds, you review after."
+echo "  [3] STRICT - Deliberate. You decide before each major action."
 echo ""
 read -p "Enter mode (1-3): " mode_choice
 
@@ -32,11 +32,11 @@ case $mode_choice in
     echo "  You review the results and git history after."
     ;;
   3)
-    MODE="classic"
+    MODE="strict"
     echo ""
-    echo "✓ Classic Mode selected"
+    echo "✓ Strict Mode selected"
     echo "  Agent presents options. You make decisions before each step."
-    echo "  Slower but deeper learning."
+    echo "  Maximum control, deliberate pace."
     ;;
   *)
     echo "Invalid selection. Defaulting to Turbo Mode."
